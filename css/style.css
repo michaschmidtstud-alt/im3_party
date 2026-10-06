@@ -28,7 +28,7 @@ body {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0;
-    background: #8f9491;
+    background: var(--paper);
     color: var(--ink);
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -45,41 +45,67 @@ a {
     min-height: 100vh;
     min-height: 100svh;
     margin: 0 auto;
-    padding: clamp(18px, 2.4vw, 34px);
+    padding: 0;
     background:
         radial-gradient(circle at 18% 8%, rgba(255, 255, 255, 0.72), transparent 28%),
         repeating-linear-gradient(88deg, rgba(0, 0, 0, 0.018) 0 1px, transparent 1px 7px),
         var(--paper);
-    box-shadow:
-        inset 0 0 0 clamp(10px, 1.1vw, 18px) rgba(255, 255, 255, 0.88),
-        inset 0 0 0 clamp(12px, 1.35vw, 22px) rgba(0, 0, 0, 0.04);
+    box-shadow: none;
 }
 
 .masthead {
+    --masthead-x: clamp(10px, 2.4vw, 34px);
+    --masthead-top: clamp(5px, 1vw, 16px);
+    --masthead-bottom: clamp(5px, 0.9vw, 14px);
+    --masthead-inner: clamp(38px, 8.4vw, 120px);
     position: relative;
     display: flex;
     align-items: end;
     justify-content: space-between;
     gap: 18px;
-    min-height: clamp(58px, 6.6vw, 96px);
-    border-top: 2px solid var(--rule);
-    border-bottom: 2px solid var(--rule);
+    height: calc(var(--masthead-inner) + var(--masthead-top) + var(--masthead-bottom) + 4px);
+    min-height: 0;
+    padding: calc(var(--masthead-top) + 2px) var(--masthead-x) calc(var(--masthead-bottom) + 2px);
+}
+
+.masthead::before,
+.masthead::after {
+    position: absolute;
+    left: var(--masthead-x);
+    right: var(--masthead-x);
+    height: 2px;
+    background: var(--rule);
+    content: "";
+}
+
+.masthead::before {
+    top: var(--masthead-top);
+}
+
+.masthead::after {
+    bottom: var(--masthead-bottom);
 }
 
 .edition {
     display: flex;
     align-items: end;
+    align-self: stretch;
+    flex: 1 1 auto;
+    height: var(--masthead-inner);
+    min-width: 0;
     font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
-    font-size: clamp(3.4rem, 7.2vw, 8rem);
-    line-height: 0.82;
+    font-size: calc(var(--masthead-inner) * 1.18);
+    line-height: 0.7;
     letter-spacing: 0;
     color: var(--ink);
     text-transform: uppercase;
 }
 
 .edition mark {
-    display: inline-block;
-    padding: 0 0.08em 0.03em;
+    align-self: stretch;
+    display: grid;
+    align-items: end;
+    padding: 0 0.08em 0.02em;
     background: var(--ink);
     color: #ffffff;
 }
@@ -97,15 +123,19 @@ a {
 .issue {
     position: static;
     display: grid;
-    min-width: clamp(120px, 14vw, 210px);
-    min-height: clamp(44px, 5vw, 78px);
+    align-self: stretch;
+    flex: 0 1 clamp(74px, 10.5vw, 160px);
+    min-width: clamp(74px, 10.5vw, 160px);
+    height: auto;
+    min-height: 0;
     place-content: center end;
-    padding: 10px 14px;
+    padding: 7px 12px;
     background: #2d2d2d;
     color: #f4f1e8;
-    font-size: clamp(0.66rem, 0.8vw, 0.9rem);
+    font-size: clamp(0.58rem, 0.72vw, 0.8rem);
     font-style: italic;
     line-height: 1.2;
+    overflow: hidden;
     text-align: right;
 }
 
@@ -113,7 +143,7 @@ a {
     content: "#67";
     color: var(--gold);
     font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
-    font-size: clamp(2.8rem, 5.2vw, 6.2rem);
+    font-size: clamp(2.2rem, 4.2vw, 5rem);
     font-style: normal;
     line-height: 0.82;
 }
@@ -121,6 +151,7 @@ a {
 .topic-nav {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    padding-inline: clamp(18px, 2.4vw, 34px);
     border-bottom: 0;
     color: #222222;
     font-size: clamp(0.7rem, 1vw, 0.92rem);
@@ -184,13 +215,9 @@ a {
     }
 }
 
-.topic-nav a + a {
-    border-left: 2px solid var(--rule);
-}
-
 .main-title {
     margin: 0;
-    padding-top: clamp(14px, 2vw, 30px);
+    padding: clamp(14px, 2vw, 30px) clamp(18px, 2.4vw, 34px) 0;
     font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
     font-size: clamp(4.8rem, 13.8vw, 13rem);
     line-height: 0.74;
@@ -203,10 +230,10 @@ a {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: clamp(16px, 1.8vw, 28px);
+    padding: clamp(16px, 1.8vw, 28px) clamp(18px, 2.4vw, 34px);
     border-bottom: 2px solid var(--rule);
     border-radius: 0;
-    background: rgba(255, 255, 255, 0.7);
+    background: rgba(244, 241, 232, 0.85);
     text-align: center;
 }
 
@@ -215,7 +242,7 @@ a {
     max-width: 980px;
     margin: 0 auto clamp(18px, 3vw, 42px);
     padding: clamp(16px, 2vw, 30px);
-    border-top: 2px solid var(--rule);
+    border-top: 0;
     border-bottom: 2px solid var(--rule);
     background: rgba(255, 255, 255, 0.7);
     text-align: center;
@@ -311,11 +338,11 @@ a {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    padding: clamp(16px, 1.8vw, 28px);
-    border-top: 2px solid var(--rule);
-    border-bottom: 2px solid var(--rule);
+    padding: clamp(16px, 1.8vw, 28px) clamp(18px, 2.4vw, 34px);
+    border-top: 0;
+    border-bottom: 0;
     border-radius: 0;
-    background: rgba(255, 255, 255, 0.7);
+    background: transparent;
 }
 
 .overview h2 {
@@ -342,7 +369,7 @@ a {
     border: 2px solid var(--rule);
     border-top: 12px solid var(--accent);
     border-radius: 0;
-    background: rgba(244, 241, 232, 0.85);
+    background: transparent;
     box-shadow: none;
     color: var(--accent);
 }
@@ -667,7 +694,7 @@ a {
 .linea-story {
     grid-column: 1 / -1;
     margin-top: clamp(30px, 5vw, 78px);
-    padding: clamp(18px, 2vw, 30px);
+    padding: clamp(18px, 2vw, 30px) clamp(18px, 2.4vw, 34px);
     border-top: 3px solid var(--rule);
     border-bottom: 3px solid var(--rule);
     background: rgba(255, 255, 255, 0.72);
@@ -1531,7 +1558,7 @@ a {
 .paper-footer {
     display: grid;
     place-items: center;
-    padding-top: clamp(18px, 2vw, 32px);
+    padding: clamp(18px, 2vw, 32px) clamp(18px, 2.4vw, 34px) 0;
 }
 
 .paper-footer a {
@@ -1550,11 +1577,26 @@ a {
 
 @media (max-width: 680px) {
     .paper {
-        padding: 20px 16px 44px;
+        padding: 0;
+    }
+
+    .masthead {
+        --masthead-x: 10px;
+        --masthead-top: 5px;
+        --masthead-bottom: 5px;
+        --masthead-inner: clamp(30px, 11vw, 58px);
+        gap: 8px;
     }
 
     .issue {
-        display: none;
+        display: grid;
+        min-width: clamp(68px, 22vw, 118px);
+        padding: 4px 6px;
+        font-size: clamp(0.46rem, 1.8vw, 0.64rem);
+    }
+
+    .issue::after {
+        font-size: clamp(1.45rem, 8.6vw, 3rem);
     }
 
     .topic-nav {
@@ -1725,6 +1767,24 @@ a {
 }
 
 @media (max-width: 420px) {
+    .masthead {
+        --masthead-x: 8px;
+        --masthead-top: 4px;
+        --masthead-bottom: 4px;
+        --masthead-inner: clamp(26px, 10vw, 42px);
+        gap: 6px;
+    }
+
+    .issue {
+        min-width: clamp(56px, 20vw, 78px);
+        padding: 3px 5px;
+        font-size: 0.42rem;
+    }
+
+    .issue::after {
+        font-size: clamp(1.2rem, 7vw, 2rem);
+    }
+
     .scene-grid {
         grid-template-columns: 1fr;
     }
