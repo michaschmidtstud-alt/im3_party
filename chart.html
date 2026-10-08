@@ -44,6 +44,31 @@
         }
         .status { padding: 120px 0; text-align: center; color: var(--muted); font-family: system-ui, sans-serif; background: var(--panel); border-radius: 10px; }
         .error { color: #ff8a8a; }
+        .paper-footer {
+            display: grid;
+            gap: 6px;
+            place-items: center;
+            margin-top: 48px;
+            padding: 24px 18px;
+            border-top: 5px double #111111;
+            background: #ffffff;
+            color: #060606;
+            text-align: center;
+        }
+        .paper-footer p {
+            margin: 0;
+            font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
+            font-size: clamp(1.05rem, 2vw, 2rem);
+            line-height: 1;
+            text-transform: uppercase;
+        }
+        .paper-footer small {
+            color: #54524d;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(0.75rem, 1vw, 0.95rem);
+            font-weight: 900;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -55,6 +80,10 @@
         <span style="--c: #4fd1c5">Studio (Box 3)</span>
     </div>
     <div id="charts"><div class="status">Daten werden geladen …</div></div>
+    <footer class="paper-footer" aria-label="Seitenabschluss">
+        <p>MMP NEWS · Welcome Party H8 · 30. Sept 2026</p>
+        <small>Live gemessen, zu spät ausgewertet.</small>
+    </footer>
 </main>
 
 <script>

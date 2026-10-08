@@ -23,18 +23,22 @@
         <a href="alcohol.html">Alkoholpegel</a>
     </nav>
 
-    <h1 class="main-title" id="main-title">Luftfeuchtigkeit</h1>
+    <h1 class="main-title" id="main-title">Feucht</h1>
 
     <section class="hero humidity-hero" aria-labelledby="main-title">
-        <p class="lead">Die Party wurde nicht nur laut, sondern auch tropisch</p>
-        <article class="story-copy" id="humidity-copy" aria-label="Story zur Luftfeuchtigkeit"></article>
+        <p class="lead">Nicht nur laut, sondern auch tropisch</p>
     </section>
 
     <section class="overview" aria-labelledby="humidity-overview-title">
         <h2 id="humidity-overview-title">Feuchtigkeitslage</h2>
         <div class="metric-grid" id="humidity-metrics"></div>
+        <article class="story-copy" id="humidity-copy" aria-label="Story zur Luftfeuchtigkeit"></article>
         <div class="humidity-chart-card" id="humidity-chart-card">
             <svg id="humidity-chart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" aria-label="Luftfeuchtigkeit über den Abend"></svg>
+            <div class="humidity-chart-key" aria-label="Legende">
+                <span class="studio">Studio</span>
+                <span class="mensa">Mensa</span>
+            </div>
             <div class="humidity-tooltip" id="humidity-tooltip" hidden></div>
         </div>
     </section>
@@ -49,8 +53,9 @@
         </div>
     </section>
 
-    <footer class="paper-footer">
-        <a href="index.html">Zurück zur Titelseite</a>
+    <footer class="paper-footer" aria-label="Seitenabschluss">
+        <p>MMP NEWS · Welcome Party H8 · 30. Sept 2026</p>
+        <small>Live gemessen, zu spät ausgewertet.</small>
     </footer>
 </main>
 
@@ -192,18 +197,19 @@
 
         const width = 900;
         const height = 340;
-        const pad = { top: 34, right: 30, bottom: 48, left: 54 };
+        const pad = { top: 34, right: 30, bottom: 24, left: 54 };
         const chartWidth = width - pad.left - pad.right;
         const chartHeight = height - pad.top - pad.bottom;
         const series = {
             3: points.filter((point) => point.box === 3).sort((a, b) => Date.parse(a.time.replace(" ", "T")) - Date.parse(b.time.replace(" ", "T"))),
             7: points.filter((point) => point.box === 7).sort((a, b) => Date.parse(a.time.replace(" ", "T")) - Date.parse(b.time.replace(" ", "T")))
         };
-        const times = points.map((point) => Date.parse(point.time.replace(" ", "T")));
-        const minTime = Math.min(...times);
-        const maxTime = Math.max(...times);
-        const minValue = Math.floor(Math.min(...points.map((point) => point.value)) - 2);
-        const maxValue = Math.ceil(Math.max(...points.map((point) => point.value)) + 2);
+        const chartDate = points[0]?.time?.slice(0, 10) || "2026-09-30";
+        const minTime = Date.parse(`${chartDate}T17:00:00`);
+        const maxTime = minTime + 11 * 60 * 60 * 1000;
+        const hourTicks = Array.from({ length: 12 }, (_, index) => minTime + index * 60 * 60 * 1000);
+        const minValue = 30;
+        const maxValue = 55;
         const lastStudio = series[3][series[3].length - 1] || last;
         const lastMensa = series[7][series[7].length - 1] || last;
         const valueRange = Math.max(maxValue - minValue, 1);
@@ -217,11 +223,12 @@
             const distance = Math.abs(Date.parse(point.time.replace(" ", "T")) - targetTime);
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
-        const guideValues = [minValue, Math.round((minValue + maxValue) / 2), maxValue];
+        const guideValues = Array.from({ length: 6 }, (_, index) => minValue + index * 5);
 
         svg.innerHTML = `
+            <rect class="humidity-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
             ${guideValues.map((value) => `
-                <line class="humidity-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line>
+                <line class="humidity-chart-grid ${value === minValue || value === maxValue ? "edge" : ""}" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line>
                 <text class="humidity-chart-axis" x="10" y="${yFor(value) + 4}">${value}%</text>
             `).join("")}
             <polyline class="humidity-chart-line humidity-chart-line-studio" points="${lineFor(series[3])}"></polyline>
@@ -229,10 +236,9 @@
             <line class="humidity-chart-grid" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             <line class="humidity-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
             <line class="humidity-chart-guide" id="humidity-chart-guide" x1="${width - pad.right}" x2="${width - pad.right}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
-            <text class="humidity-chart-label" x="${pad.left}" y="${height - 10}">${timeOnly(first?.time)}</text>
-            <text class="humidity-chart-label" x="${width - pad.right - 40}" y="${height - 10}">${timeOnly(last?.time)}</text>
-            <text class="humidity-chart-legend studio" x="${pad.left + 8}" y="18">Studio</text>
-            <text class="humidity-chart-legend mensa" x="${pad.left + 76}" y="18">Mensa</text>
+            ${hourTicks.map((time, index) => `
+                <text class="humidity-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
+            `).join("")}
             <circle class="humidity-chart-dot humidity-chart-dot-studio" id="humidity-chart-dot-studio" cx="${xForTime(Date.parse(lastStudio.time.replace(" ", "T")))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
             <circle class="humidity-chart-dot humidity-chart-dot-mensa" id="humidity-chart-dot-mensa" cx="${xForTime(Date.parse(lastMensa.time.replace(" ", "T")))}" cy="${yFor(lastMensa.value)}" r="6"></circle>
         `;
@@ -261,7 +267,11 @@
             }
 
             tooltip.hidden = false;
-            tooltip.innerHTML = `<strong>${clockFromTime(targetTime)} Uhr</strong>Studio: ${format(studio?.value, 0)}<br>Mensa: ${format(mensa?.value, 0)}`;
+            tooltip.innerHTML = `
+                <strong>${clockFromTime(targetTime)}</strong>
+                <span>Studio: ${format(studio?.value, 0)} · Mensa: ${format(mensa?.value, 0)}</span>
+                <p>Luftfeuchtigkeit im direkten Vergleich der beiden Räume.</p>
+            `;
             tooltip.style.left = `${Math.max(8, Math.min(xPercent, 92))}%`;
             tooltip.style.top = "34%";
         };

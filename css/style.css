@@ -65,6 +65,7 @@ a {
     gap: 18px;
     height: calc(var(--masthead-inner) + var(--masthead-top) + var(--masthead-bottom) + 4px);
     min-height: 0;
+    overflow: hidden;
     padding: calc(var(--masthead-top) + 2px) var(--masthead-x) calc(var(--masthead-bottom) + 2px);
 }
 
@@ -149,6 +150,8 @@ a {
 }
 
 .topic-nav {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding-inline: clamp(18px, 2.4vw, 34px);
@@ -161,7 +164,8 @@ a {
 
 .topic-nav a {
     display: grid;
-    min-height: 34px;
+    min-height: 48px;
+    padding: 8px 10px;
     place-items: center;
     white-space: nowrap;
 }
@@ -231,9 +235,9 @@ a {
     flex-direction: column;
     min-width: 0;
     padding: clamp(16px, 1.8vw, 28px) clamp(18px, 2.4vw, 34px);
-    border-bottom: 2px solid var(--rule);
+    border-bottom: 0;
     border-radius: 0;
-    background: rgba(244, 241, 232, 0.85);
+    background: transparent;
     text-align: center;
 }
 
@@ -276,46 +280,26 @@ a {
 
 .scene {
     position: relative;
+    margin: 0;
     min-height: clamp(220px, 27vw, 430px);
     overflow: hidden;
     border: 0;
     background-color: #d5d2c9;
 }
 
-.scene::before,
-.scene::after {
-    position: absolute;
-    content: "";
-    inset: 0;
-}
-
-.scene::before {
-    background:
-        linear-gradient(180deg, transparent 0 62%, rgba(0, 0, 0, 0.22) 62% 100%),
-        radial-gradient(circle at 34% 38%, rgba(216, 18, 79, 0.96), transparent 28%),
-        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0 6px, transparent 7px 36px),
-        linear-gradient(135deg, #d8d5cc, #bfbab0);
-}
-
-.scene::after {
-    background:
-        linear-gradient(90deg, transparent 0 60%, rgba(255, 255, 255, 0.18) 60% 62%, transparent 62%),
-        linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.42));
-    opacity: 1;
-}
-
-.scene-mensa::before {
-    background:
-        linear-gradient(180deg, transparent 0 58%, rgba(0, 0, 0, 0.15) 58% 100%),
-        linear-gradient(90deg, #d6d3cb 0 24%, #f4f1e8 24% 38%, #c9c5bc 38% 63%, #dedbd3 63%),
-        linear-gradient(135deg, #cfcfcf, #eeeeee);
+.scene img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
 }
 
 .story-copy {
     max-width: 760px;
     margin: clamp(14px, 1.6vw, 22px) auto 0;
-    padding-top: clamp(12px, 1.2vw, 18px);
-    border-top: 2px solid var(--rule);
+    padding-top: 0;
+    border-top: 0;
     color: #282623;
     font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(0.95rem, 1.1vw, 1.1rem);
@@ -337,12 +321,13 @@ a {
 .overview {
     display: flex;
     flex-direction: column;
+    width: min(1120px, calc(100% - clamp(24px, 5vw, 68px)));
     min-width: 0;
+    margin: 0 auto;
     padding: clamp(16px, 1.8vw, 28px) clamp(18px, 2.4vw, 34px);
-    border-top: 0;
-    border-bottom: 0;
+    border: 3px solid var(--rule);
     border-radius: 0;
-    background: transparent;
+    background: rgba(255, 255, 255, 0.72);
 }
 
 .overview h2 {
@@ -354,24 +339,35 @@ a {
     text-transform: uppercase;
 }
 
+.temperature-finder + .overview {
+    margin-top: clamp(30px, 5vw, 78px);
+}
+
 .metric-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
+    gap: 8px;
 }
 
 .metric-card {
     display: grid;
-    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-content: center;
+    align-items: center;
+    gap: 6px;
     min-width: 0;
-    min-height: 118px;
-    padding: 13px 10px 12px;
+    min-height: 0;
+    padding: 13px 12px 8px;
     border: 2px solid var(--rule);
-    border-top: 12px solid var(--accent);
     border-radius: 0;
-    background: transparent;
+    background: linear-gradient(to bottom, var(--accent) 0 12px, var(--paper) 12px);
     box-shadow: none;
     color: var(--accent);
+}
+
+.metric-card:focus-visible {
+    outline: 2px solid var(--rule);
+    outline-offset: 3px;
 }
 
 .metric-card.red { --accent: var(--red); }
@@ -381,7 +377,8 @@ a {
 .metric-card.green { --accent: var(--green); }
 
 .metric-label {
-    min-height: 20px;
+    grid-column: 1;
+    min-height: 0;
     font-size: clamp(0.54rem, 1.45vw, 0.68rem);
     color: var(--ink);
     font-weight: 900;
@@ -390,49 +387,146 @@ a {
 }
 
 .metric-card strong {
+    grid-column: 2;
+    grid-row: 1 / span 2;
     color: var(--accent);
     font-size: clamp(1.25rem, 3.2vw, 2.3rem);
     line-height: 0.9;
+    text-align: right;
     white-space: nowrap;
 }
 
 .metric-note {
-    min-height: 24px;
+    grid-column: 1;
+    min-height: 0;
     color: #9a948b;
     font-size: clamp(0.5rem, 1.35vw, 0.63rem);
     line-height: 1.1;
 }
 
 .humidity-chart-card,
-.temperature-chart-card {
+.temperature-chart-card,
+.noise-chart-card {
     position: relative;
     min-height: clamp(330px, 42vw, 500px);
     margin-top: clamp(18px, 2vw, 28px);
     padding: clamp(10px, 1.4vw, 18px);
     border: 2px solid var(--rule);
     background: var(--paper);
-    box-shadow: 7px 7px 0 rgba(22, 21, 19, 0.1);
+    box-shadow: none;
+}
+
+.humidity-chart-card,
+.temperature-chart-card,
+.noise-chart-card {
+    padding: 42px 18px 14px;
+    background: var(--paper);
+}
+
+.humidity-chart-card h3,
+.temperature-chart-card h3,
+.noise-chart-card h3 {
+    margin: 0 0 14px;
+    font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
+    font-size: clamp(1.4rem, 2.6vw, 3rem);
+    line-height: 0.9;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.humidity-chart-card h3 {
+    color: var(--blue);
+}
+
+.temperature-chart-card h3 {
+    color: var(--red);
+}
+
+.noise-chart-card h3 {
+    color: var(--orange);
 }
 
 .humidity-chart-card svg,
-.temperature-chart-card svg {
+.temperature-chart-card svg,
+.noise-chart-card svg {
     display: block;
     width: 100%;
     height: auto;
     aspect-ratio: 900 / 340;
     overflow: visible;
-    cursor: crosshair;
+    cursor: default;
+}
+
+.humidity-chart-key,
+.temperature-chart-key,
+.noise-chart-key {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 2px;
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.humidity-chart-key span::before,
+.temperature-chart-key span::before,
+.noise-chart-key span::before {
+    display: inline-block;
+    width: 24px;
+    margin-right: 8px;
+    border-top: 4px solid currentColor;
+    content: "";
+    vertical-align: middle;
+}
+
+.humidity-chart-key .studio {
+    color: #13c8d2;
+}
+
+.humidity-chart-key .mensa {
+    color: #087982;
+}
+
+.temperature-chart-key .studio {
+    color: #d8124f;
+}
+
+.temperature-chart-key .mensa {
+    color: #8f0d38;
+}
+
+.noise-chart-key .studio {
+    color: #f2a11a;
+}
+
+.noise-chart-key .mensa {
+    color: #a35d05;
 }
 
 .humidity-chart-grid,
-.temperature-chart-grid {
-    stroke: rgba(22, 21, 19, 0.14);
-    stroke-width: 1;
+.temperature-chart-grid,
+.noise-chart-grid {
+    stroke: rgba(22, 21, 19, 0.18);
+    stroke-width: 2;
     vector-effect: non-scaling-stroke;
 }
 
+.humidity-chart-plot,
+.temperature-chart-plot,
+.noise-chart-plot {
+    fill: rgba(22, 21, 19, 0.05);
+}
+
+.humidity-chart-grid.edge,
+.temperature-chart-grid.edge,
+.noise-chart-grid.edge {
+    stroke: var(--rule);
+}
+
 .humidity-chart-line,
-.temperature-chart-line {
+.temperature-chart-line,
+.noise-chart-line {
     fill: none;
     stroke-width: 5;
     stroke-linecap: round;
@@ -441,23 +535,32 @@ a {
 }
 
 .humidity-chart-line-studio {
-    stroke: var(--orange);
+    stroke: #13c8d2;
 }
 
 .humidity-chart-line-mensa {
-    stroke: var(--magenta);
+    stroke: #087982;
 }
 
 .temperature-chart-line-studio {
-    stroke: var(--red);
+    stroke: #d8124f;
 }
 
 .temperature-chart-line-mensa {
-    stroke: var(--orange);
+    stroke: #8f0d38;
+}
+
+.noise-chart-line-studio {
+    stroke: #f2a11a;
+}
+
+.noise-chart-line-mensa {
+    stroke: #a35d05;
 }
 
 .humidity-chart-guide,
-.temperature-chart-guide {
+.temperature-chart-guide,
+.noise-chart-guide {
     stroke: var(--ink);
     stroke-dasharray: 5 7;
     stroke-width: 2;
@@ -466,57 +569,66 @@ a {
 }
 
 .humidity-chart-dot,
-.temperature-chart-dot {
+.temperature-chart-dot,
+.noise-chart-dot {
     fill: var(--paper);
     stroke-width: 4;
     vector-effect: non-scaling-stroke;
 }
 
 .humidity-chart-dot-studio {
-    stroke: var(--orange);
+    stroke: #13c8d2;
 }
 
 .humidity-chart-dot-mensa {
-    stroke: var(--magenta);
+    stroke: #087982;
 }
 
 .temperature-chart-dot-studio {
-    stroke: var(--red);
+    stroke: #d8124f;
 }
 
 .temperature-chart-dot-mensa {
-    stroke: var(--orange);
+    stroke: #8f0d38;
+}
+
+.noise-chart-dot-studio {
+    stroke: #f2a11a;
+}
+
+.noise-chart-dot-mensa {
+    stroke: #a35d05;
 }
 
 .humidity-chart-axis,
 .humidity-chart-label,
-.humidity-chart-legend,
 .temperature-chart-axis,
 .temperature-chart-label,
-.temperature-chart-legend {
+.temperature-chart-legend,
+.noise-chart-axis,
+.noise-chart-label {
     fill: var(--ink);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
     font-size: 12px;
     font-weight: 900;
+    text-transform: uppercase;
     transform-box: fill-box;
     vector-effect: non-scaling-stroke;
 }
 
+.humidity-chart-axis,
+.temperature-chart-axis,
+.noise-chart-axis {
+    fill: var(--ink);
+    font-size: 14px;
+}
+
 .humidity-chart-label,
-.temperature-chart-label {
-    fill: var(--blue);
-}
-
-.humidity-chart-legend.studio {
-    fill: var(--orange);
-}
-
-.humidity-chart-legend.mensa {
-    fill: var(--magenta);
-}
-
-.temperature-chart-label {
-    fill: var(--red);
+.temperature-chart-label,
+.noise-chart-label {
+    fill: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
 }
 
 .temperature-chart-legend.studio {
@@ -528,14 +640,15 @@ a {
 }
 
 .humidity-tooltip,
-.temperature-tooltip {
+.temperature-tooltip,
+.noise-tooltip {
     position: absolute;
     z-index: 3;
     min-width: 104px;
     padding: 8px 10px;
     border: 2px solid var(--rule);
-    background: var(--paper);
-    box-shadow: 4px 4px 0 rgba(22, 21, 19, 0.14);
+    background: var(--tooltip-bg, var(--paper));
+    box-shadow: 3px 3px 0 rgba(22, 21, 19, 0.16);
     color: var(--ink);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.78rem;
@@ -545,8 +658,21 @@ a {
     transform: translate(-50%, calc(-100% - 18px));
 }
 
+.humidity-tooltip {
+    --tooltip-bg: var(--cyan);
+}
+
+.temperature-tooltip {
+    --tooltip-bg: #f3bfd0;
+}
+
+.noise-tooltip {
+    --tooltip-bg: var(--gold);
+}
+
 .humidity-tooltip strong,
-.temperature-tooltip strong {
+.temperature-tooltip strong,
+.noise-tooltip strong {
     display: block;
     color: var(--blue);
     font-size: 1.18rem;
@@ -554,6 +680,49 @@ a {
 
 .temperature-tooltip strong {
     color: var(--red);
+}
+
+.noise-tooltip strong {
+    color: var(--orange);
+}
+
+.humidity-tooltip,
+.temperature-tooltip,
+.noise-tooltip {
+    width: min(240px, calc(100% - 24px));
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 0.82rem;
+    font-weight: 400;
+    line-height: 1.25;
+}
+
+.humidity-tooltip strong,
+.temperature-tooltip strong,
+.noise-tooltip strong {
+    color: var(--ink);
+    font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.humidity-tooltip span,
+.temperature-tooltip span,
+.noise-tooltip span {
+    display: block;
+    margin-top: 3px;
+    font-size: 0.68rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.humidity-tooltip p,
+.temperature-tooltip p,
+.noise-tooltip p {
+    margin: 8px 0 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.82rem;
+    line-height: 1.25;
 }
 
 .sparkline {
@@ -693,10 +862,10 @@ a {
 
 .linea-story {
     grid-column: 1 / -1;
-    margin-top: clamp(30px, 5vw, 78px);
+    width: min(1120px, calc(100% - clamp(24px, 5vw, 68px)));
+    margin: clamp(30px, 5vw, 78px) auto 0;
     padding: clamp(18px, 2vw, 30px) clamp(18px, 2.4vw, 34px);
-    border-top: 3px solid var(--rule);
-    border-bottom: 3px solid var(--rule);
+    border: 3px solid var(--rule);
     background: rgba(255, 255, 255, 0.72);
 }
 
@@ -756,6 +925,10 @@ a {
     stroke: var(--blue);
 }
 
+.landing-story .linea-route-main {
+    stroke: var(--magenta);
+}
+
 .temperature-page .linea-route-main {
     stroke: var(--red);
 }
@@ -782,7 +955,7 @@ a {
 
 .linea-event.is-visible {
     opacity: 1;
-    box-shadow: 7px 7px 0 rgba(22, 21, 19, 0.12);
+    box-shadow: none;
     transform: translateY(0) rotate(var(--card-tilt, 0deg)) scale(1);
 }
 
@@ -986,6 +1159,14 @@ a {
     background: rgba(255, 255, 255, 0.72);
 }
 
+.temperature-page .temperature-finder,
+.noise-page .temperature-finder {
+    width: min(1120px, calc(100% - clamp(24px, 5vw, 68px)));
+    margin: clamp(30px, 5vw, 78px) auto 0;
+    border: 3px solid var(--rule);
+    background: rgba(255, 255, 255, 0.72);
+}
+
 .thermometer-panel,
 .volume-panel,
 .temperature-result {
@@ -1021,14 +1202,14 @@ a {
 .thermometer-control {
     position: relative;
     width: 230px;
-    height: 390px;
+    height: 410px;
     margin: clamp(24px, 3vw, 42px) auto 10px;
 }
 
 .thermometer-scale {
     position: absolute;
     top: 10px;
-    bottom: 68px;
+    bottom: 88px;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -1061,13 +1242,13 @@ a {
 
 .thermometer-tube {
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 17px;
     width: 40px;
-    height: 315px;
+    height: 376px;
     overflow: hidden;
     border: 4px solid var(--rule);
-    border-bottom: 0;
     border-radius: 24px 24px 0 0;
     background: var(--paper);
 }
@@ -1085,6 +1266,7 @@ a {
 
 .thermometer-bulb {
     position: absolute;
+    z-index: 2;
     bottom: 0;
     left: 0;
     width: 74px;
@@ -1101,7 +1283,7 @@ a {
     top: 0;
     left: 83px;
     width: 74px;
-    height: 315px;
+    height: 335px;
     margin: 0;
     accent-color: var(--red);
     cursor: ns-resize;
@@ -1112,12 +1294,6 @@ a {
 
 .temperature-slider:active {
     cursor: ns-resize;
-}
-
-.thermometer-control:focus-within .thermometer {
-    outline: 3px solid var(--blue);
-    outline-offset: 4px;
-    border-radius: 28px;
 }
 
 .temperature-selection {
@@ -1265,6 +1441,11 @@ a {
     box-shadow: 6px 6px 0 rgba(22, 21, 19, 0.1);
 }
 
+.temperature-page .temperature-timeline,
+.noise-page .temperature-timeline {
+    box-shadow: none;
+}
+
 .temperature-timeline-axis {
     position: absolute;
     top: 12px;
@@ -1340,6 +1521,11 @@ a {
     animation-play-state: paused;
 }
 
+.temperature-page .temperature-period:hover,
+.temperature-page .temperature-period:focus-visible {
+    background: #8f0d38;
+}
+
 .noise-page .noise-period {
     background: var(--orange);
     box-shadow: 0 0 0 0 rgba(241, 92, 39, 0.5);
@@ -1348,7 +1534,7 @@ a {
 
 .noise-page .noise-period:hover,
 .noise-page .noise-period:focus-visible {
-    background: var(--magenta);
+    background: #a35d05;
 }
 
 @keyframes temperaturePulse {
@@ -1399,6 +1585,16 @@ a {
     transform: translate(-50%, -100%);
 }
 
+.temperature-page .temperature-period-tooltip {
+    background: #f3bfd0;
+    box-shadow: 3px 3px 0 rgba(22, 21, 19, 0.16);
+}
+
+.noise-page .temperature-period-tooltip {
+    background: var(--gold);
+    box-shadow: 3px 3px 0 rgba(22, 21, 19, 0.16);
+}
+
 .temperature-period-tooltip strong,
 .temperature-period-tooltip span {
     display: block;
@@ -1428,25 +1624,28 @@ a {
     display: grid;
     grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
     gap: clamp(18px, 3vw, 42px);
-    margin-top: clamp(24px, 4vw, 58px);
+    width: min(1120px, calc(100% - clamp(24px, 5vw, 68px)));
+    margin: clamp(16px, 2vw, 28px) auto 0;
     padding: clamp(18px, 2.6vw, 38px);
-    border-top: 5px double var(--rule);
-    border-bottom: 5px double var(--rule);
+    border: 3px solid var(--rule);
     background: rgba(255, 255, 255, 0.72);
 }
 
 .alcohol-error-banner {
-    grid-column: 1 / -1;
+    width: min(1120px, calc(100% - clamp(24px, 5vw, 68px)));
+    margin: clamp(30px, 5vw, 78px) auto 0;
     padding: clamp(16px, 2vw, 28px);
-    border: 4px solid var(--rule);
+    border: 3px solid var(--rule);
     background:
         repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.09) 0 12px, transparent 12px 24px),
         var(--red);
     color: #fff;
+    text-align: center;
 }
 
 .alcohol-error-banner p {
     margin: 0 0 8px;
+    color: #fff;
     font-size: 0.78rem;
     font-weight: 900;
     letter-spacing: 0.12em;
@@ -1455,19 +1654,18 @@ a {
 
 .alcohol-error-banner h2 {
     max-width: 900px;
-    margin: 0;
+    margin: 0 auto;
     font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
     font-size: clamp(2rem, 4.5vw, 5.2rem);
-    line-height: 0.88;
+    line-height: 0.98;
     text-transform: uppercase;
 }
 
 .alcohol-photo {
     align-self: start;
     margin: 0;
-    border: 3px solid var(--rule);
+    border: 2px solid var(--rule);
     background: var(--paper);
-    transform: rotate(-0.6deg);
 }
 
 .alcohol-photo img {
@@ -1524,7 +1722,7 @@ a {
     gap: 5px;
     min-width: 0;
     padding: 12px 10px;
-    background: var(--paper);
+    background: linear-gradient(to bottom, var(--red) 0 10px, var(--paper) 10px);
 }
 
 .alcohol-diagnostics div + div {
@@ -1547,7 +1745,8 @@ a {
 .alcohol-copy blockquote {
     margin: clamp(20px, 3vw, 38px) 0 14px;
     padding: 16px 18px;
-    border-left: 10px solid var(--gold);
+    border: 2px solid var(--rule);
+    border-left: 10px solid var(--red);
     background: var(--paper);
     font-family: Georgia, "Times New Roman", serif;
     font-size: clamp(1.05rem, 1.5vw, 1.35rem);
@@ -1557,22 +1756,28 @@ a {
 
 .paper-footer {
     display: grid;
+    gap: 6px;
     place-items: center;
-    padding: clamp(18px, 2vw, 32px) clamp(18px, 2.4vw, 34px) 0;
+    margin-top: clamp(30px, 5vw, 76px);
+    padding: clamp(18px, 2vw, 32px) clamp(18px, 2.4vw, 34px);
+    border-top: 5px double var(--rule);
+    background: #ffffff;
+    text-align: center;
 }
 
-.paper-footer a {
-    display: inline-grid;
-    min-height: 48px;
-    place-items: center;
-    padding: 0 19px;
-    border-radius: 0;
-    background: #303030;
-    color: #fff;
-    font-family: Impact, Haettenschweiler, "Arial Black", sans-serif;
-    font-size: 1.18rem;
+.paper-footer p {
+    margin: 0;
+    font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
+    font-size: clamp(1.05rem, 2vw, 2rem);
+    line-height: 1;
     text-transform: uppercase;
-    box-shadow: 0 6px 0 var(--gold);
+}
+
+.paper-footer small {
+    color: var(--muted);
+    font-size: clamp(0.75rem, 1vw, 0.95rem);
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 @media (max-width: 680px) {
@@ -1735,19 +1940,14 @@ a {
         min-height: clamp(260px, 30vh, 470px);
     }
 
-    .overview {
-        align-self: stretch;
-        width: 100%;
-    }
-
     .metric-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: clamp(10px, 1vw, 16px);
     }
 
     .metric-card {
-        min-height: clamp(150px, 16vh, 210px);
-        padding: clamp(12px, 1vw, 18px);
+        min-height: clamp(90px, 9vh, 126px);
+        padding: clamp(8px, 0.7vw, 12px) clamp(12px, 1vw, 18px);
     }
 
     .sparkline {

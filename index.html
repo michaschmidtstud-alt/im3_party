@@ -35,8 +35,12 @@
         <p class="lead">Ersti Party eskaliert: heiss und feucht</p>
 
         <div class="scene-grid" aria-label="Stimmungsbilder der Party">
-            <article class="scene scene-studio"></article>
-            <article class="scene scene-mensa"></article>
+            <figure class="scene">
+                <img src="assets/brandaktuell-mensa.png" alt="Festlich beleuchteter Partyraum nach der Feier">
+            </figure>
+            <figure class="scene">
+                <img src="assets/brandaktuell-dancefloor.png" alt="Bunte Tanzfläche mit Partylicht und Konfetti">
+            </figure>
         </div>
 
         <article class="story-copy" id="story-copy" aria-label="Story aus den Messdaten"></article>
@@ -47,7 +51,7 @@
         <div class="metric-grid" id="metric-grid"></div>
     </section>
 
-    <section class="linea-story" aria-labelledby="linea-story-title">
+    <section class="linea-story landing-story" aria-labelledby="linea-story-title">
         <h2 id="linea-story-title">Abendprotokoll</h2>
         <div class="linea-timeline">
             <svg class="linea-route" viewBox="0 0 860 1720" preserveAspectRatio="none" aria-hidden="true">
@@ -99,7 +103,7 @@
                 </svg>
                 <div>
                     <span>21:14</span>
-                    <h3>Alle singen</h3>
+                    <h3>Karaoke-Eskalation</h3>
                     <p>Keiner kennt die zweite Strophe. Das haelt aber niemanden auf.</p>
                 </div>
             </article>
@@ -128,8 +132,9 @@
         </div>
     </section>
 
-    <footer class="paper-footer">
-        <a href="chart.html">Entdecke mehr</a>
+    <footer class="paper-footer" aria-label="Seitenabschluss">
+        <p>MMP NEWS · Welcome Party H8 · 30. Sept 2026</p>
+        <small>Live gemessen, zu spät ausgewertet.</small>
     </footer>
 </main>
 
@@ -146,9 +151,9 @@
         noise_pct: { label: "Lautstärke", unit: "dB", accent: "orange", digits: 1 }
     };
     const metricConfig = [
-        { id: "temperature", key: "temperature_c", label: "Temperatur", unit: "°C", accent: "red", digits: 1 },
-        { id: "humidity", key: "humidity_pct", label: "Luftfeuchtigkeit", unit: "%", accent: "blue", digits: 0 },
-        { id: "noise", key: "noise_pct", label: "Lautstärke", unit: "dB", accent: "orange", digits: 1 }
+        { id: "temperature", key: "temperature_c", label: "Temperatur", unit: "°C", accent: "red", digits: 1, href: "temperature.html" },
+        { id: "humidity", key: "humidity_pct", label: "Luftfeuchtigkeit", unit: "%", accent: "blue", digits: 0, href: "humidity.html" },
+        { id: "noise", key: "noise_pct", label: "Lautstärke", unit: "dB", accent: "orange", digits: 1, href: "noise.html" }
     ];
 
     function valuesFor(key) {
@@ -191,11 +196,11 @@
     document.getElementById("metric-grid").innerHTML = metricConfig.map((metric) => {
         const values = valuesFor(metric.key);
         const latest = latestMetricValue(metric.key);
-        return `<article class="metric-card ${metric.accent}" id="${metric.id}">
+        return `<a class="metric-card ${metric.accent}" id="${metric.id}" href="${metric.href}" aria-label="${metric.label} öffnen">
             <div class="metric-label">${metric.label}</div>
             <strong>${format(latest, metric.digits, metric.unit)}</strong>
             <span class="metric-note">${values.length ? "letzter Messwert" : "nicht gemessen"}</span>
-        </article>`;
+        </a>`;
     }).join("");
 
     const humidityPeak = strongestFor("humidity_pct");
