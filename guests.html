@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMP News | Gästezahl</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="paper subpage guests-page">
+    <header class="masthead">
+        <a class="edition" href="index.html"><span>MMP</span><mark>NEWS</mark></a>
+        <div class="issue">
+            <span>Gäste Report</span>
+            <span>30. Sept 2026</span>
+        </div>
+    </header>
+
+    <nav class="topic-nav" aria-label="Messwerte">
+        <a href="temperature.html">Temperatur</a>
+        <a href="humidity.html">Luftfeuchtigkeit</a>
+        <a href="noise.html">Lautstärke</a>
+        <a href="alcohol.html">Alkoholpegel</a>
+        <a href="guests.html" aria-current="page">Gäste</a>
+    </nav>
+
+    <h1 class="main-title" id="main-title">Gezählt?</h1>
+
+    <section class="hero guests-hero" aria-labelledby="main-title">
+        <p class="lead">Ab 20 Uhr hatte jede Person plötzlich eine Begleitung</p>
+    </section>
+
+    <section class="guest-finder" aria-labelledby="guest-finder-title">
+        <div class="guest-result" aria-live="polite">
+            <p class="guest-kicker">17:00 bis zum Kontrollverlust</p>
+            <h2 id="guest-finder-title">Gästezahl im Verlauf</h2>
+            <div class="guest-chart" id="guest-chart">
+                <svg id="guest-chart-svg" viewBox="0 0 760 300" preserveAspectRatio="xMidYMid meet" aria-label="Gästezahl über den Abend"></svg>
+                <div class="guest-tooltip" id="guest-tooltip" hidden></div>
+            </div>
+            <div class="guest-chart-key" aria-label="Legende">
+                <span class="counted">Sicher gezählt</span>
+                <span class="corrected">Doppelt gesehen</span>
+                <span class="missing">Ab 23:00: ?</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="overview guest-overview" aria-labelledby="guest-story-title">
+        <h2 id="guest-story-title">Die Nacht der wundersamen Vermehrung</h2>
+        <div class="metric-grid" id="guest-metrics"></div>
+        <article class="guest-story" id="guest-story"></article>
+    </section>
+
+    <footer class="paper-footer" aria-label="Seitenabschluss">
+        <p>MMP NEWS · Welcome Party H8 · 30. Sept 2026</p>
+        <small>Erst gezählt, dann geschätzt, später nur noch geraten.</small>
+    </footer>
+</main>
+
+<script>
+    const guestData = [
+        { time: "17:00", value: 39, reliable: true },
+        { time: "17:30", value: 45, reliable: true },
+        { time: "18:00", value: 62, reliable: true },
+        { time: "18:30", value: 66, reliable: true },
+        { time: "19:00", value: 65, reliable: true },
+        { time: "19:30", value: 63, reliable: true },
+        { time: "20:00", value: 126, reliable: false },
+        { time: "20:30", value: 122, reliable: false },
+        { time: "21:00", value: 121, reliable: false },
+        { time: "21:30", value: 122, reliable: false },
+        { time: "22:00", value: 120, reliable: false },
+        { time: "22:30¹", value: 115, reliable: false },
+        { time: "22:30²", value: 109, reliable: false },
+        { time: "23:00", value: null },
+        { time: "23:30", value: null },
+        { time: "00:00", value: null },
+        { time: "00:30", value: null },
+        { time: "01:00", value: null },
+        { time: "01:30", value: null },
+        { time: "02:00", value: null },
+        { time: "02:30", value: null },
+        { time: "03:00", value: null }
+    ];
+
+    const chart = document.getElementById("guest-chart");
+    const svg = document.getElementById("guest-chart-svg");
+    const tooltip = document.getElementById("guest-tooltip");
+
+    function guestComment(entry) {
+        if (!Number.isFinite(entry.value)) return "Ab hier wurde nicht mehr gezählt. Möglicherweise fehlte Personal, möglicherweise nur noch der Fokus.";
+        if (entry.reliable) return "Noch eine seriöse Zahl: einzelne Menschen, einzelne Köpfe, erstaunlich klare Sicht.";
+        if (entry.time === "22:30²") return "Zum zweiten Mal 22:30 Uhr. Ab hier sah offenbar sogar die Uhr doppelt.";
+        return `Diese Zahl wirkt so groß, weil doppelt gesehen wurde. Nüchtern geschätzt wären es etwa ${Math.round(entry.value / 2)} Gäste.`;
+    }
+
+    function showTooltip(entry, chartX, chartY) {
+        const rect = chart.getBoundingClientRect();
+        tooltip.innerHTML = Number.isFinite(entry.value)
+            ? `<strong>${entry.time} Uhr</strong><span>${entry.value} gezählte Gäste</span><p>${guestComment(entry)}</p>`
+            : `<strong>${entry.time} Uhr</strong><span>Messwert: ?</span><p>${guestComment(entry)}</p>`;
+        tooltip.style.left = `${Math.max(120, Math.min((chartX / 760) * rect.width, rect.width - 120))}px`;
+        tooltip.style.top = `${Math.max(20, (chartY / 300) * rect.height - 8)}px`;
+        tooltip.hidden = false;
+    }
+
+    function renderGuests() {
+        const width = 760;
+        const height = 300;
+        const pad = { top: 74, right: 24, bottom: 38, left: 42 };
+        const plotWidth = width - pad.left - pad.right;
+        const plotHeight = height - pad.top - pad.bottom;
+        const slotFor = (index) => index > 11 ? index - 1 : index;
+        const xFor = (index) => pad.left + (slotFor(index) / (guestData.length - 2)) * plotWidth;
+        const yFor = (value) => pad.top + (1 - value / 140) * plotHeight;
+        const known = guestData.filter((entry) => Number.isFinite(entry.value));
+        const points = known.map((entry, index) => `${xFor(index)},${yFor(entry.value)}`).join(" ");
+        const possibleValues = [103, 98, 92, 86, 79, 72, 64, 55, 46];
+        const unknownStart = (xFor(12) + xFor(13)) / 2;
+        const guideValues = [0, 35, 70, 105, 140];
+
+        svg.innerHTML = `
+            <defs>
+                <marker id="guest-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 z"></path>
+                </marker>
+            </defs>
+            <rect class="guest-chart-missing-zone" x="${unknownStart}" y="${pad.top}" width="${width - pad.right - unknownStart}" height="${plotHeight}"></rect>
+            ${guideValues.map((value) => `<line class="guest-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line><text class="guest-chart-axis" x="5" y="${yFor(value) + 4}">${value}</text>`).join("")}
+            <line class="guest-chart-cut" x1="${xFor(5.5)}" x2="${xFor(5.5)}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
+            <polyline class="guest-chart-line is-counted" points="${points}"></polyline>
+            ${known.map((entry, index) => `<circle class="guest-chart-point ${entry.reliable ? "is-reliable" : "is-doubled"}" data-index="${index}" cx="${xFor(index)}" cy="${yFor(entry.value)}" r="5"></circle>`).join("")}
+            <path class="guest-chart-arrow" d="M${xFor(9)},52 Q${xFor(7.5)},55 ${xFor(6) + 5},${yFor(126) + 6}" marker-end="url(#guest-arrowhead)"></path>
+            <text class="guest-chart-note" x="${xFor(9) + 8}" y="24">
+                <tspan x="${xFor(9) + 8}" dy="0">PLÖTZLICH 126?</tspan>
+                <tspan x="${xFor(9) + 8}" dy="14">WEIL DOPPELT GESEHEN WURDE.</tspan>
+            </text>
+            ${guestData.map((entry, index) => index % 2 === 0 || index === guestData.length - 1 ? `<text class="guest-chart-time" x="${xFor(index)}" y="${height - 12}" text-anchor="middle">${entry.time.replace(/[¹²]/g, "")}</text>` : "").join("")}
+            ${guestData.slice(13).map((entry, offset) => `<text class="guest-chart-question" x="${xFor(offset + 13)}" y="${yFor(possibleValues[offset])}" text-anchor="middle">?</text>`).join("")}
+            <line class="guest-chart-guide" id="guest-chart-guide" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}" hidden></line>
+        `;
+
+        const guide = document.getElementById("guest-chart-guide");
+        const handlePointer = (event) => {
+            const rect = svg.getBoundingClientRect();
+            const svgX = ((event.clientX - rect.left) / Math.max(rect.width, 1)) * width;
+            const slot = Math.max(0, Math.min(Math.round(((svgX - pad.left) / plotWidth) * (guestData.length - 2)), guestData.length - 2));
+            const index = slot <= 10 ? slot : slot === 11 ? 12 : slot + 1;
+            const entry = guestData[index];
+            const x = xFor(index);
+            const value = entry.value;
+            const y = value === null ? yFor(possibleValues[index - 13]) : yFor(value);
+            guide.hidden = false;
+            guide.setAttribute("x1", x);
+            guide.setAttribute("x2", x);
+            showTooltip(entry, x, y);
+        };
+
+        svg.addEventListener("pointermove", handlePointer);
+        svg.addEventListener("pointerleave", () => {
+            guide.hidden = true;
+            tooltip.hidden = true;
+        });
+
+        document.getElementById("guest-metrics").innerHTML = [
+            { label: "Sauber gezählt", value: "bis 19:30", note: "danach übernimmt der Doppelblick" },
+            { label: "Sprung um 20:00", value: "63 → 126", note: "weil doppelt gesehen wurde" },
+            { label: "Letztes Lebenszeichen", value: "22:30²", note: "sogar die Uhr kam zweimal" }
+        ].map((metric) => `<article class="metric-card guest-metric">
+            <div class="metric-label">${metric.label}</div>
+            <strong>${metric.value}</strong>
+            <span class="metric-note">${metric.note}</span>
+        </article>`).join("");
+    }
+
+    document.getElementById("guest-story").innerHTML = `
+        <p><strong>Bis 19:30 Uhr lief alles verdächtig professionell:</strong> 39 Gäste zum Start, ein sauberer Anstieg und schließlich 63 Menschen im Raum. Um 20:00 Uhr geschah dann das statistische Wunder: Plötzlich waren es 126. Kein Reisebus war vorgefahren, keine zweite Party durch die Hintertür gekommen – das Zählteam hatte einfach begonnen, jede Person mit ihrer verschwommenen Begleitung zu notieren.</p>
+        <p>Die Zahlen blieben danach erstaunlich stabil doppelt: 122, 121, wieder 122. Um 22:30 Uhr wurde sogar zweimal um 22:30 Uhr gezählt. Danach stehen nur noch Fragezeichen. Vermutlich waren weiterhin Gäste da; bloß niemand mehr, der gleichzeitig Menschen, Uhrzeit und Strichliste scharf sehen konnte.</p>
+        <blockquote>Redaktionelle Schätzung: Die Party wurde nicht voller – nur die Wahrnehmung großzügiger.</blockquote>
+    `;
+
+    renderGuests();
+</script>
+</body>
+</html>

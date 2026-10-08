@@ -21,12 +21,45 @@
         <a href="humidity.html" aria-current="page">Luftfeuchtigkeit</a>
         <a href="noise.html">Lautstärke</a>
         <a href="alcohol.html">Alkoholpegel</a>
+        <a href="guests.html">Gäste</a>
     </nav>
 
     <h1 class="main-title" id="main-title">Feucht</h1>
 
     <section class="hero humidity-hero" aria-labelledby="main-title">
         <p class="lead">Nicht nur laut, sondern auch tropisch</p>
+    </section>
+
+    <section class="temperature-finder humidity-finder" aria-labelledby="humidity-finder-title">
+        <div class="humidity-panel">
+            <p class="temperature-kicker">Beschlag-o-Meter</p>
+            <h2 id="humidity-finder-title">Wie feucht war’s?</h2>
+
+            <div class="humidity-control" id="humidity-control">
+                <div class="humidity-window" aria-hidden="true">
+                    <div class="humidity-window-scene">
+                        <img src="assets/IMG_1451.jpg" alt="">
+                    </div>
+                    <div class="humidity-fog"></div>
+                    <span class="humidity-wiper"></span>
+                </div>
+                <input class="humidity-slider" id="humidity-slider" type="range" step="1" aria-label="Luftfeuchtigkeit auswählen">
+            </div>
+
+            <output class="temperature-selection humidity-selection" id="humidity-selection" for="humidity-slider">-- %</output>
+            <p class="temperature-hint">Zieh den Fensterwischer nach links oder rechts</p>
+        </div>
+
+        <div class="temperature-result" aria-live="polite">
+            <p class="temperature-kicker">Mikroklima der Partynacht</p>
+            <h2>Wann war die Luft so dick?</h2>
+            <div class="temperature-timeline humidity-finder-timeline" id="humidity-finder-timeline">
+                <div class="temperature-timeline-axis" id="humidity-finder-axis" aria-hidden="true"></div>
+                <div class="temperature-timeline-lanes" id="humidity-finder-lanes"></div>
+                <div class="temperature-period-tooltip humidity-period-tooltip" id="humidity-period-tooltip" hidden></div>
+            </div>
+            <p class="temperature-accuracy" id="humidity-accuracy"></p>
+        </div>
     </section>
 
     <section class="overview" aria-labelledby="humidity-overview-title">
@@ -80,6 +113,23 @@
     const low = points.reduce((best, point) => !best || point.value < best.value ? point : best, null);
     const average = points.length ? points.reduce((sum, point) => sum + point.value, 0) / points.length : null;
     const middle = points[Math.floor(points.length * 0.52)] || null;
+    const timestamp = (point) => Date.parse(point.time.replace(" ", "T"));
+
+    const humiditySlider = document.getElementById("humidity-slider");
+    const humidityControl = document.getElementById("humidity-control");
+    const humiditySelection = document.getElementById("humidity-selection");
+    const humidityFinderTimeline = document.getElementById("humidity-finder-timeline");
+    const humidityFinderAxis = document.getElementById("humidity-finder-axis");
+    const humidityFinderLanes = document.getElementById("humidity-finder-lanes");
+    const humidityPeriodTooltip = document.getElementById("humidity-period-tooltip");
+    const humidityAccuracy = document.getElementById("humidity-accuracy");
+    const minHumidity = points.length ? Math.floor(Math.min(...points.map((point) => point.value))) : 0;
+    const maxHumidity = points.length ? Math.ceil(Math.max(...points.map((point) => point.value))) : 100;
+    const startHumidity = points.length ? Math.round(average) : 50;
+    const finderStart = points.length ? Math.min(...points.map(timestamp)) : 0;
+    const finderEnd = points.length ? Math.max(...points.map(timestamp)) : 1;
+    const finderDuration = Math.max(finderEnd - finderStart, 1);
+    const finderHours = Array.from({ length: 7 }, (_, index) => finderStart + finderDuration * (index / 6));
 
     function format(value, digits = 1) {
         if (value === null || value === undefined || Number.isNaN(value)) return "--";
@@ -248,11 +298,12 @@
         const mensaDot = document.getElementById("humidity-chart-dot-mensa");
         const showPoint = (event) => {
             const rect = svg.getBoundingClientRect();
-            const ratio = Math.max(0, Math.min((event.clientX - rect.left) / Math.max(rect.width, 1), 1));
+            const svgX = ((event.clientX - rect.left) / Math.max(rect.width, 1)) * width;
+            const x = Math.max(pad.left, Math.min(svgX, width - pad.right));
+            const ratio = (x - pad.left) / chartWidth;
             const targetTime = minTime + ratio * (maxTime - minTime);
             const studio = nearest(series[3], targetTime);
             const mensa = nearest(series[7], targetTime);
-            const x = xForTime(targetTime);
             const xPercent = (x / width) * 100;
 
             guide.setAttribute("x1", x);
@@ -283,6 +334,126 @@
     }
 
     renderHumidityChart();
+
+    function humidityPeriods(selectedHumidity) {
+        const periods = [];
+
+        Object.keys(boxes).forEach((boxId) => {
+            const roomPoints = points
+                .filter((point) => point.box === Number(boxId) && Math.abs(point.value - selectedHumidity) <= 0.5)
+                .sort((a, b) => timestamp(a) - timestamp(b));
+
+            roomPoints.forEach((point) => {
+                const pointTime = timestamp(point);
+                const current = periods[periods.length - 1];
+                if (current && current.box === Number(boxId) && pointTime - current.end <= 150000) {
+                    current.end = pointTime;
+                    current.count += 1;
+                    current.sum += point.value;
+                } else {
+                    periods.push({
+                        box: Number(boxId),
+                        start: pointTime,
+                        end: pointTime,
+                        count: 1,
+                        sum: point.value
+                    });
+                }
+            });
+        });
+
+        return periods;
+    }
+
+    function humidityPeriodComment(period) {
+        const periodAverage = period.sum / period.count;
+        const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
+        if (periodAverage >= 46) return "Fast Tropenhaus: Die Luft feiert inzwischen sichtbar mit.";
+        if (duration >= 10) return "Ein stabiles Mikroklima – dieser Wert wollte offenbar länger bleiben.";
+        if (period.box === 3) return "Im Studio sammelt sich kurz genug Wasserdampf für beschlagene Gedanken.";
+        return "Die Mensa legt eine kleine Feuchtigkeitswelle hin – kurz, aber messbar.";
+    }
+
+    function renderHumidityFinderTimeline(selectedHumidity) {
+        const periodData = humidityPeriods(selectedHumidity).map((period, index) => ({ ...period, index }));
+
+        humidityFinderAxis.innerHTML = finderHours.map((time) => {
+            const ratio = (time - finderStart) / finderDuration;
+            return `<span style="left: ${ratio * 100}%">${clockFromTime(time)}</span>`;
+        }).join("");
+
+        humidityFinderLanes.innerHTML = Object.entries(boxes).map(([boxId, box]) => {
+            const roomPeriods = periodData.filter((period) => period.box === Number(boxId));
+            return `
+                <div class="temperature-timeline-lane">
+                    <strong>${box.name}</strong>
+                    <div class="temperature-timeline-track">
+                        ${roomPeriods.map((period) => {
+                            const left = Math.min(((period.start - finderStart) / finderDuration) * 100, 99.35);
+                            const visibleEnd = Math.min(period.end + 60000, finderEnd);
+                            const width = Math.min(Math.max(((visibleEnd - period.start) / finderDuration) * 100, 0.65), 100 - left);
+                            const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
+                            return `<button class="temperature-period humidity-period" style="left: ${left}%; width: ${width}%; --pulse-delay: ${(period.index % 8) * 90}ms" data-period="${period.index}" aria-label="${box.name}, ${clockFromTime(period.start)} Uhr, ${duration} Minuten"></button>`;
+                        }).join("")}
+                    </div>
+                </div>
+            `;
+        }).join("");
+
+        const showTooltip = (period, target, event) => {
+            const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
+            const endTime = period.end > period.start ? `–${clockFromTime(period.end)} Uhr` : " Uhr";
+            humidityPeriodTooltip.innerHTML = `
+                <strong>${clockFromTime(period.start)}${endTime}</strong>
+                <span>${boxes[period.box].name} · ca. ${duration} Min.</span>
+                <p>${humidityPeriodComment(period)}</p>
+            `;
+            humidityPeriodTooltip.hidden = false;
+            const timelineRect = humidityFinderTimeline.getBoundingClientRect();
+            const targetRect = target.getBoundingClientRect();
+            const pointerX = event?.clientX ?? targetRect.left + targetRect.width / 2;
+            const left = Math.max(120, Math.min(pointerX - timelineRect.left, timelineRect.width - 120));
+            humidityPeriodTooltip.style.left = `${left}px`;
+            humidityPeriodTooltip.style.top = `${targetRect.top - timelineRect.top - 12}px`;
+        };
+
+        humidityFinderTimeline.querySelectorAll(".humidity-period").forEach((element) => {
+            const period = periodData[Number(element.dataset.period)];
+            element.addEventListener("pointerenter", (event) => showTooltip(period, element, event));
+            element.addEventListener("pointermove", (event) => showTooltip(period, element, event));
+            element.addEventListener("pointerleave", () => { humidityPeriodTooltip.hidden = true; });
+            element.addEventListener("focus", () => showTooltip(period, element));
+            element.addEventListener("blur", () => { humidityPeriodTooltip.hidden = true; });
+        });
+
+        return periodData.length;
+    }
+
+    function renderHumidityFinder() {
+        const selectedHumidity = Number(humiditySlider.value);
+        const range = Math.max(maxHumidity - minHumidity, 1);
+        const level = (selectedHumidity - minHumidity) / range;
+        const periodCount = renderHumidityFinderTimeline(selectedHumidity);
+
+        humiditySelection.value = `${selectedHumidity.toFixed(0)} %`;
+        humidityControl.style.setProperty("--humidity-level", level.toFixed(3));
+        humidityControl.style.setProperty("--wiper-x", `${5 + level * 90}%`);
+        humidityAccuracy.textContent = periodCount
+            ? `${periodCount} Feuchtigkeitsphasen rund um ${selectedHumidity.toFixed(0)} % gefunden.`
+            : `Keine Phase rund um ${selectedHumidity.toFixed(0)} % gefunden – probier einen Nachbarwert.`;
+    }
+
+    if (points.length) {
+        humiditySlider.min = minHumidity;
+        humiditySlider.max = maxHumidity;
+        humiditySlider.value = startHumidity;
+        humiditySlider.addEventListener("input", renderHumidityFinder);
+        renderHumidityFinder();
+    } else {
+        humiditySlider.disabled = true;
+        humidityFinderLanes.innerHTML = "<p>Keine Feuchtigkeitsdaten verfügbar.</p>";
+        humidityAccuracy.textContent = "Sobald Messwerte vorhanden sind, beschlägt die Scheibe.";
+    }
 
     document.getElementById("humidity-events").innerHTML = chapters.map((chapter) => `
         <article class="linea-event">

@@ -21,6 +21,7 @@
         <a href="humidity.html">Luftfeuchtigkeit</a>
         <a href="noise.html">Lautstärke</a>
         <a href="alcohol.html">Alkoholpegel</a>
+        <a href="guests.html">Gäste</a>
     </nav>
 
     <h1 class="main-title" id="main-title">Heiss</h1>
@@ -218,11 +219,12 @@
         const mensaDot = document.getElementById("temperature-chart-dot-mensa");
         const showPoint = (event) => {
             const rect = svg.getBoundingClientRect();
-            const ratio = Math.max(0, Math.min((event.clientX - rect.left) / Math.max(rect.width, 1), 1));
+            const svgX = ((event.clientX - rect.left) / Math.max(rect.width, 1)) * width;
+            const x = Math.max(pad.left, Math.min(svgX, width - pad.right));
+            const ratio = (x - pad.left) / chartWidth;
             const targetTime = minTime + ratio * (maxTime - minTime);
             const studio = nearest(series[3], targetTime);
             const mensa = nearest(series[7], targetTime);
-            const x = xForTime(targetTime);
             const xPercent = (x / width) * 100;
 
             guide.setAttribute("x1", x);

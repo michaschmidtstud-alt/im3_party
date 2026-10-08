@@ -21,6 +21,7 @@
         <a href="humidity.html">Luftfeuchtigkeit</a>
         <a href="noise.html">Lautstärke</a>
         <a href="alcohol.html">Alkoholpegel</a>
+        <a href="guests.html">Gäste</a>
     </nav>
 
     <div class="news-strip" aria-hidden="true">
@@ -36,10 +37,13 @@
 
         <div class="scene-grid" aria-label="Stimmungsbilder der Party">
             <figure class="scene">
-                <img src="assets/brandaktuell-mensa.png" alt="Festlich beleuchteter Partyraum nach der Feier">
+                <img src="assets/IMG_1451.jpg" alt="Partygäste beim Einschenken eines Getränks">
             </figure>
             <figure class="scene">
-                <img src="assets/brandaktuell-dancefloor.png" alt="Bunte Tanzfläche mit Partylicht und Konfetti">
+                <img src="assets/IMG_1457.jpg" alt="Buffettisch nach der Party">
+            </figure>
+            <figure class="scene">
+                <img src="assets/IMG_2385.jpg" alt="Zerbrochener Glastisch neben einem Sofa">
             </figure>
         </div>
 
@@ -187,11 +191,11 @@
 
     document.getElementById("metric-grid").innerHTML = metricConfig.map((metric) => {
         const values = valuesFor(metric.key);
-        const latest = latestMetricValue(metric.key);
+        const peak = strongestFor(metric.key);
         return `<a class="metric-card ${metric.accent}" id="${metric.id}" href="${metric.href}" aria-label="${metric.label} öffnen">
             <div class="metric-label">${metric.label}</div>
-            <strong>${format(latest, metric.digits, metric.unit)}</strong>
-            <span class="metric-note">${values.length ? "letzter Messwert" : "nicht gemessen"}</span>
+            <strong>${format(peak?.value, metric.digits, metric.unit)}</strong>
+            <span class="metric-note">${values.length ? "Peak" : "nicht gemessen"}</span>
         </a>`;
     }).join("");
 
