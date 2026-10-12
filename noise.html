@@ -58,14 +58,17 @@
                 <div class="temperature-period-tooltip noise-period-tooltip" id="noise-period-tooltip" hidden></div>
             </div>
             <p class="temperature-accuracy" id="noise-accuracy"></p>
+            <p class="temperature-explainer">Gespräche, Musik und eine volle Tanzfläche bestimmten gemeinsam den Pegel. Mit jedem Song wurde es lauter – kurze ruhigere Phasen gaben Ohren und Stimmen zwischendurch eine kleine Pause.</p>
         </div>
     </section>
 
     <section class="overview" aria-labelledby="noise-overview-title">
         <h2 id="noise-overview-title">Lautstärkelage</h2>
         <div class="metric-grid" id="noise-metrics"></div>
-        <article class="story-copy" id="noise-copy" aria-label="Story zur Lautstärke"></article>
         <div class="noise-chart-card" id="noise-chart-card">
+            <button class="noise-chart-toggle" id="noise-chart-toggle" type="button" aria-controls="noise-chart" aria-pressed="false">
+                Kommentierte Ansicht
+            </button>
             <svg id="noise-chart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" aria-label="Lautstärke über den Abend"></svg>
             <div class="noise-chart-key" aria-label="Legende">
                 <span class="studio">Studio</span>
@@ -116,7 +119,7 @@
     const startVolume = Math.round((minVolume + maxVolume) / 10) * 5;
     const timestamp = (point) => Date.parse(point.time.replace(" ", "T"));
     const timelineStart = points.length ? Math.min(...points.map(timestamp)) : 0;
-    const timelineEnd = points.length ? Math.max(...points.map(timestamp)) : 1;
+    const timelineEnd = timelineStart + 10 * 60 * 60 * 1000;
     const timelineDuration = Math.max(timelineEnd - timelineStart, 1);
     const tolerance = 2.5;
 
@@ -163,10 +166,6 @@
         </article>
     `).join("");
 
-    document.getElementById("noise-copy").innerHTML = `
-        <p><strong>Die Nacht in Dezibel:</strong> Von ${first ? formatVolume(first.value) : "--"} auf ${last ? formatVolume(last.value) : "--"}, mit einem Peak von ${peak ? formatVolume(peak.value) : "--"} um ${peak ? formatTime(timestamp(peak)).replace(" Uhr", "") : "--:--"} Uhr. Zwischen Gesprächen, Musik und voller Tanzfläche zeigt die Lautstärke, wann die Party aufdreht und wann sie kurz Luft holt.</p>
-    `;
-
     function renderNoiseChart() {
         const svg = document.getElementById("noise-chart");
         const tooltip = document.getElementById("noise-tooltip");
@@ -183,23 +182,85 @@
         };
         const chartDate = points[0]?.time?.slice(0, 10) || "2026-09-30";
         const minTime = Date.parse(`${chartDate}T17:00:00`);
-        const maxTime = minTime + 11 * 60 * 60 * 1000;
-        const hourTicks = Array.from({ length: 12 }, (_, index) => minTime + index * 60 * 60 * 1000);
-        const minValue = 20;
+        const maxTime = minTime + 10 * 60 * 60 * 1000;
+        const hourTicks = Array.from({ length: 11 }, (_, index) => minTime + index * 60 * 60 * 1000);
+        series[3] = series[3].filter((point) => timestamp(point) <= maxTime);
+        series[7] = series[7].filter((point) => timestamp(point) <= maxTime);
+        const minValue = 0;
         const maxValue = 100;
         const lastStudio = series[3][series[3].length - 1] || last;
         const lastMensa = series[7][series[7].length - 1] || last;
+        const soundcheckTime = Date.parse(`${chartDate}T18:23:00`);
+        const soundcheckStudio = series[3].reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - soundcheckTime) < Math.abs(timestamp(closest) - soundcheckTime)
+                ? point
+                : closest
+        , null);
+        const karaokeStartTime = Date.parse(`${chartDate}T19:28:00`);
+        const karaokeEndTime = Date.parse(`${chartDate}T22:27:00`);
+        const karaokeStudioRange = series[3].filter((point) => {
+            const pointTime = timestamp(point);
+            return pointTime >= karaokeStartTime && pointTime <= karaokeEndTime;
+        });
+        const karaokeMidpointTime = karaokeStartTime + (karaokeEndTime - karaokeStartTime) / 2;
+        const karaokeStudioAnchor = karaokeStudioRange.reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - karaokeMidpointTime) < Math.abs(timestamp(closest) - karaokeMidpointTime)
+                ? point
+                : closest
+        , null);
+        const lastSongTime = minTime + 8 * 60 * 60 * 1000;
+        const lastSongStudio = series[3].reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - lastSongTime) < Math.abs(timestamp(closest) - lastSongTime)
+                ? point
+                : closest
+        , null);
+        const farewellTime = Date.parse(`${chartDate}T22:33:00`);
+        const farewellMensa = series[7].reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - farewellTime) < Math.abs(timestamp(closest) - farewellTime)
+                ? point
+                : closest
+        , null);
         const valueRange = Math.max(maxValue - minValue, 1);
         const xForTime = (time) => pad.left + ((time - minTime) / Math.max(maxTime - minTime, 1)) * chartWidth;
         const yFor = (value) => pad.top + (1 - (value - minValue) / valueRange) * chartHeight;
         const lineFor = (items) => items.map((point) => `${xForTime(timestamp(point)).toFixed(1)},${yFor(point.value).toFixed(1)}`).join(" ");
+        const highlightAround = (items, focalPoint) => {
+            const highlightRadius = 25 * 60 * 1000;
+            return focalPoint
+                ? items.filter((point) => Math.abs(timestamp(point) - timestamp(focalPoint)) <= highlightRadius)
+                : [];
+        };
         const nearest = (items, targetTime) => items.reduce((best, point) => {
             const distance = Math.abs(timestamp(point) - targetTime);
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
-        const guideValues = Array.from({ length: 5 }, (_, index) => minValue + index * 20);
+        const guideValues = Array.from({ length: 6 }, (_, index) => minValue + index * 20);
+        const soundcheckStudioX = soundcheckStudio ? xForTime(timestamp(soundcheckStudio)) : pad.left;
+        const soundcheckStudioY = soundcheckStudio ? yFor(soundcheckStudio.value) : pad.top;
+        const soundcheckNoteX = Math.max(soundcheckStudioX - 145, pad.left + 8);
+        const soundcheckNoteY = Math.min(soundcheckStudioY + 110, height - pad.bottom - 24);
+        const soundcheckLabelX = soundcheckStudioX + 22;
+        const karaokeStudioX = karaokeStudioAnchor ? xForTime(timestamp(karaokeStudioAnchor)) : pad.left;
+        const karaokeStudioY = karaokeStudioAnchor ? yFor(karaokeStudioAnchor.value) : pad.top;
+        const karaokeNoteX = Math.min(karaokeStudioX + 58, width - pad.right - 190);
+        const karaokeNoteY = Math.max(karaokeStudioY - 54, pad.top + 30);
+        const lastSongStudioX = lastSongStudio ? xForTime(timestamp(lastSongStudio)) : pad.left;
+        const lastSongStudioY = lastSongStudio ? yFor(lastSongStudio.value) : pad.top;
+        const lastSongNoteX = Math.max(lastSongStudioX - 170, pad.left + 8);
+        const lastSongNoteY = Math.min(lastSongStudioY + 100, height - pad.bottom - 24);
+        const lastSongLabelX = lastSongNoteX + 28;
+        const farewellMensaX = farewellMensa ? xForTime(timestamp(farewellMensa)) : pad.left;
+        const farewellMensaY = farewellMensa ? yFor(farewellMensa.value) : pad.top;
+        const farewellNoteX = Math.min(farewellMensaX + 34, width - pad.right - 180);
+        const farewellNoteY = Math.min(farewellMensaY + 155, height - pad.bottom - 38);
+        const farewellLabelX = farewellNoteX - 30;
 
         svg.innerHTML = `
+            <defs>
+                <marker id="noise-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                </marker>
+            </defs>
             <rect class="noise-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
             ${guideValues.map((value, index) => `
                 <line class="noise-chart-grid ${index === 0 || index === guideValues.length - 1 ? "edge" : ""}" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line>
@@ -207,12 +268,41 @@
             `).join("")}
             <polyline class="noise-chart-line noise-chart-line-studio" points="${lineFor(series[3])}"></polyline>
             <polyline class="noise-chart-line noise-chart-line-mensa" points="${lineFor(series[7])}"></polyline>
+            ${soundcheckStudio ? `<polyline class="noise-chart-highlight noise-chart-highlight-studio noise-chart-annotation" points="${lineFor(highlightAround(series[3], soundcheckStudio))}"></polyline>` : ""}
+            ${karaokeStudioRange.length ? `<polyline class="noise-chart-highlight noise-chart-highlight-studio noise-chart-annotation" points="${lineFor(karaokeStudioRange)}"></polyline>` : ""}
+            ${lastSongStudio ? `<polyline class="noise-chart-highlight noise-chart-highlight-studio noise-chart-annotation" points="${lineFor(highlightAround(series[3], lastSongStudio))}"></polyline>` : ""}
+            ${farewellMensa ? `<polyline class="noise-chart-highlight noise-chart-highlight-mensa noise-chart-annotation" points="${lineFor(highlightAround(series[7], farewellMensa))}"></polyline>` : ""}
             <line class="noise-chart-grid" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             <line class="noise-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
             <line class="noise-chart-guide" id="noise-chart-guide" x1="${width - pad.right}" x2="${width - pad.right}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             ${hourTicks.map((time, index) => `
                 <text class="noise-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
             `).join("")}
+            ${soundcheckStudio ? `
+                <path class="noise-chart-arrow noise-chart-annotation" d="M${soundcheckNoteX + 112},${soundcheckNoteY - 18} Q${soundcheckStudioX - 24},${soundcheckStudioY + 54} ${soundcheckStudioX},${soundcheckStudioY + 7}" marker-end="url(#noise-arrowhead)"></path>
+                <text class="noise-chart-note noise-chart-annotation" x="${soundcheckLabelX}" y="${soundcheckNoteY}">
+                    <tspan x="${soundcheckLabelX}" dy="0">SOUNDCHECK IM</tspan>
+                    <tspan x="${soundcheckLabelX}" dy="14">KARAOKE-RAUM</tspan>
+                </text>
+            ` : ""}
+            ${karaokeStudioAnchor ? `
+                <path class="noise-chart-arrow noise-chart-annotation" d="M${karaokeNoteX},${karaokeNoteY + 18} Q${karaokeStudioX + 42},${karaokeStudioY - 42} ${karaokeStudioX + 5},${karaokeStudioY - 5}" marker-end="url(#noise-arrowhead)"></path>
+                <text class="noise-chart-note noise-chart-annotation" x="${karaokeNoteX}" y="${karaokeNoteY}">KARAOKE TIME</text>
+            ` : ""}
+            ${lastSongStudio ? `
+                <path class="noise-chart-arrow noise-chart-annotation" d="M${lastSongNoteX + 140},${lastSongNoteY - 18} Q${lastSongStudioX - 28},${lastSongStudioY + 50} ${lastSongStudioX},${lastSongStudioY + 7}" marker-end="url(#noise-arrowhead)"></path>
+                <text class="noise-chart-note noise-chart-annotation" x="${lastSongLabelX}" y="${lastSongNoteY}">
+                    <tspan x="${lastSongLabelX}" dy="0">NOCH EIN LETZTES MAL</tspan>
+                    <tspan x="${lastSongLabelX}" dy="14">SINGEN</tspan>
+                </text>
+            ` : ""}
+            ${farewellMensa ? `
+                <path class="noise-chart-arrow noise-chart-annotation" d="M${farewellNoteX},${farewellNoteY - 18} Q${farewellMensaX + 42},${farewellMensaY + 70} ${farewellMensaX},${farewellMensaY + 7}" marker-end="url(#noise-arrowhead)"></path>
+                <text class="noise-chart-note noise-chart-annotation" x="${farewellLabelX}" y="${farewellNoteY}">
+                    <tspan x="${farewellLabelX}" dy="0">DIE LEUTE VERABSCHIEDEN</tspan>
+                    <tspan x="${farewellLabelX}" dy="14">SICH LANGSAM</tspan>
+                </text>
+            ` : ""}
             <circle class="noise-chart-dot noise-chart-dot-studio" id="noise-chart-dot-studio" cx="${xForTime(timestamp(lastStudio))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
             <circle class="noise-chart-dot noise-chart-dot-mensa" id="noise-chart-dot-mensa" cx="${xForTime(timestamp(lastMensa))}" cy="${yFor(lastMensa.value)}" r="6"></circle>
         `;
@@ -259,12 +349,20 @@
 
     renderNoiseChart();
 
+    const noiseChartCard = document.getElementById("noise-chart-card");
+    const noiseChartToggle = document.getElementById("noise-chart-toggle");
+    noiseChartToggle.addEventListener("click", () => {
+        const commentsVisible = noiseChartCard.classList.toggle("is-commented");
+        noiseChartToggle.setAttribute("aria-pressed", String(commentsVisible));
+        noiseChartToggle.textContent = commentsVisible ? "Normale Ansicht" : "Kommentierte Ansicht";
+    });
+
     function volumePeriods(selectedVolume) {
         const periods = [];
 
         Object.keys(boxes).forEach((boxId) => {
             const roomPoints = points
-                .filter((point) => point.box === Number(boxId) && Math.abs(point.value - selectedVolume) <= tolerance)
+                .filter((point) => point.box === Number(boxId) && timestamp(point) <= timelineEnd && Math.abs(point.value - selectedVolume) <= tolerance)
                 .sort((a, b) => timestamp(a) - timestamp(b));
 
             roomPoints.forEach((point) => {

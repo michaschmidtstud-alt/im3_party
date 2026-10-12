@@ -59,14 +59,17 @@
                 <div class="temperature-period-tooltip humidity-period-tooltip" id="humidity-period-tooltip" hidden></div>
             </div>
             <p class="temperature-accuracy" id="humidity-accuracy"></p>
+            <p class="temperature-explainer">Viele Gäste, warme Luft und wenig Luftaustausch liessen die Feuchtigkeit im Raum steigen. Je voller die Tanzfläche wurde, desto dichter fühlte sich die Luft an – bis selbst die Fenster den Überblick verloren.</p>
         </div>
     </section>
 
     <section class="overview" aria-labelledby="humidity-overview-title">
         <h2 id="humidity-overview-title">Feuchtigkeitslage</h2>
         <div class="metric-grid" id="humidity-metrics"></div>
-        <article class="story-copy" id="humidity-copy" aria-label="Story zur Luftfeuchtigkeit"></article>
         <div class="humidity-chart-card" id="humidity-chart-card">
+            <button class="humidity-chart-toggle" id="humidity-chart-toggle" type="button" aria-controls="humidity-chart" aria-pressed="false">
+                Kommentierte Ansicht
+            </button>
             <svg id="humidity-chart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" aria-label="Luftfeuchtigkeit über den Abend"></svg>
             <div class="humidity-chart-key" aria-label="Legende">
                 <span class="studio">Studio</span>
@@ -117,7 +120,7 @@
     const maxHumidity = points.length ? Math.ceil(Math.max(...points.map((point) => point.value))) : 100;
     const startHumidity = points.length ? Math.round(average) : 50;
     const finderStart = points.length ? Math.min(...points.map(timestamp)) : 0;
-    const finderEnd = points.length ? Math.max(...points.map(timestamp)) : 1;
+    const finderEnd = finderStart + 10 * 60 * 60 * 1000;
     const finderDuration = Math.max(finderEnd - finderStart, 1);
     const finderHours = Array.from({ length: 7 }, (_, index) => finderStart + finderDuration * (index / 6));
 
@@ -144,10 +147,6 @@
         const value = to.value - from.value;
         return `${value >= 0 ? "+" : ""}${value.toFixed(1)} %`;
     }
-
-    document.getElementById("humidity-copy").innerHTML = `
-        <p><strong>Die Nacht in Tropfen:</strong> Von ${format(first?.value, 0)} auf ${format(last?.value, 0)}, mit einem Peak von ${format(peak?.value, 0)} um ${timeOnly(peak?.time)} Uhr. Die Party hat sich langsam in ein eigenes Mikroklima verwandelt.</p>
-    `;
 
     document.getElementById("humidity-metrics").innerHTML = [
         { label: "Start", value: format(first?.value, 0), note: `${timeOnly(first?.time)} Uhr` },
@@ -177,12 +176,16 @@
         };
         const chartDate = points[0]?.time?.slice(0, 10) || "2026-09-30";
         const minTime = Date.parse(`${chartDate}T17:00:00`);
-        const maxTime = minTime + 11 * 60 * 60 * 1000;
-        const hourTicks = Array.from({ length: 12 }, (_, index) => minTime + index * 60 * 60 * 1000);
+        const maxTime = minTime + 10 * 60 * 60 * 1000;
+        const hourTicks = Array.from({ length: 11 }, (_, index) => minTime + index * 60 * 60 * 1000);
+        series[3] = series[3].filter((point) => timestamp(point) <= maxTime);
+        series[7] = series[7].filter((point) => timestamp(point) <= maxTime);
         const minValue = 30;
         const maxValue = 55;
         const lastStudio = series[3][series[3].length - 1] || last;
         const lastMensa = series[7][series[7].length - 1] || last;
+        const peakStudio = series[3].reduce((best, point) => !best || point.value > best.value ? point : best, null);
+        const peakMensa = series[7].reduce((best, point) => !best || point.value > best.value ? point : best, null);
         const valueRange = Math.max(maxValue - minValue, 1);
         const xForTime = (time) => pad.left + ((time - minTime) / Math.max(maxTime - minTime, 1)) * chartWidth;
         const yFor = (value) => pad.top + (1 - (value - minValue) / valueRange) * chartHeight;
@@ -190,13 +193,32 @@
             const time = Date.parse(point.time.replace(" ", "T"));
             return `${xForTime(time).toFixed(1)},${yFor(point.value).toFixed(1)}`;
         }).join(" ");
+        const highlightAround = (items, focalPoint) => {
+            const highlightRadius = 25 * 60 * 1000;
+            return focalPoint
+                ? items.filter((point) => Math.abs(timestamp(point) - timestamp(focalPoint)) <= highlightRadius)
+                : [];
+        };
         const nearest = (items, targetTime) => items.reduce((best, point) => {
             const distance = Math.abs(Date.parse(point.time.replace(" ", "T")) - targetTime);
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
         const guideValues = Array.from({ length: 6 }, (_, index) => minValue + index * 5);
+        const peakStudioX = peakStudio ? xForTime(timestamp(peakStudio)) : pad.left;
+        const peakStudioY = peakStudio ? yFor(peakStudio.value) : pad.top;
+        const studioNoteX = Math.max(peakStudioX - 150, pad.left + 8);
+        const studioNoteY = Math.min(peakStudioY + 92, height - pad.bottom - 24);
+        const peakMensaX = peakMensa ? xForTime(timestamp(peakMensa)) : pad.left;
+        const peakMensaY = peakMensa ? yFor(peakMensa.value) : pad.top;
+        const mensaNoteX = Math.min(peakMensaX + 54, width - pad.right - 190);
+        const mensaNoteY = Math.max(peakMensaY - 62, pad.top + 30);
 
         svg.innerHTML = `
+            <defs>
+                <marker id="humidity-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                </marker>
+            </defs>
             <rect class="humidity-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
             ${guideValues.map((value) => `
                 <line class="humidity-chart-grid ${value === minValue || value === maxValue ? "edge" : ""}" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line>
@@ -204,12 +226,29 @@
             `).join("")}
             <polyline class="humidity-chart-line humidity-chart-line-studio" points="${lineFor(series[3])}"></polyline>
             <polyline class="humidity-chart-line humidity-chart-line-mensa" points="${lineFor(series[7])}"></polyline>
+            ${peakStudio ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-studio humidity-chart-annotation" points="${lineFor(highlightAround(series[3], peakStudio))}"></polyline>` : ""}
+            ${peakMensa ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-mensa humidity-chart-annotation" points="${lineFor(highlightAround(series[7], peakMensa))}"></polyline>` : ""}
             <line class="humidity-chart-grid" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             <line class="humidity-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
             <line class="humidity-chart-guide" id="humidity-chart-guide" x1="${width - pad.right}" x2="${width - pad.right}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             ${hourTicks.map((time, index) => `
                 <text class="humidity-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
             `).join("")}
+            ${peakStudio ? `
+                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${studioNoteX + 118},${studioNoteY - 18} Q${peakStudioX - 24},${peakStudioY + 52} ${peakStudioX},${peakStudioY + 7}" marker-end="url(#humidity-arrowhead)"></path>
+                <text class="humidity-chart-note humidity-chart-annotation" x="${studioNoteX}" y="${studioNoteY}">
+                    <tspan x="${studioNoteX}" dy="0">DRAUSSEN WURDE ES FRISCH,</tspan>
+                    <tspan x="${studioNoteX}" dy="14">DIE MENSA FÜLLTE SICH</tspan>
+                    <tspan x="${studioNoteX}" dy="14">MIT GÄSTEN</tspan>
+                </text>
+            ` : ""}
+            ${peakMensa ? `
+                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${mensaNoteX},${mensaNoteY + 18} Q${peakMensaX + 42},${peakMensaY - 42} ${peakMensaX + 5},${peakMensaY - 5}" marker-end="url(#humidity-arrowhead)"></path>
+                <text class="humidity-chart-note humidity-chart-annotation" x="${mensaNoteX}" y="${mensaNoteY}">
+                    <tspan x="${mensaNoteX}" dy="0">SPÄTER PEAK:</tspan>
+                    <tspan x="${mensaNoteX}" dy="14">DICKE LUFT IN DER MENSA.</tspan>
+                </text>
+            ` : ""}
             <circle class="humidity-chart-dot humidity-chart-dot-studio" id="humidity-chart-dot-studio" cx="${xForTime(Date.parse(lastStudio.time.replace(" ", "T")))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
             <circle class="humidity-chart-dot humidity-chart-dot-mensa" id="humidity-chart-dot-mensa" cx="${xForTime(Date.parse(lastMensa.time.replace(" ", "T")))}" cy="${yFor(lastMensa.value)}" r="6"></circle>
         `;
@@ -256,12 +295,20 @@
 
     renderHumidityChart();
 
+    const humidityChartCard = document.getElementById("humidity-chart-card");
+    const humidityChartToggle = document.getElementById("humidity-chart-toggle");
+    humidityChartToggle.addEventListener("click", () => {
+        const commentsVisible = humidityChartCard.classList.toggle("is-commented");
+        humidityChartToggle.setAttribute("aria-pressed", String(commentsVisible));
+        humidityChartToggle.textContent = commentsVisible ? "Normale Ansicht" : "Kommentierte Ansicht";
+    });
+
     function humidityPeriods(selectedHumidity) {
         const periods = [];
 
         Object.keys(boxes).forEach((boxId) => {
             const roomPoints = points
-                .filter((point) => point.box === Number(boxId) && Math.abs(point.value - selectedHumidity) <= 0.5)
+                .filter((point) => point.box === Number(boxId) && timestamp(point) <= finderEnd && Math.abs(point.value - selectedHumidity) <= 0.5)
                 .sort((a, b) => timestamp(a) - timestamp(b));
 
             roomPoints.forEach((point) => {
