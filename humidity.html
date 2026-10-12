@@ -184,8 +184,28 @@
         const maxValue = 55;
         const lastStudio = series[3][series[3].length - 1] || last;
         const lastMensa = series[7][series[7].length - 1] || last;
+        const freshMensaTime = Date.parse(`${chartDate}T18:45:00`);
+        const freshMensa = series[7].reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - freshMensaTime) < Math.abs(timestamp(closest) - freshMensaTime)
+                ? point
+                : closest
+        , null);
+        const freshStartTime = Date.parse(`${chartDate}T18:00:00`);
+        const freshEndTime = Date.parse(`${chartDate}T20:00:00`);
+        const freshStudioRange = series[3].filter((point) => timestamp(point) >= freshStartTime && timestamp(point) <= freshEndTime);
+        const freshMensaRange = series[7].filter((point) => timestamp(point) >= freshStartTime && timestamp(point) <= freshEndTime);
         const peakStudio = series[3].reduce((best, point) => !best || point.value > best.value ? point : best, null);
         const peakMensa = series[7].reduce((best, point) => !best || point.value > best.value ? point : best, null);
+        const flatMensaTime = minTime + 9 * 60 * 60 * 1000;
+        const flatMensa = series[7].reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - flatMensaTime) < Math.abs(timestamp(closest) - flatMensaTime)
+                ? point
+                : closest
+        , null);
+        const flatStartTime = minTime + (8 * 60 + 30) * 60 * 1000;
+        const flatEndTime = maxTime;
+        const flatStudioRange = series[3].filter((point) => timestamp(point) >= flatStartTime && timestamp(point) <= flatEndTime);
+        const flatMensaRange = series[7].filter((point) => timestamp(point) >= flatStartTime && timestamp(point) <= flatEndTime);
         const valueRange = Math.max(maxValue - minValue, 1);
         const xForTime = (time) => pad.left + ((time - minTime) / Math.max(maxTime - minTime, 1)) * chartWidth;
         const yFor = (value) => pad.top + (1 - (value - minValue) / valueRange) * chartHeight;
@@ -204,14 +224,22 @@
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
         const guideValues = Array.from({ length: 6 }, (_, index) => minValue + index * 5);
+        const freshMensaX = freshMensa ? xForTime(timestamp(freshMensa)) : pad.left;
+        const freshMensaY = freshMensa ? yFor(freshMensa.value) : height - pad.bottom;
+        const freshNoteX = Math.min(Math.max(freshMensaX + 36, pad.left + 8), width - pad.right - 250);
+        const freshNoteY = Math.min(freshMensaY + 82, height - pad.bottom - 42);
         const peakStudioX = peakStudio ? xForTime(timestamp(peakStudio)) : pad.left;
         const peakStudioY = peakStudio ? yFor(peakStudio.value) : pad.top;
-        const studioNoteX = Math.max(peakStudioX - 150, pad.left + 8);
-        const studioNoteY = Math.min(peakStudioY + 92, height - pad.bottom - 24);
+        const studioNoteX = Math.min(peakStudioX + 76, width - pad.right - 190);
+        const studioNoteY = Math.max(peakStudioY - 72, pad.top + 34);
         const peakMensaX = peakMensa ? xForTime(timestamp(peakMensa)) : pad.left;
         const peakMensaY = peakMensa ? yFor(peakMensa.value) : pad.top;
-        const mensaNoteX = Math.min(peakMensaX + 54, width - pad.right - 190);
-        const mensaNoteY = Math.max(peakMensaY - 62, pad.top + 30);
+        const mensaNoteX = Math.min(peakMensaX + 70, width - pad.right - 190);
+        const mensaNoteY = Math.max(peakMensaY - 76, pad.top + 30);
+        const flatMensaX = flatMensa ? xForTime(timestamp(flatMensa)) : pad.left;
+        const flatMensaY = flatMensa ? yFor(flatMensa.value) : pad.top;
+        const flatNoteX = Math.min(Math.max(flatMensaX - 118, pad.left + 8), width - pad.right - 220);
+        const flatNoteY = Math.min(flatMensaY + 86, height - pad.bottom - 42);
 
         svg.innerHTML = `
             <defs>
@@ -226,27 +254,47 @@
             `).join("")}
             <polyline class="humidity-chart-line humidity-chart-line-studio" points="${lineFor(series[3])}"></polyline>
             <polyline class="humidity-chart-line humidity-chart-line-mensa" points="${lineFor(series[7])}"></polyline>
+            ${freshStudioRange.length ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-studio humidity-chart-annotation" points="${lineFor(freshStudioRange)}"></polyline>` : ""}
+            ${freshMensaRange.length ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-mensa humidity-chart-annotation" points="${lineFor(freshMensaRange)}"></polyline>` : ""}
             ${peakStudio ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-studio humidity-chart-annotation" points="${lineFor(highlightAround(series[3], peakStudio))}"></polyline>` : ""}
             ${peakMensa ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-mensa humidity-chart-annotation" points="${lineFor(highlightAround(series[7], peakMensa))}"></polyline>` : ""}
+            ${flatStudioRange.length ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-studio humidity-chart-annotation" points="${lineFor(flatStudioRange)}"></polyline>` : ""}
+            ${flatMensaRange.length ? `<polyline class="humidity-chart-highlight humidity-chart-highlight-mensa humidity-chart-annotation" points="${lineFor(flatMensaRange)}"></polyline>` : ""}
             <line class="humidity-chart-grid" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             <line class="humidity-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
             <line class="humidity-chart-guide" id="humidity-chart-guide" x1="${width - pad.right}" x2="${width - pad.right}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             ${hourTicks.map((time, index) => `
                 <text class="humidity-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
             `).join("")}
+            ${freshMensa ? `
+                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${freshNoteX - 28},${freshNoteY - 10} Q${freshMensaX - 12},${freshNoteY - 56} ${freshMensaX + 2},${freshMensaY + 7}" marker-end="url(#humidity-arrowhead)"></path>
+                <text class="humidity-chart-note humidity-chart-annotation" x="${freshNoteX}" y="${freshNoteY}">
+                    <tspan x="${freshNoteX}" dy="0">DRAUSSEN WURDE ES FRISCH,</tspan>
+                    <tspan x="${freshNoteX}" dy="14">DIE MENSA UND DAS STUDIO</tspan>
+                    <tspan x="${freshNoteX}" dy="14">FÜLLTEN SICH MIT GÄSTEN</tspan>
+                </text>
+            ` : ""}
             ${peakStudio ? `
-                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${studioNoteX + 118},${studioNoteY - 18} Q${peakStudioX - 24},${peakStudioY + 52} ${peakStudioX},${peakStudioY + 7}" marker-end="url(#humidity-arrowhead)"></path>
+                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${studioNoteX + 20},${studioNoteY + 30} Q${peakStudioX + 66},${peakStudioY - 52} ${peakStudioX + 6},${peakStudioY - 7}" marker-end="url(#humidity-arrowhead)"></path>
                 <text class="humidity-chart-note humidity-chart-annotation" x="${studioNoteX}" y="${studioNoteY}">
-                    <tspan x="${studioNoteX}" dy="0">DRAUSSEN WURDE ES FRISCH,</tspan>
-                    <tspan x="${studioNoteX}" dy="14">DIE MENSA FÜLLTE SICH</tspan>
-                    <tspan x="${studioNoteX}" dy="14">MIT GÄSTEN</tspan>
+                    <tspan x="${studioNoteX}" dy="0">HÖHEPUNKT</tspan>
+                    <tspan x="${studioNoteX}" dy="14">DES KARAOKES</tspan>
                 </text>
             ` : ""}
             ${peakMensa ? `
-                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${mensaNoteX},${mensaNoteY + 18} Q${peakMensaX + 42},${peakMensaY - 42} ${peakMensaX + 5},${peakMensaY - 5}" marker-end="url(#humidity-arrowhead)"></path>
+                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${mensaNoteX},${mensaNoteY + 32} Q${peakMensaX + 50},${peakMensaY - 40} ${peakMensaX + 5},${peakMensaY - 5}" marker-end="url(#humidity-arrowhead)"></path>
                 <text class="humidity-chart-note humidity-chart-annotation" x="${mensaNoteX}" y="${mensaNoteY}">
                     <tspan x="${mensaNoteX}" dy="0">SPÄTER PEAK:</tspan>
-                    <tspan x="${mensaNoteX}" dy="14">DICKE LUFT IN DER MENSA.</tspan>
+                    <tspan x="${mensaNoteX}" dy="14">DICKE LUFT</tspan>
+                    <tspan x="${mensaNoteX}" dy="14">IN DER MENSA</tspan>
+                </text>
+            ` : ""}
+            ${flatMensa ? `
+                <path class="humidity-chart-arrow humidity-chart-annotation" d="M${flatNoteX + 166},${flatNoteY - 18} Q${flatMensaX + 24},${flatMensaY + 66} ${flatMensaX + 3},${flatMensaY + 7}" marker-end="url(#humidity-arrowhead)"></path>
+                <text class="humidity-chart-note humidity-chart-annotation" x="${flatNoteX}" y="${flatNoteY}">
+                    <tspan x="${flatNoteX}" dy="0">FEIERABEND FÜR DIE</tspan>
+                    <tspan x="${flatNoteX}" dy="14">LUFTFEUCHTIGKEIT</tspan>
+                    <tspan x="${flatNoteX}" dy="14">VERÄNDERT SICH KAUM NOCH</tspan>
                 </text>
             ` : ""}
             <circle class="humidity-chart-dot humidity-chart-dot-studio" id="humidity-chart-dot-studio" cx="${xForTime(Date.parse(lastStudio.time.replace(" ", "T")))}" cy="${yFor(lastStudio.value)}" r="6"></circle>

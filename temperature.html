@@ -188,15 +188,24 @@
         const lastStudio = series[3][series[3].length - 1] || last;
         const lastMensa = series[7][series[7].length - 1] || last;
         const lowMensa = series[7].reduce((best, point) => !best || point.value < best.value ? point : best, null);
+        const lateStudioRange = lastStudio
+            ? series[3].filter((point) => timestamp(point) >= Math.max(minTime, timestamp(lastStudio) - 45 * 60 * 1000))
+            : [];
         const karaokeTime = Date.parse(`${chartDate}T20:46:00`);
         const karaokeStudio = series[3].reduce((closest, point) =>
             !closest || Math.abs(timestamp(point) - karaokeTime) < Math.abs(timestamp(closest) - karaokeTime)
                 ? point
                 : closest
         , null);
-        const partyEndTime = Date.parse(`${chartDate}T22:13:00`);
+        const partyEndTime = minTime + (8 * 60 + 21) * 60 * 1000;
         const partyEndMensa = series[7].reduce((closest, point) =>
             !closest || Math.abs(timestamp(point) - partyEndTime) < Math.abs(timestamp(closest) - partyEndTime)
+                ? point
+                : closest
+        , null);
+        const drinkPauseTime = Date.parse(`${chartDate}T22:13:00`);
+        const drinkPauseMensa = series[7].reduce((closest, point) =>
+            !closest || Math.abs(timestamp(point) - drinkPauseTime) < Math.abs(timestamp(closest) - drinkPauseTime)
                 ? point
                 : closest
         , null);
@@ -217,16 +226,24 @@
         const guideValues = Array.from({ length: 5 }, (_, index) => minValue + index);
         const lowMensaX = lowMensa ? xForTime(timestamp(lowMensa)) : pad.left;
         const lowMensaY = lowMensa ? yFor(lowMensa.value) : height - pad.bottom;
-        const noteX = Math.min(Math.max(lowMensaX + 96, pad.left + 130), width - pad.right - 210);
-        const noteY = Math.max(pad.top + 42, lowMensaY - 112);
+        const noteX = Math.min(Math.max(lowMensaX - 220, pad.left + 120), width - pad.right - 230);
+        const noteY = Math.min(lowMensaY + 56, height - pad.bottom - 36);
         const karaokeStudioX = karaokeStudio ? xForTime(timestamp(karaokeStudio)) : pad.left;
         const karaokeStudioY = karaokeStudio ? yFor(karaokeStudio.value) : pad.top;
-        const karaokeNoteX = Math.max(karaokeStudioX - 145, pad.left + 8);
-        const karaokeNoteY = Math.min(karaokeStudioY + 112, height - pad.bottom - 18);
+        const karaokeNoteX = Math.max(karaokeStudioX - 245, pad.left + 8);
+        const karaokeNoteY = Math.min(karaokeStudioY + 92, height - pad.bottom - 18);
         const partyEndMensaX = partyEndMensa ? xForTime(timestamp(partyEndMensa)) : pad.left;
         const partyEndMensaY = partyEndMensa ? yFor(partyEndMensa.value) : pad.top;
-        const partyEndNoteX = Math.min(Math.max(partyEndMensaX - 30, pad.left + 8), width - pad.right - 180);
-        const partyEndNoteY = Math.min(partyEndMensaY + 150, height - pad.bottom - 24);
+        const partyEndNoteX = Math.min(Math.max(partyEndMensaX - 40, pad.left + 8), width - pad.right - 190);
+        const partyEndNoteY = Math.min(partyEndMensaY + 74, height - pad.bottom - 24);
+        const drinkPauseMensaX = drinkPauseMensa ? xForTime(timestamp(drinkPauseMensa)) : pad.left;
+        const drinkPauseMensaY = drinkPauseMensa ? yFor(drinkPauseMensa.value) : pad.top;
+        const drinkPauseNoteX = Math.min(Math.max(drinkPauseMensaX - 115, pad.left + 8), width - pad.right - 190);
+        const drinkPauseNoteY = Math.max(pad.top + 34, drinkPauseMensaY - 112);
+        const lateStudioX = lastStudio ? xForTime(timestamp(lastStudio)) : pad.left;
+        const lateStudioY = lastStudio ? yFor(lastStudio.value) : pad.top;
+        const lateStudioNoteX = Math.min(Math.max(lateStudioX - 210, pad.left + 8), width - pad.right - 220);
+        const lateStudioNoteY = Math.min(Math.max(lateStudioY + 56, pad.top + 90), height - pad.bottom - 38);
 
         svg.innerHTML = `
             <defs>
@@ -242,7 +259,9 @@
             <polyline class="temperature-chart-line temperature-chart-line-studio" points="${lineFor(series[3])}"></polyline>
             <polyline class="temperature-chart-line temperature-chart-line-mensa" points="${lineFor(series[7])}"></polyline>
             ${karaokeStudio ? `<polyline class="temperature-chart-highlight temperature-chart-highlight-studio temperature-chart-annotation" points="${lineFor(highlightAround(series[3], karaokeStudio))}"></polyline>` : ""}
+            ${lateStudioRange.length ? `<polyline class="temperature-chart-highlight temperature-chart-highlight-studio temperature-chart-annotation" points="${lineFor(lateStudioRange)}"></polyline>` : ""}
             ${lowMensa ? `<polyline class="temperature-chart-highlight temperature-chart-highlight-mensa temperature-chart-annotation" points="${lineFor(highlightAround(series[7], lowMensa))}"></polyline>` : ""}
+            ${drinkPauseMensa ? `<polyline class="temperature-chart-highlight temperature-chart-highlight-mensa temperature-chart-annotation" points="${lineFor(highlightAround(series[7], drinkPauseMensa))}"></polyline>` : ""}
             ${partyEndMensa ? `<polyline class="temperature-chart-highlight temperature-chart-highlight-mensa temperature-chart-annotation" points="${lineFor(highlightAround(series[7], partyEndMensa))}"></polyline>` : ""}
             <line class="temperature-chart-grid" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
             <line class="temperature-chart-grid" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
@@ -251,7 +270,7 @@
                 <text class="temperature-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
             `).join("")}
             ${lowMensa ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${noteX},${noteY + 30} Q${(noteX + lowMensaX) / 2},${noteY + 12} ${lowMensaX + 4},${lowMensaY - 6}" marker-end="url(#temperature-arrowhead)"></path>
+                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${noteX + 150},${noteY + 6} Q${lowMensaX - 32},${noteY + 8} ${lowMensaX - 5},${lowMensaY + 8}" marker-end="url(#temperature-arrowhead)"></path>
                 <text class="temperature-chart-note temperature-chart-annotation" x="${noteX}" y="${noteY}">
                     <tspan x="${noteX}" dy="0">TÜR IN DEN</tspan>
                     <tspan x="${noteX}" dy="14">INNENHOF WURDE</tspan>
@@ -259,14 +278,29 @@
                 </text>
             ` : ""}
             ${karaokeStudio ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${karaokeNoteX + 112},${karaokeNoteY - 12} Q${karaokeStudioX - 18},${karaokeStudioY + 54} ${karaokeStudioX},${karaokeStudioY + 7}" marker-end="url(#temperature-arrowhead)"></path>
+                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${karaokeNoteX + 142},${karaokeNoteY - 3} Q${karaokeStudioX - 64},${karaokeNoteY - 4} ${karaokeStudioX - 6},${karaokeStudioY + 8}" marker-end="url(#temperature-arrowhead)"></path>
                 <text class="temperature-chart-note temperature-chart-annotation" x="${karaokeNoteX}" y="${karaokeNoteY}">KARAOKE GING LOS.</text>
             ` : ""}
+            ${drinkPauseMensa ? `
+                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${drinkPauseNoteX + 92},${drinkPauseNoteY + 32} Q${drinkPauseMensaX - 28},${drinkPauseNoteY + 44} ${drinkPauseMensaX - 3},${drinkPauseMensaY - 7}" marker-end="url(#temperature-arrowhead)"></path>
+                <text class="temperature-chart-note temperature-chart-annotation" x="${drinkPauseNoteX}" y="${drinkPauseNoteY}">
+                    <tspan x="${drinkPauseNoteX}" dy="0">KURZE TRINKPAUSE</tspan>
+                    <tspan x="${drinkPauseNoteX}" dy="14">WÄHREND DES KARAOKES</tspan>
+                </text>
+            ` : ""}
             ${partyEndMensa ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${partyEndNoteX + 28},${partyEndNoteY - 20} Q${partyEndMensaX + 18},${partyEndMensaY + 56} ${partyEndMensaX},${partyEndMensaY + 7}" marker-end="url(#temperature-arrowhead)"></path>
+                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${partyEndNoteX + 52},${partyEndNoteY - 18} Q${partyEndMensaX - 2},${partyEndNoteY - 46} ${partyEndMensaX - 4},${partyEndMensaY + 8}" marker-end="url(#temperature-arrowhead)"></path>
                 <text class="temperature-chart-note temperature-chart-annotation" x="${partyEndNoteX}" y="${partyEndNoteY}">
                     <tspan x="${partyEndNoteX}" dy="0">DIE PARTY IN DER</tspan>
-                    <tspan x="${partyEndNoteX}" dy="14">MENSA WAR ZU ENDE.</tspan>
+                    <tspan x="${partyEndNoteX}" dy="14">MENSA WAR ZU ENDE</tspan>
+                </text>
+            ` : ""}
+            ${lateStudioRange.length ? `
+                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${lateStudioNoteX + 170},${lateStudioNoteY + 2} Q${lateStudioX - 36},${lateStudioNoteY + 2} ${lateStudioX - 8},${lateStudioY + 8}" marker-end="url(#temperature-arrowhead)"></path>
+                <text class="temperature-chart-note temperature-chart-annotation" x="${lateStudioNoteX}" y="${lateStudioNoteY}">
+                    <tspan x="${lateStudioNoteX}" dy="0">IM STUDIO GAB ES</tspan>
+                    <tspan x="${lateStudioNoteX}" dy="14">SPÄT NACHTS DOCH NOCH</tspan>
+                    <tspan x="${lateStudioNoteX}" dy="14">EIN BISSCHEN ACTION</tspan>
                 </text>
             ` : ""}
             <circle class="temperature-chart-dot temperature-chart-dot-studio" id="temperature-chart-dot-studio" cx="${xForTime(timestamp(lastStudio))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
