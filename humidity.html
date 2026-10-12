@@ -38,7 +38,7 @@
             <div class="humidity-control" id="humidity-control">
                 <div class="humidity-window" aria-hidden="true">
                     <div class="humidity-window-scene">
-                        <img src="assets/IMG_1451.jpg" alt="">
+                        <img src="assets/brandaktuell_bild1.jpg" alt="">
                     </div>
                     <div class="humidity-fog"></div>
                     <span class="humidity-wiper"></span>
@@ -73,16 +73,6 @@
                 <span class="mensa">Mensa</span>
             </div>
             <div class="humidity-tooltip" id="humidity-tooltip" hidden></div>
-        </div>
-    </section>
-
-    <section class="linea-story humidity-story" aria-labelledby="humidity-story-title">
-        <h2 id="humidity-story-title">Tropfenprotokoll</h2>
-        <div class="linea-timeline humidity-timeline" id="humidity-timeline">
-            <svg class="linea-route" viewBox="0 0 860 1460" preserveAspectRatio="none" aria-hidden="true">
-                <path class="linea-route-main" d="M430 0 C430 92 200 66 200 180 C200 306 675 244 675 380 C675 510 185 446 185 590 C185 734 690 660 690 820 C690 980 205 900 205 1060 C205 1210 430 1200 430 1460" />
-            </svg>
-            <div id="humidity-events"></div>
         </div>
     </section>
 
@@ -154,75 +144,6 @@
         const value = to.value - from.value;
         return `${value >= 0 ? "+" : ""}${value.toFixed(1)} %`;
     }
-
-    function dropIcon(type) {
-        const icons = {
-            first: `
-                <svg viewBox="0 0 140 120" aria-hidden="true">
-                    <path d="M70 23 q24 29 24 48 q0 23 -24 23 q-24 0 -24 -23 q0 -19 24 -48 z" />
-                    <path d="M61 79 q9 7 20 0" />
-                    <circle cx="101" cy="40" r="4" />
-                </svg>`,
-            low: `
-                <svg viewBox="0 0 140 120" aria-hidden="true">
-                    <path d="M48 50 q13 -18 13 -29 q18 22 18 38 q0 17 -18 17 q-17 0 -17 -16 q0 -5 4 -10 z" />
-                    <path d="M92 76 q13 -18 13 -29 q18 22 18 38 q0 17 -18 17 q-17 0 -17 -16 q0 -5 4 -10 z" />
-                    <path d="M32 96 q18 8 38 0 M82 104 q24 8 43 -2" />
-                </svg>`,
-            middle: `
-                <svg viewBox="0 0 140 120" aria-hidden="true">
-                    <path d="M38 38 q18 20 18 35 q0 17 -18 17 q-18 0 -18 -17 q0 -15 18 -35 z" />
-                    <path d="M72 22 q24 28 24 48 q0 23 -24 23 q-24 0 -24 -23 q0 -20 24 -48 z" />
-                    <path d="M106 48 q14 17 14 29 q0 14 -14 14 q-14 0 -14 -14 q0 -12 14 -29 z" />
-                </svg>`,
-            peak: `
-                <svg viewBox="0 0 140 120" aria-hidden="true">
-                    <path d="M70 18 q32 38 32 64 q0 30 -32 30 q-32 0 -32 -30 q0 -26 32 -64 z" />
-                    <path d="M56 82 q14 13 31 0" />
-                    <path d="M31 44 q-10 8 -11 21 M109 44 q10 8 11 21 M42 25 l-12 -12 M99 25 l12 -12" />
-                </svg>`,
-            last: `
-                <svg viewBox="0 0 140 120" aria-hidden="true">
-                    <path d="M48 39 q20 24 20 41 q0 20 -20 20 q-20 0 -20 -20 q0 -17 20 -41 z" />
-                    <path d="M90 28 q24 28 24 48 q0 23 -24 23 q-24 0 -24 -23 q0 -20 24 -48 z" />
-                    <path d="M32 105 q34 -10 74 0 M72 86 q8 8 20 0" />
-                </svg>`
-        };
-        return icons[type];
-    }
-
-    const chapters = [
-        {
-            type: "first",
-            point: first,
-            title: "Noch atmet der Raum",
-            body: `Der erste Wert liegt bei ${format(first?.value, 0)} in der ${room(first)}. Die Luft wirkt noch harmlos, fast unschuldig.`
-        },
-        {
-            type: "low",
-            point: low,
-            title: "Kurzer Trocken-Moment",
-            body: `Der tiefste Punkt kommt um ${timeOnly(low?.time)} Uhr mit ${format(low?.value, 0)}. Danach beginnt die Luft langsam mitzumachen.`
-        },
-        {
-            type: "middle",
-            point: middle,
-            title: "Tropfen sammeln sich",
-            body: `Um ${timeOnly(middle?.time)} Uhr steht die Feuchtigkeit bei ${format(middle?.value, 0)}. Gespräche, Tanzfläche und Raumluft bilden ein kleines Wetter.`
-        },
-        {
-            type: "peak",
-            point: peak,
-            title: "Der feuchteste Moment",
-            body: `Peak um ${timeOnly(peak?.time)} Uhr: ${format(peak?.value, 0)} in der ${room(peak)}. Ab hier ist die Luft offiziell Teil der Party.`
-        },
-        {
-            type: "last",
-            point: last,
-            title: "Der Raum bleibt wach",
-            body: `Zum Schluss bleiben ${format(last?.value, 0)}. Insgesamt: ${delta(first, last)} seit Beginn, Durchschnitt ${format(average, 0)}.`
-        }
-    ];
 
     document.getElementById("humidity-copy").innerHTML = `
         <p><strong>Die Nacht in Tropfen:</strong> Von ${format(first?.value, 0)} auf ${format(last?.value, 0)}, mit einem Peak von ${format(peak?.value, 0)} um ${timeOnly(peak?.time)} Uhr. Die Party hat sich langsam in ein eigenes Mikroklima verwandelt.</p>
@@ -455,80 +376,6 @@
         humidityAccuracy.textContent = "Sobald Messwerte vorhanden sind, beschlägt die Scheibe.";
     }
 
-    document.getElementById("humidity-events").innerHTML = chapters.map((chapter) => `
-        <article class="linea-event">
-            ${dropIcon(chapter.type)}
-            <div>
-                <span>${timeOnly(chapter.point?.time)}</span>
-                <h3>${chapter.title}</h3>
-                <p>${chapter.body}</p>
-            </div>
-        </article>
-    `).join("");
-
-    const lineaCards = document.querySelectorAll(".linea-event");
-    const timeline = document.querySelector(".linea-timeline");
-    const routePaths = document.querySelectorAll(".linea-route-main");
-
-    routePaths.forEach((path) => {
-        const length = Math.ceil(path.getTotalLength());
-        path.dataset.routeLength = length;
-        path.style.setProperty("--route-length", length);
-        path.style.strokeDashoffset = length;
-    });
-
-    lineaCards.forEach((card) => {
-        card.querySelectorAll("path, circle").forEach((shape) => {
-            const length = Math.ceil(shape.getTotalLength());
-            shape.dataset.drawLength = length;
-            shape.style.setProperty("--draw-length", length);
-            shape.style.strokeDashoffset = length;
-        });
-    });
-
-    const cardObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("is-visible");
-        });
-    }, { threshold: [0.45, 0.65, 0.85] });
-
-    lineaCards.forEach((card, index) => {
-        card.style.setProperty("--card-tilt", `${index % 2 === 0 ? -0.25 : 0.35}deg`);
-        card.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
-        cardObserver.observe(card);
-    });
-
-    const updateTimelineProgress = () => {
-        if (timeline) {
-            const timelineRect = timeline.getBoundingClientRect();
-            const routeStart = window.innerHeight * 0.78;
-            const routeEnd = window.innerHeight * 0.22;
-            const routeProgress = Math.max(0, Math.min((routeStart - timelineRect.top) / Math.max(timelineRect.height - routeEnd, 1), 1));
-
-            routePaths.forEach((path) => {
-                const length = Number(path.dataset.routeLength || 0);
-                path.style.strokeDashoffset = length * (1 - routeProgress);
-            });
-        }
-
-        lineaCards.forEach((card) => {
-            const cardRect = card.getBoundingClientRect();
-            const drawStart = window.innerHeight * 0.82;
-            const drawEnd = window.innerHeight * 0.38;
-            const drawProgress = Math.max(0, Math.min((drawStart - cardRect.top) / Math.max(drawStart - drawEnd, 1), 1));
-
-            card.querySelectorAll("path, circle").forEach((shape) => {
-                const length = Number(shape.dataset.drawLength || 0);
-                shape.style.strokeDashoffset = length * (1 - drawProgress);
-            });
-
-            card.classList.toggle("is-drawn", drawProgress >= 0.98);
-        });
-    };
-
-    updateTimelineProgress();
-    window.addEventListener("scroll", updateTimelineProgress, { passive: true });
-    window.addEventListener("resize", updateTimelineProgress);
 </script>
 </body>
 </html>

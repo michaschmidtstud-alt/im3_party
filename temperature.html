@@ -186,6 +186,8 @@
         const maxValue = 26;
         const lastStudio = series[3][series[3].length - 1] || last;
         const lastMensa = series[7][series[7].length - 1] || last;
+        const peakMensa = series[7].reduce((best, point) => !best || point.value > best.value ? point : best, null);
+        const lowMensa = series[7].reduce((best, point) => !best || point.value < best.value ? point : best, null);
         const valueRange = Math.max(maxValue - minValue, 1);
         const xForTime = (time) => pad.left + ((time - minTime) / Math.max(maxTime - minTime, 1)) * chartWidth;
         const yFor = (value) => pad.top + (1 - (value - minValue) / valueRange) * chartHeight;
@@ -195,8 +197,21 @@
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
         const guideValues = Array.from({ length: 5 }, (_, index) => minValue + index);
+        const lowMensaX = lowMensa ? xForTime(timestamp(lowMensa)) : pad.left;
+        const lowMensaY = lowMensa ? yFor(lowMensa.value) : height - pad.bottom;
+        const noteX = Math.min(Math.max(lowMensaX + 96, pad.left + 130), width - pad.right - 210);
+        const noteY = Math.max(pad.top + 42, lowMensaY - 112);
+        const peakMensaX = peakMensa ? xForTime(timestamp(peakMensa)) : pad.left;
+        const peakMensaY = peakMensa ? yFor(peakMensa.value) : pad.top;
+        const peakMensaNoteX = Math.min(Math.max(peakMensaX - 210, pad.left + 70), width - pad.right - 230);
+        const peakMensaNoteY = Math.min(Math.max(peakMensaY + 52, pad.top + 76), height - pad.bottom - 44);
 
         svg.innerHTML = `
+            <defs>
+                <marker id="temperature-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                </marker>
+            </defs>
             <rect class="temperature-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
             ${guideValues.map((value, index) => `
                 <line class="temperature-chart-grid ${index === 0 || index === guideValues.length - 1 ? "edge" : ""}" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line>
@@ -210,6 +225,21 @@
             ${hourTicks.map((time, index) => `
                 <text class="temperature-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
             `).join("")}
+            ${lowMensa ? `
+                <path class="temperature-chart-arrow" d="M${noteX},${noteY + 30} Q${(noteX + lowMensaX) / 2},${noteY + 12} ${lowMensaX + 4},${lowMensaY - 6}" marker-end="url(#temperature-arrowhead)"></path>
+                <text class="temperature-chart-note" x="${noteX}" y="${noteY}">
+                    <tspan x="${noteX}" dy="0">HIER WURD DIE TÜR</tspan>
+                    <tspan x="${noteX}" dy="14">IN DEN INNENHOF</tspan>
+                    <tspan x="${noteX}" dy="14">GESCHLOSSEN.</tspan>
+                </text>
+            ` : ""}
+            ${peakMensa ? `
+                <path class="temperature-chart-arrow" d="M${peakMensaNoteX + 144},${peakMensaNoteY} Q${(peakMensaNoteX + peakMensaX) / 2},${peakMensaNoteY - 38} ${peakMensaX - 4},${peakMensaY + 6}" marker-end="url(#temperature-arrowhead)"></path>
+                <text class="temperature-chart-note" x="${peakMensaNoteX}" y="${peakMensaNoteY}">
+                    <tspan x="${peakMensaNoteX}" dy="0">DIE PARTY IN DER</tspan>
+                    <tspan x="${peakMensaNoteX}" dy="14">MENSA WAR ZU ENDE.</tspan>
+                </text>
+            ` : ""}
             <circle class="temperature-chart-dot temperature-chart-dot-studio" id="temperature-chart-dot-studio" cx="${xForTime(timestamp(lastStudio))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
             <circle class="temperature-chart-dot temperature-chart-dot-mensa" id="temperature-chart-dot-mensa" cx="${xForTime(timestamp(lastMensa))}" cy="${yFor(lastMensa.value)}" r="6"></circle>
         `;
