@@ -290,8 +290,8 @@
 
         svg.innerHTML = `
             <defs>
-                <marker id="humidity-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                <marker id="humidity-arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+                    <path d="M0,0.5 L6,3.5 L0,6.5 Z"></path>
                 </marker>
             </defs>
             <rect class="humidity-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
@@ -347,6 +347,8 @@
             <circle class="humidity-chart-dot humidity-chart-dot-studio" id="humidity-chart-dot-studio" cx="${xForTime(Date.parse(lastStudio.time.replace(" ", "T")))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
             <circle class="humidity-chart-dot humidity-chart-dot-mensa" id="humidity-chart-dot-mensa" cx="${xForTime(Date.parse(lastMensa.time.replace(" ", "T")))}" cy="${yFor(lastMensa.value)}" r="6"></circle>
         `;
+
+        window.addSvgAnnotationFrames?.(svg, ".humidity-chart-note", "humidity-chart-annotation");
 
         const guide = document.getElementById("humidity-chart-guide");
         const studioDot = document.getElementById("humidity-chart-dot-studio");

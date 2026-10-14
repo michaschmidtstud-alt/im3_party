@@ -1,0 +1,53 @@
+body {
+    background-color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: ghostwhite;
+    font-size: 6rem;
+    margin-bottom: 0.5em;
+    font-family: sans-serif;
+}
+
+#wert {
+    color: #333333;
+    font-size: 5rem;
+    margin-bottom: 0.5em;
+    font-family: sans-serif;
+}
+
+#einheit {
+    color: #333333;
+    font-size: 3rem;
+    margin-left: 0.3rem;
+}
+
+p {
+    color: ghostwhite;
+    font-size: 1rem;
+    margin-bottom: 1em;
+    font-family: sans-serif;
+}
+
+#fehler {
+    margin-top: auto;
+
+}
+
+#messwert {
+    background: ghostwhite;
+    font-size: 2rem;
+    font-family: sans-serif;
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 0.4rem;
+}

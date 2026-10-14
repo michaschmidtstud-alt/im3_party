@@ -12958,6 +12958,77 @@ const PARTY_UNLOAD_DATA = {
 
 if (typeof window !== "undefined") {
   window.PARTY_UNLOAD_DATA = PARTY_UNLOAD_DATA;
+
+  window.addSvgAnnotationFrames = (svg, noteSelector, annotationClass = "") => {
+    const svgNamespace = "http://www.w3.org/2000/svg";
+
+    svg.querySelectorAll(noteSelector).forEach((note, index) => {
+      if (note.previousElementSibling?.classList.contains("chart-note-frame")) return;
+
+      note.style.visibility = "visible";
+      note.style.opacity = "0";
+      const box = note.getBBox();
+      note.style.removeProperty("visibility");
+      note.style.removeProperty("opacity");
+
+      const frame = document.createElementNS(svgNamespace, "rect");
+      frame.setAttribute("class", ["chart-note-frame", annotationClass].filter(Boolean).join(" "));
+      frame.setAttribute("x", (box.x - 10).toFixed(1));
+      frame.setAttribute("y", (box.y - 7).toFixed(1));
+      frame.setAttribute("width", (box.width + 20).toFixed(1));
+      frame.setAttribute("height", (box.height + 14).toFixed(1));
+      frame.setAttribute("rx", "6");
+      frame.setAttribute("ry", "6");
+      note.parentNode.insertBefore(frame, note);
+
+      const arrow = frame.previousElementSibling;
+      if (arrow?.tagName.toLowerCase() !== "path" || !arrow.getTotalLength()) return;
+
+      const target = arrow.getPointAtLength(arrow.getTotalLength());
+      const rect = {
+        x: box.x - 10,
+        y: box.y - 7,
+        width: box.width + 20,
+        height: box.height + 14
+      };
+      const center = {
+        x: rect.x + rect.width / 2,
+        y: rect.y + rect.height / 2
+      };
+      const direction = {
+        x: target.x - center.x,
+        y: target.y - center.y
+      };
+      const directionLength = Math.max(Math.hypot(direction.x, direction.y), 1);
+      const unit = {
+        x: direction.x / directionLength,
+        y: direction.y / directionLength
+      };
+      const edgeScale = Math.min(
+        Math.abs(direction.x) > 0.001 ? rect.width / 2 / Math.abs(direction.x) : Infinity,
+        Math.abs(direction.y) > 0.001 ? rect.height / 2 / Math.abs(direction.y) : Infinity
+      );
+      const edge = {
+        x: center.x + direction.x * edgeScale,
+        y: center.y + direction.y * edgeScale
+      };
+      const availableLength = Math.max(directionLength - edgeScale * directionLength, 1);
+      const startGap = Math.min(14, Math.max(4, availableLength * 0.35));
+      const start = {
+        x: edge.x + unit.x * startGap,
+        y: edge.y + unit.y * startGap
+      };
+      const arrowLength = Math.hypot(target.x - start.x, target.y - start.y);
+      const bendDirection = index % 2 === 0 ? 1 : -1;
+      const bend = Math.min(7, arrowLength * 0.08) * bendDirection;
+      const control = {
+        x: (start.x + target.x) / 2 - unit.y * bend,
+        y: (start.y + target.y) / 2 + unit.x * bend
+      };
+
+      arrow.setAttribute("d", `M${start.x.toFixed(1)},${start.y.toFixed(1)} Q${control.x.toFixed(1)},${control.y.toFixed(1)} ${target.x.toFixed(1)},${target.y.toFixed(1)}`);
+    });
+  };
 }
 
 if (typeof module !== "undefined") {

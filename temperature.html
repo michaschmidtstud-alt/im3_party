@@ -160,6 +160,145 @@
         </article>
     `).join("");
 
+    function annotationRectsOverlap(firstRect, secondRect, spacing = 20) {
+        return firstRect.x < secondRect.x + secondRect.width + spacing
+            && firstRect.x + firstRect.width + spacing > secondRect.x
+            && firstRect.y < secondRect.y + secondRect.height + spacing
+            && firstRect.y + firstRect.height + spacing > secondRect.y;
+    }
+
+    function annotationLineCrossesRect(start, end, rect, padding = 8) {
+        const paddedRect = {
+            left: rect.x - padding,
+            right: rect.x + rect.width + padding,
+            top: rect.y - padding,
+            bottom: rect.y + rect.height + padding
+        };
+        const steps = 12;
+
+        for (let index = 1; index < steps; index += 1) {
+            const ratio = index / steps;
+            const x = start.x + (end.x - start.x) * ratio;
+            const y = start.y + (end.y - start.y) * ratio;
+            if (x >= paddedRect.left && x <= paddedRect.right && y >= paddedRect.top && y <= paddedRect.bottom) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function layoutTemperatureAnnotations(svg, annotations, bounds, curvePoints) {
+        const placements = {
+            "above-left": (anchor, box) => ({ x: anchor.x - box.width - 18, y: anchor.y - box.height - 24 }),
+            above: (anchor, box) => ({ x: anchor.x - box.width / 2, y: anchor.y - box.height - 30 }),
+            "above-right": (anchor, box) => ({ x: anchor.x + 18, y: anchor.y - box.height - 24 }),
+            right: (anchor, box) => ({ x: anchor.x + 34, y: anchor.y - box.height / 2 }),
+            "below-right": (anchor) => ({ x: anchor.x + 18, y: anchor.y + 24 }),
+            below: (anchor, box) => ({ x: anchor.x - box.width / 2, y: anchor.y + 30 }),
+            "below-left": (anchor, box) => ({ x: anchor.x - box.width - 18, y: anchor.y + 24 }),
+            left: (anchor, box) => ({ x: anchor.x - box.width - 34, y: anchor.y - box.height / 2 })
+        };
+        const placementNames = Object.keys(placements);
+        const placedAnnotations = [];
+        const annotationAnchors = annotations.map((annotation) => annotation.anchor);
+
+        annotations.forEach((annotation) => {
+            const group = svg.querySelector(`[data-temperature-annotation="${annotation.id}"]`);
+            const text = group?.querySelector("text");
+            const arrow = group?.querySelector("path");
+            const frame = group?.querySelector("rect");
+            if (!group || !text || !arrow || !frame) return;
+
+            group.style.visibility = "visible";
+            group.style.opacity = "0";
+            const measuredBox = text.getBBox();
+            group.style.removeProperty("visibility");
+            group.style.removeProperty("opacity");
+
+            const framePadding = { x: 10, y: 7 };
+            const box = {
+                width: Math.max(measuredBox.width, 1) + framePadding.x * 2,
+                height: Math.max(measuredBox.height, annotation.lines.length * 14) + framePadding.y * 2
+            };
+            const candidates = [
+                annotation.preferred,
+                ...placementNames.filter((name) => name !== annotation.preferred)
+            ].map((name, preferenceIndex) => {
+                const rawPosition = placements[name](annotation.anchor, box);
+                const offset = preferenceIndex === 0 ? annotation.offset : { x: 0, y: 0 };
+                const desiredPosition = {
+                    x: rawPosition.x + (offset?.x || 0),
+                    y: rawPosition.y + (offset?.y || 0)
+                };
+                const position = {
+                    x: Math.max(bounds.left, Math.min(desiredPosition.x, bounds.right - box.width)),
+                    y: Math.max(bounds.top, Math.min(desiredPosition.y, bounds.bottom - box.height))
+                };
+                const rect = { ...position, ...box };
+                const center = { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+                const distance = Math.hypot(annotation.anchor.x - center.x, annotation.anchor.y - center.y);
+                const boundaryShift = Math.hypot(position.x - desiredPosition.x, position.y - desiredPosition.y);
+                let score = preferenceIndex * 110 + distance * 0.45 + boundaryShift * 80;
+
+                placedAnnotations.forEach((placed) => {
+                    if (annotationRectsOverlap(rect, placed.rect)) score += 100000;
+                    if (annotationLineCrossesRect(center, annotation.anchor, placed.rect)) score += 3000;
+                });
+                annotationAnchors.forEach((anchor) => {
+                    if (anchor === annotation.anchor) return;
+                    if (anchor.x >= rect.x - 8 && anchor.x <= rect.x + rect.width + 8
+                        && anchor.y >= rect.y - 8 && anchor.y <= rect.y + rect.height + 8) {
+                        score += 12000;
+                    }
+                });
+                curvePoints.forEach((point) => {
+                    if (point.x >= rect.x - 4 && point.x <= rect.x + rect.width + 4
+                        && point.y >= rect.y - 4 && point.y <= rect.y + rect.height + 4) {
+                        score += 55;
+                    }
+                });
+
+                return { name, rect, score };
+            });
+            const selected = candidates.reduce((best, candidate) => candidate.score < best.score ? candidate : best);
+            const rect = selected.rect;
+            const center = { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+            const direction = {
+                x: annotation.anchor.x - center.x,
+                y: annotation.anchor.y - center.y
+            };
+            const halfWidth = rect.width / 2;
+            const halfHeight = rect.height / 2;
+            const edgeScale = Math.min(
+                Math.abs(direction.x) > 0.001 ? halfWidth / Math.abs(direction.x) : Infinity,
+                Math.abs(direction.y) > 0.001 ? halfHeight / Math.abs(direction.y) : Infinity
+            );
+            const edge = {
+                x: center.x + direction.x * edgeScale,
+                y: center.y + direction.y * edgeScale
+            };
+            const directionLength = Math.max(Math.hypot(direction.x, direction.y), 1);
+            const unit = { x: direction.x / directionLength, y: direction.y / directionLength };
+            const start = { x: edge.x + unit.x * 14, y: edge.y + unit.y * 14 };
+            const end = { x: annotation.anchor.x - unit.x * 7, y: annotation.anchor.y - unit.y * 7 };
+            const arrowLength = Math.hypot(end.x - start.x, end.y - start.y);
+            const bend = Math.min(7, arrowLength * 0.08) * (annotation.curve || 1);
+            const control = {
+                x: (start.x + end.x) / 2 - unit.y * bend,
+                y: (start.y + end.y) / 2 + unit.x * bend
+            };
+
+            frame.setAttribute("x", rect.x.toFixed(1));
+            frame.setAttribute("y", rect.y.toFixed(1));
+            frame.setAttribute("width", rect.width.toFixed(1));
+            frame.setAttribute("height", rect.height.toFixed(1));
+            text.setAttribute("transform", `translate(${(rect.x + framePadding.x - measuredBox.x).toFixed(1)} ${(rect.y + framePadding.y - measuredBox.y).toFixed(1)})`);
+            arrow.setAttribute("d", `M${start.x.toFixed(1)},${start.y.toFixed(1)} Q${control.x.toFixed(1)},${control.y.toFixed(1)} ${end.x.toFixed(1)},${end.y.toFixed(1)}`);
+            placedAnnotations.push({ rect, start, end });
+        });
+    }
+
     function renderTemperatureChart() {
         const svg = document.getElementById("temperature-chart");
         const tooltip = document.getElementById("temperature-tooltip");
@@ -268,31 +407,69 @@
             return "Studio und Mensa bleiben hier relativ stabil. Die Temperaturen pendeln sich in beiden Räumen ein.";
         };
         const guideValues = Array.from({ length: 5 }, (_, index) => minValue + index);
-        const lowMensaX = lowMensa ? xForTime(timestamp(lowMensa)) : pad.left;
-        const lowMensaY = lowMensa ? yFor(lowMensa.value) : height - pad.bottom;
-        const noteX = Math.min(Math.max(lowMensaX - 220, pad.left + 120), width - pad.right - 230);
-        const noteY = Math.min(lowMensaY + 56, height - pad.bottom - 36);
-        const karaokeStudioX = karaokeStudio ? xForTime(timestamp(karaokeStudio)) : pad.left;
-        const karaokeStudioY = karaokeStudio ? yFor(karaokeStudio.value) : pad.top;
-        const karaokeNoteX = Math.max(karaokeStudioX - 245, pad.left + 8);
-        const karaokeNoteY = Math.min(karaokeStudioY + 92, height - pad.bottom - 18);
-        const partyEndMensaX = partyEndMensa ? xForTime(timestamp(partyEndMensa)) : pad.left;
-        const partyEndMensaY = partyEndMensa ? yFor(partyEndMensa.value) : pad.top;
-        const partyEndNoteX = Math.min(Math.max(partyEndMensaX - 40, pad.left + 8), width - pad.right - 190);
-        const partyEndNoteY = Math.min(partyEndMensaY + 74, height - pad.bottom - 24);
-        const drinkPauseMensaX = drinkPauseMensa ? xForTime(timestamp(drinkPauseMensa)) : pad.left;
-        const drinkPauseMensaY = drinkPauseMensa ? yFor(drinkPauseMensa.value) : pad.top;
-        const drinkPauseNoteX = Math.min(Math.max(drinkPauseMensaX - 115, pad.left + 8), width - pad.right - 190);
-        const drinkPauseNoteY = Math.max(pad.top + 34, drinkPauseMensaY - 112);
-        const lateStudioX = lastStudio ? xForTime(timestamp(lastStudio)) : pad.left;
-        const lateStudioY = lastStudio ? yFor(lastStudio.value) : pad.top;
-        const lateStudioNoteX = Math.min(Math.max(lateStudioX - 210, pad.left + 8), width - pad.right - 220);
-        const lateStudioNoteY = Math.min(Math.max(lateStudioY + 56, pad.top + 90), height - pad.bottom - 38);
+        const annotationDefinitions = [
+            {
+                id: "karaoke",
+                lines: ["KARAOKE GING LOS."],
+                seriesId: 3,
+                time: karaokeTime,
+                point: karaokeStudio,
+                preferred: "above-left",
+                offset: { x: -4, y: 4 },
+                curve: -1
+            },
+            {
+                id: "drink-pause",
+                lines: ["KURZE TRINKPAUSE", "WÄHREND DES KARAOKES"],
+                seriesId: 7,
+                time: drinkPauseTime,
+                point: drinkPauseMensa,
+                preferred: "above-right",
+                offset: { x: 2, y: 2 },
+                curve: 1
+            },
+            {
+                id: "party-end",
+                lines: ["DIE PARTY IN DER", "MENSA WAR ZU ENDE"],
+                seriesId: 7,
+                time: partyEndTime,
+                point: partyEndMensa,
+                preferred: "below-right",
+                offset: { x: 0, y: 2 },
+                curve: -1
+            },
+            {
+                id: "courtyard-door",
+                lines: ["TÜR IN DEN", "INNENHOF WURDE", "GESCHLOSSEN"],
+                seriesId: 7,
+                time: lowMensa ? timestamp(lowMensa) : null,
+                point: lowMensa,
+                preferred: "below-left",
+                offset: { x: -2, y: 0 },
+                curve: 1
+            },
+            {
+                id: "late-studio",
+                lines: ["IM STUDIO GAB ES", "SPÄT NACHTS DOCH NOCH", "EIN BISSCHEN ACTION"],
+                seriesId: 3,
+                time: lastStudio ? timestamp(lastStudio) : null,
+                point: lastStudio,
+                preferred: "below-left",
+                offset: { x: -60, y: -2 },
+                curve: -1
+            }
+        ].filter((annotation) => annotation.point).map((annotation) => ({
+            ...annotation,
+            anchor: {
+                x: xForTime(timestamp(annotation.point)),
+                y: yFor(annotation.point.value)
+            }
+        }));
 
         svg.innerHTML = `
             <defs>
-                <marker id="temperature-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 Z"></path>
+                <marker id="temperature-arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+                    <path d="M0,0.5 L6,3.5 L0,6.5 Z"></path>
                 </marker>
             </defs>
             <rect class="temperature-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
@@ -313,43 +490,37 @@
             ${hourTicks.map((time, index) => `
                 <text class="temperature-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
             `).join("")}
-            ${lowMensa ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${noteX + 150},${noteY + 6} Q${lowMensaX - 32},${noteY + 8} ${lowMensaX - 5},${lowMensaY + 8}" marker-end="url(#temperature-arrowhead)"></path>
-                <text class="temperature-chart-note temperature-chart-annotation" x="${noteX}" y="${noteY}">
-                    <tspan x="${noteX}" dy="0">TÜR IN DEN</tspan>
-                    <tspan x="${noteX}" dy="14">INNENHOF WURDE</tspan>
-                    <tspan x="${noteX}" dy="14">GESCHLOSSEN</tspan>
-                </text>
-            ` : ""}
-            ${karaokeStudio ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${karaokeNoteX + 142},${karaokeNoteY - 3} Q${karaokeStudioX - 64},${karaokeNoteY - 4} ${karaokeStudioX - 6},${karaokeStudioY + 8}" marker-end="url(#temperature-arrowhead)"></path>
-                <text class="temperature-chart-note temperature-chart-annotation" x="${karaokeNoteX}" y="${karaokeNoteY}">KARAOKE GING LOS.</text>
-            ` : ""}
-            ${drinkPauseMensa ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${drinkPauseNoteX + 92},${drinkPauseNoteY + 32} Q${drinkPauseMensaX - 28},${drinkPauseNoteY + 44} ${drinkPauseMensaX - 3},${drinkPauseMensaY - 7}" marker-end="url(#temperature-arrowhead)"></path>
-                <text class="temperature-chart-note temperature-chart-annotation" x="${drinkPauseNoteX}" y="${drinkPauseNoteY}">
-                    <tspan x="${drinkPauseNoteX}" dy="0">KURZE TRINKPAUSE</tspan>
-                    <tspan x="${drinkPauseNoteX}" dy="14">WÄHREND DES KARAOKES</tspan>
-                </text>
-            ` : ""}
-            ${partyEndMensa ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${partyEndNoteX + 52},${partyEndNoteY - 18} Q${partyEndMensaX - 2},${partyEndNoteY - 46} ${partyEndMensaX - 4},${partyEndMensaY + 8}" marker-end="url(#temperature-arrowhead)"></path>
-                <text class="temperature-chart-note temperature-chart-annotation" x="${partyEndNoteX}" y="${partyEndNoteY}">
-                    <tspan x="${partyEndNoteX}" dy="0">DIE PARTY IN DER</tspan>
-                    <tspan x="${partyEndNoteX}" dy="14">MENSA WAR ZU ENDE</tspan>
-                </text>
-            ` : ""}
-            ${lateStudioRange.length ? `
-                <path class="temperature-chart-arrow temperature-chart-annotation" d="M${lateStudioNoteX + 170},${lateStudioNoteY + 2} Q${lateStudioX - 36},${lateStudioNoteY + 2} ${lateStudioX - 8},${lateStudioY + 8}" marker-end="url(#temperature-arrowhead)"></path>
-                <text class="temperature-chart-note temperature-chart-annotation" x="${lateStudioNoteX}" y="${lateStudioNoteY}">
-                    <tspan x="${lateStudioNoteX}" dy="0">IM STUDIO GAB ES</tspan>
-                    <tspan x="${lateStudioNoteX}" dy="14">SPÄT NACHTS DOCH NOCH</tspan>
-                    <tspan x="${lateStudioNoteX}" dy="14">EIN BISSCHEN ACTION</tspan>
-                </text>
-            ` : ""}
+            ${annotationDefinitions.map((annotation) => `
+                <g class="temperature-chart-annotation" data-temperature-annotation="${annotation.id}">
+                    <path class="temperature-chart-arrow" marker-end="url(#temperature-arrowhead)"></path>
+                    <rect class="chart-note-frame" rx="6" ry="6"></rect>
+                    <text class="temperature-chart-note" x="0" y="0">
+                        ${annotation.lines.map((line, index) => `<tspan x="0" dy="${index === 0 ? 0 : 14}">${line}</tspan>`).join("")}
+                    </text>
+                </g>
+            `).join("")}
             <circle class="temperature-chart-dot temperature-chart-dot-studio" id="temperature-chart-dot-studio" cx="${xForTime(timestamp(lastStudio))}" cy="${yFor(lastStudio.value)}" r="6"></circle>
             <circle class="temperature-chart-dot temperature-chart-dot-mensa" id="temperature-chart-dot-mensa" cx="${xForTime(timestamp(lastMensa))}" cy="${yFor(lastMensa.value)}" r="6"></circle>
         `;
+
+        const annotationBounds = {
+            left: pad.left + 10,
+            right: width - pad.right - 10,
+            top: pad.top + 10,
+            bottom: height - pad.bottom - 10
+        };
+        const curvePoints = Object.values(series).flatMap((items) => items
+            .filter((point, index) => index % 4 === 0 || index === items.length - 1)
+            .map((point) => ({ x: xForTime(timestamp(point)), y: yFor(point.value) }))
+        );
+        const positionAnnotations = () => layoutTemperatureAnnotations(svg, annotationDefinitions, annotationBounds, curvePoints);
+        positionAnnotations();
+        document.fonts?.ready.then(positionAnnotations);
+
+        if (window.ResizeObserver) {
+            const annotationObserver = new ResizeObserver(positionAnnotations);
+            annotationObserver.observe(svg);
+        }
 
         const guide = document.getElementById("temperature-chart-guide");
         const studioDot = document.getElementById("temperature-chart-dot-studio");

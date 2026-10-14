@@ -122,8 +122,8 @@
 
         svg.innerHTML = `
             <defs>
-                <marker id="guest-arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-                    <path d="M0,0 L8,4 L0,8 z"></path>
+                <marker id="guest-arrowhead" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="userSpaceOnUse">
+                    <path d="M0,0.5 L6,3.5 L0,6.5 Z"></path>
                 </marker>
             </defs>
             <rect class="guest-chart-missing-zone" x="${unknownStart}" y="${pad.top}" width="${width - pad.right - unknownStart}" height="${plotHeight}"></rect>
@@ -140,6 +140,8 @@
             ${guestData.slice(13).map((entry, offset) => `<text class="guest-chart-question" x="${xFor(offset + 13)}" y="${yFor(possibleValues[offset])}" text-anchor="middle">?</text>`).join("")}
             <line class="guest-chart-guide" id="guest-chart-guide" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}" hidden></line>
         `;
+
+        window.addSvgAnnotationFrames?.(svg, ".guest-chart-note");
 
         const guide = document.getElementById("guest-chart-guide");
         const handlePointer = (event) => {
