@@ -58,7 +58,7 @@
     <section class="linea-story landing-story" aria-labelledby="linea-story-title">
         <p class="linea-story-kicker">Die Nacht in vier Kapiteln</p>
         <h2 id="linea-story-title">Abendprotokoll</h2>
-        <p class="linea-story-intro">Was als vorsichtiges Ankommen begann, wurde irgendwann laut, warm und herrlich unübersichtlich. Eine kurze Geschichte über neue Gesichter, mutige Karaoke und den Moment, in dem niemand mehr auf die Uhr schaute.</p>
+        <p class="linea-story-intro">Für unser IM 3 Projekt haben wir die Ersti-Party mit Sensorboxen aufgezeichnet: Temperatur, Luftfeuchtigkeit, Alkoholpegel und Gästezahl zeigen, wie sich die Nacht Schritt für Schritt verändert hat. Eine kurze Geschichte über neue Gesichter, mutige Karaoke und den Moment, in dem niemand mehr auf die Uhr schaute.</p>
         <div class="linea-timeline">
             <svg class="linea-route" viewBox="0 0 860 1720" preserveAspectRatio="none" aria-hidden="true">
                 <path class="linea-route-main" d="M428 0 C428 95 178 70 178 190 C178 315 686 250 686 386 C686 515 205 455 205 600 C205 748 668 680 668 830 C668 970 188 905 188 1060 C188 1210 690 1135 690 1295 C690 1445 426 1415 426 1720" />
@@ -193,7 +193,7 @@
     const latestHumidity = latestMetricValue("humidity_pct");
     const latestNoise = latestMetricValue("noise_pct");
     document.getElementById("story-copy").innerHTML = `
-        <p><strong>Die Nacht in Zahlen:</strong> Lautstärke-Peak um ${timeOnly(noisePeak?.time)} Uhr mit ${format(noisePeak?.value, 1, "dB")}, feuchtester Moment um ${timeOnly(humidityPeak?.time)} Uhr mit ${format(humidityPeak?.value, 1, "%")}. Am Schluss: ${format(latestTemp, 1, "°C")}, ${format(latestHumidity, 0, "%")} und ${format(latestNoise, 1, "dB")}.</p>
+        <p><strong>Die Nacht in Zahlen:</strong> Lautstärke-Peak um ${timeOnly(noisePeak?.time)} mit ${format(noisePeak?.value, 1, "dB")}, feuchtester Moment um ${timeOnly(humidityPeak?.time)} mit ${format(humidityPeak?.value, 1, "%")}. Am Schluss: ${format(latestTemp, 1, "°C")}, ${format(latestHumidity, 0, "%")} und ${format(latestNoise, 1, "dB")}.</p>
     `;
 
     const lineaCards = document.querySelectorAll(".linea-event");

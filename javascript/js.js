@@ -1,7 +1,7 @@
-// Data from: https://party.gurulugi.myhostpoint.ch/unload.php?from=2026-09-30%2017:00&to=2026-10-01%2004:00&order=asc&exclude_box=5
-// Generated on 2026-10-05.
+// Data from: https://party.gurulugi.myhostpoint.ch/unload.php?from=2026-09-30%2017:00&to=2026-10-01%2004:00&order=asc
+// Box 5 contains only alcohol readings; climate/noise fields are kept for boxes 3 and 7.
 const PARTY_UNLOAD_DATA = {
-  "count": 1305,
+  "count": 1807,
   "data": [
     {
       "box_id": 7,
@@ -20,12 +20,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:00:49",
+      "alcohol_mgl": -0.54
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:01:49",
       "temperature_c": 24.7,
       "noise_pct": 35.4,
       "humidity_pct": 36.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:01:54",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -52,6 +62,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:02:14",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:03:27",
       "temperature_c": 25.4,
@@ -66,6 +81,16 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 43.9,
       "humidity_pct": 36,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:03:34",
+      "alcohol_mgl": -0.43
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:03:54",
+      "alcohol_mgl": -0.54
     },
     {
       "box_id": 7,
@@ -100,12 +125,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:05:53",
+      "alcohol_mgl": -0.53
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:06:04",
       "temperature_c": 24.7,
       "noise_pct": 32.3,
       "humidity_pct": 36,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:06:08",
+      "alcohol_mgl": -0.18
     },
     {
       "box_id": 7,
@@ -132,6 +167,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:07:48",
+      "alcohol_mgl": 1.16
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:07:57",
       "temperature_c": 25.4,
@@ -146,6 +186,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 34.9,
       "humidity_pct": 35.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:08:08",
+      "alcohol_mgl": -0.13
     },
     {
       "box_id": 3,
@@ -164,6 +209,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:09:03",
+      "alcohol_mgl": 0.05
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:10:12",
       "temperature_c": 25.3,
@@ -180,12 +230,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:10:23",
+      "alcohol_mgl": -0.29
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:11:42",
       "temperature_c": 25.3,
       "noise_pct": 66.1,
       "humidity_pct": 35.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:11:48",
+      "alcohol_mgl": -0.35
     },
     {
       "box_id": 3,
@@ -202,6 +262,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 37.5,
       "humidity_pct": 35.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:12:53",
+      "alcohol_mgl": -0.5
     },
     {
       "box_id": 7,
@@ -228,6 +293,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:13:31",
+      "alcohol_mgl": -0.53
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:14:27",
       "temperature_c": 25.4,
@@ -242,6 +312,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 43.8,
       "humidity_pct": 35.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:14:41",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -260,6 +335,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:15:21",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:16:34",
       "temperature_c": 24.7,
@@ -276,12 +356,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:16:45",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:17:49",
       "temperature_c": 24.7,
       "noise_pct": 41.7,
       "humidity_pct": 35.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:17:55",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -308,6 +398,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:18:50",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:19:42",
       "temperature_c": 25.3,
@@ -322,6 +417,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 36.6,
       "humidity_pct": 35.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:19:51",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -340,6 +440,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:20:50",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:21:42",
       "temperature_c": 25.4,
@@ -354,6 +459,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 38.4,
       "humidity_pct": 35.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:21:51",
+      "alcohol_mgl": -0.57
     },
     {
       "box_id": 3,
@@ -372,12 +482,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:22:16",
+      "alcohol_mgl": -0.58
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:23:49",
       "temperature_c": 24.8,
       "noise_pct": 33.7,
       "humidity_pct": 35.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:23:56",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 7,
@@ -396,6 +516,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:24:41",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:24:42",
       "temperature_c": 25.4,
@@ -410,6 +535,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 38.2,
       "humidity_pct": 35.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:25:26",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 7,
@@ -436,6 +566,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:26:35",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:27:12",
       "temperature_c": 25.4,
@@ -450,6 +585,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 38.7,
       "humidity_pct": 35.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:27:26",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -468,6 +608,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:28:51",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:29:27",
       "temperature_c": 25.4,
@@ -482,6 +627,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 37.4,
       "humidity_pct": 35.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:29:36",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 3,
@@ -500,6 +650,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:30:01",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:31:42",
       "temperature_c": 25.5,
@@ -514,6 +669,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 34.4,
       "humidity_pct": 35.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:31:50",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -532,6 +692,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:32:35",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:32:57",
       "temperature_c": 25.5,
@@ -546,6 +711,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 35.4,
       "humidity_pct": 35.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:33:05",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 3,
@@ -564,6 +734,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:34:45",
+      "alcohol_mgl": -0.52
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:35:34",
       "temperature_c": 24.8,
@@ -578,6 +753,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 69.3,
       "humidity_pct": 34.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:35:46",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -596,12 +776,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:36:06",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:37:49",
       "temperature_c": 24.8,
       "noise_pct": 37.8,
       "humidity_pct": 35.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:37:56",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -628,6 +818,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:38:50",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:39:27",
       "temperature_c": 25.5,
@@ -642,6 +837,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 42,
       "humidity_pct": 35.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:39:40",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -660,6 +860,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:40:21",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:41:27",
       "temperature_c": 25.5,
@@ -674,6 +879,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 40.7,
       "humidity_pct": 35.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:41:35",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -692,6 +902,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:42:51",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:43:27",
       "temperature_c": 25.4,
@@ -706,6 +921,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 41,
       "humidity_pct": 35.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:43:35",
+      "alcohol_mgl": -0.54
     },
     {
       "box_id": 7,
@@ -724,12 +944,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:44:56",
+      "alcohol_mgl": -0.46
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:45:19",
       "temperature_c": 24.9,
       "noise_pct": 40,
       "humidity_pct": 35.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:45:26",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -756,12 +986,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:46:05",
+      "alcohol_mgl": -0.45
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:46:49",
       "temperature_c": 24.9,
       "noise_pct": 38.1,
       "humidity_pct": 35.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:46:56",
+      "alcohol_mgl": -0.44
     },
     {
       "box_id": 7,
@@ -778,6 +1018,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 37.7,
       "humidity_pct": 36,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:47:56",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -804,6 +1049,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:49:26",
+      "alcohol_mgl": -0.49
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:50:34",
       "temperature_c": 24.8,
@@ -818,6 +1068,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 71.3,
       "humidity_pct": 36.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:50:46",
+      "alcohol_mgl": -0.46
     },
     {
       "box_id": 3,
@@ -836,6 +1091,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:51:46",
+      "alcohol_mgl": 7.37
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:52:27",
       "temperature_c": 25.5,
@@ -850,6 +1110,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 33.4,
       "humidity_pct": 36.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:52:35",
+      "alcohol_mgl": 6.83
     },
     {
       "box_id": 7,
@@ -868,6 +1133,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:53:06",
+      "alcohol_mgl": 6.52
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 17:54:34",
       "temperature_c": 24.9,
@@ -884,12 +1154,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:54:46",
+      "alcohol_mgl": 4.24
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:55:27",
       "temperature_c": 25.4,
       "noise_pct": 51.3,
       "humidity_pct": 36.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:55:31",
+      "alcohol_mgl": 1.95
     },
     {
       "box_id": 3,
@@ -916,12 +1196,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:56:46",
+      "alcohol_mgl": 1.87
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:57:42",
       "temperature_c": 25.6,
       "noise_pct": 56.4,
       "humidity_pct": 36.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:57:46",
+      "alcohol_mgl": 1.43
     },
     {
       "box_id": 3,
@@ -948,6 +1238,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:58:20",
+      "alcohol_mgl": 0.88
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 17:58:57",
       "temperature_c": 25.5,
@@ -962,6 +1257,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 40.8,
       "humidity_pct": 36.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 17:59:11",
+      "alcohol_mgl": 1.76
     },
     {
       "box_id": 3,
@@ -980,12 +1280,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:00:46",
+      "alcohol_mgl": 0.9
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:01:34",
       "temperature_c": 24.8,
       "noise_pct": 39.3,
       "humidity_pct": 36.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:01:40",
+      "alcohol_mgl": 0.68
     },
     {
       "box_id": 7,
@@ -1012,6 +1322,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:02:21",
+      "alcohol_mgl": 0.39
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:03:27",
       "temperature_c": 25.5,
@@ -1026,6 +1341,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 36.9,
       "humidity_pct": 36.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:03:41",
+      "alcohol_mgl": 0.04
     },
     {
       "box_id": 3,
@@ -1044,6 +1364,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:04:31",
+      "alcohol_mgl": 0.25
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:05:27",
       "temperature_c": 25.5,
@@ -1058,6 +1383,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 39.7,
       "humidity_pct": 36.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:05:35",
+      "alcohol_mgl": -0.19
     },
     {
       "box_id": 3,
@@ -1076,6 +1406,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:06:16",
+      "alcohol_mgl": -0.27
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:06:49",
       "temperature_c": 24.8,
@@ -1092,12 +1427,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:07:01",
+      "alcohol_mgl": 0.01
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:08:04",
       "temperature_c": 24.8,
       "noise_pct": 35.3,
       "humidity_pct": 37.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:08:11",
+      "alcohol_mgl": -0.07
     },
     {
       "box_id": 7,
@@ -1124,6 +1469,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:09:45",
+      "alcohol_mgl": -0.41
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:10:42",
       "temperature_c": 25.5,
@@ -1138,6 +1488,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 41.6,
       "humidity_pct": 37,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:10:50",
+      "alcohol_mgl": -0.07
     },
     {
       "box_id": 7,
@@ -1156,12 +1511,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:11:51",
+      "alcohol_mgl": 0.05
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:12:19",
       "temperature_c": 24.8,
       "noise_pct": 48.5,
       "humidity_pct": 37,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:12:26",
+      "alcohol_mgl": -0.17
     },
     {
       "box_id": 7,
@@ -1178,6 +1543,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 40.9,
       "humidity_pct": 37,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:13:26",
+      "alcohol_mgl": -0.01
     },
     {
       "box_id": 7,
@@ -1204,6 +1574,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:14:51",
+      "alcohol_mgl": 0.14
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:15:04",
       "temperature_c": 24.9,
@@ -1218,6 +1593,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 68.9,
       "humidity_pct": 36.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:15:16",
+      "alcohol_mgl": 0.17
     },
     {
       "box_id": 3,
@@ -1236,6 +1616,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:16:31",
+      "alcohol_mgl": -0.16
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:17:42",
       "temperature_c": 25.6,
@@ -1250,6 +1635,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 30.2,
       "humidity_pct": 37.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:17:51",
+      "alcohol_mgl": 0.16
     },
     {
       "box_id": 7,
@@ -1268,6 +1658,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:18:21",
+      "alcohol_mgl": 0.15
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:19:12",
       "temperature_c": 25.6,
@@ -1282,6 +1677,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 33,
       "humidity_pct": 37.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:19:20",
+      "alcohol_mgl": 0.1
     },
     {
       "box_id": 7,
@@ -1300,6 +1700,16 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:20:51",
+      "alcohol_mgl": -0.03
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:20:56",
+      "alcohol_mgl": -0.17
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:20:57",
       "temperature_c": 25.6,
@@ -1314,6 +1724,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 64.8,
       "humidity_pct": 36.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:22:16",
+      "alcohol_mgl": 0.11
     },
     {
       "box_id": 3,
@@ -1340,12 +1755,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:23:16",
+      "alcohol_mgl": -0.19
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:24:19",
       "temperature_c": 24.8,
       "noise_pct": 57.2,
       "humidity_pct": 37.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:24:26",
+      "alcohol_mgl": -0.16
     },
     {
       "box_id": 7,
@@ -1372,6 +1797,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:25:30",
+      "alcohol_mgl": -0.24
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:25:49",
       "temperature_c": 24.8,
@@ -1388,12 +1818,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:26:01",
+      "alcohol_mgl": -0.14
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:27:12",
       "temperature_c": 25.6,
       "noise_pct": 69.8,
       "humidity_pct": 36.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:27:16",
+      "alcohol_mgl": 0.01
     },
     {
       "box_id": 3,
@@ -1420,6 +1860,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:28:36",
+      "alcohol_mgl": -0.22
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:29:27",
       "temperature_c": 25.6,
@@ -1434,6 +1879,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 80.8,
       "humidity_pct": 38,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:29:35",
+      "alcohol_mgl": -0.07
     },
     {
       "box_id": 7,
@@ -1452,12 +1902,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:30:21",
+      "alcohol_mgl": -0.07
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:31:19",
       "temperature_c": 24.6,
       "noise_pct": 77.3,
       "humidity_pct": 38.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:31:26",
+      "alcohol_mgl": -0.16
     },
     {
       "box_id": 7,
@@ -1484,6 +1944,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:32:46",
+      "alcohol_mgl": -0.13
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:33:42",
       "temperature_c": 25.5,
@@ -1498,6 +1963,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 72.9,
       "humidity_pct": 38,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:33:51",
+      "alcohol_mgl": -0.27
     },
     {
       "box_id": 7,
@@ -1516,12 +1986,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:34:51",
+      "alcohol_mgl": -0.11
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:35:19",
       "temperature_c": 24.7,
       "noise_pct": 38.6,
       "humidity_pct": 37.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:35:26",
+      "alcohol_mgl": 0
     },
     {
       "box_id": 7,
@@ -1548,12 +2028,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:36:46",
+      "alcohol_mgl": -0.17
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:36:49",
       "temperature_c": 24.7,
       "noise_pct": 33.4,
       "humidity_pct": 37.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:36:56",
+      "alcohol_mgl": -0.33
     },
     {
       "box_id": 7,
@@ -1580,6 +2070,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:38:01",
+      "alcohol_mgl": 0.35
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:38:57",
       "temperature_c": 25.6,
@@ -1594,6 +2089,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 36.6,
       "humidity_pct": 37.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:39:06",
+      "alcohol_mgl": -0.17
     },
     {
       "box_id": 7,
@@ -1612,6 +2112,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:40:21",
+      "alcohol_mgl": -0.21
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:40:57",
       "temperature_c": 25.5,
@@ -1628,12 +2133,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:41:06",
+      "alcohol_mgl": -0.21
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:42:49",
       "temperature_c": 24.7,
       "noise_pct": 40.9,
       "humidity_pct": 38,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:42:56",
+      "alcohol_mgl": -0.31
     },
     {
       "box_id": 7,
@@ -1660,6 +2175,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:43:31",
+      "alcohol_mgl": -0.3
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:44:04",
       "temperature_c": 24.7,
@@ -1674,6 +2194,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 73.4,
       "humidity_pct": 37.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:44:16",
+      "alcohol_mgl": -0.07
     },
     {
       "box_id": 7,
@@ -1692,6 +2217,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:45:41",
+      "alcohol_mgl": -0.28
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:46:04",
       "temperature_c": 24.6,
@@ -1706,6 +2236,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 72.4,
       "humidity_pct": 37.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:46:16",
+      "alcohol_mgl": -0.13
     },
     {
       "box_id": 3,
@@ -1724,6 +2259,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:47:31",
+      "alcohol_mgl": -0.09
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:48:42",
       "temperature_c": 25.2,
@@ -1738,6 +2278,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 32.9,
       "humidity_pct": 38.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:48:56",
+      "alcohol_mgl": -0.24
     },
     {
       "box_id": 7,
@@ -1756,12 +2301,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:49:21",
+      "alcohol_mgl": 0.02
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:50:27",
       "temperature_c": 25.3,
       "noise_pct": 72.2,
       "humidity_pct": 37.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:50:31",
+      "alcohol_mgl": -0.27
     },
     {
       "box_id": 3,
@@ -1778,6 +2333,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 40.1,
       "humidity_pct": 38.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:51:11",
+      "alcohol_mgl": -0.14
     },
     {
       "box_id": 7,
@@ -1804,6 +2364,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:52:01",
+      "alcohol_mgl": -0.24
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:53:12",
       "temperature_c": 25,
@@ -1818,6 +2383,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 33.2,
       "humidity_pct": 38.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:53:26",
+      "alcohol_mgl": -0.14
     },
     {
       "box_id": 3,
@@ -1836,6 +2406,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:54:31",
+      "alcohol_mgl": -0.07
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:54:57",
       "temperature_c": 25.1,
@@ -1852,12 +2427,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:55:06",
+      "alcohol_mgl": -0.37
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 18:56:19",
       "temperature_c": 24.5,
       "noise_pct": 32,
       "humidity_pct": 38.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:56:26",
+      "alcohol_mgl": -0.11
     },
     {
       "box_id": 7,
@@ -1874,6 +2459,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 34,
       "humidity_pct": 38.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:57:41",
+      "alcohol_mgl": -0.37
     },
     {
       "box_id": 7,
@@ -1900,6 +2490,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:58:46",
+      "alcohol_mgl": -0.08
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 18:59:12",
       "temperature_c": 25.1,
@@ -1914,6 +2509,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 30.6,
       "humidity_pct": 38.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 18:59:21",
+      "alcohol_mgl": -0.19
     },
     {
       "box_id": 3,
@@ -1932,12 +2532,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:00:16",
+      "alcohol_mgl": -0.12
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:01:19",
       "temperature_c": 24.5,
       "noise_pct": 33.3,
       "humidity_pct": 38.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:01:26",
+      "alcohol_mgl": -0.29
     },
     {
       "box_id": 7,
@@ -1954,6 +2564,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 35,
       "humidity_pct": 38.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:02:26",
+      "alcohol_mgl": -0.2
     },
     {
       "box_id": 7,
@@ -1980,12 +2595,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:03:36",
+      "alcohol_mgl": -0.33
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:03:49",
       "temperature_c": 24.3,
       "noise_pct": 34.1,
       "humidity_pct": 38.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:03:55",
+      "alcohol_mgl": -0.24
     },
     {
       "box_id": 7,
@@ -2012,6 +2637,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:05:56",
+      "alcohol_mgl": -0.12
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:05:57",
       "temperature_c": 25.2,
@@ -2026,6 +2656,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 33.3,
       "humidity_pct": 38.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:06:06",
+      "alcohol_mgl": -0.11
     },
     {
       "box_id": 3,
@@ -2044,12 +2679,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:07:16",
+      "alcohol_mgl": -0.19
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:08:19",
       "temperature_c": 24.4,
       "noise_pct": 36.4,
       "humidity_pct": 38.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:08:26",
+      "alcohol_mgl": -0.33
     },
     {
       "box_id": 7,
@@ -2066,6 +2711,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 33.1,
       "humidity_pct": 38.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:09:11",
+      "alcohol_mgl": -0.19
     },
     {
       "box_id": 7,
@@ -2092,6 +2742,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:10:01",
+      "alcohol_mgl": -0.22
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:11:04",
       "temperature_c": 24.4,
@@ -2106,6 +2761,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 60.5,
       "humidity_pct": 37.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:11:16",
+      "alcohol_mgl": -0.23
     },
     {
       "box_id": 7,
@@ -2124,6 +2784,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:12:51",
+      "alcohol_mgl": -0.27
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:13:04",
       "temperature_c": 24.3,
@@ -2140,12 +2805,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:13:16",
+      "alcohol_mgl": -0.25
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:14:49",
       "temperature_c": 24.3,
       "noise_pct": 38.5,
       "humidity_pct": 39,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:14:56",
+      "alcohol_mgl": -0.19
     },
     {
       "box_id": 7,
@@ -2164,6 +2839,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:15:06",
+      "alcohol_mgl": -0.18
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:15:57",
       "temperature_c": 25.3,
@@ -2178,6 +2858,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 33,
       "humidity_pct": 38.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:16:06",
+      "alcohol_mgl": -0.27
     },
     {
       "box_id": 7,
@@ -2196,6 +2881,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:17:51",
+      "alcohol_mgl": -0.34
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:17:57",
       "temperature_c": 25.3,
@@ -2210,6 +2900,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 30.8,
       "humidity_pct": 39,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:18:06",
+      "alcohol_mgl": -0.32
     },
     {
       "box_id": 3,
@@ -2228,6 +2923,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:19:16",
+      "alcohol_mgl": -0.26
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:19:49",
       "temperature_c": 24.3,
@@ -2242,6 +2942,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 62.7,
       "humidity_pct": 38.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:20:01",
+      "alcohol_mgl": -0.24
     },
     {
       "box_id": 7,
@@ -2260,6 +2965,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:21:36",
+      "alcohol_mgl": -0.31
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:21:57",
       "temperature_c": 25.2,
@@ -2276,12 +2986,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:22:06",
+      "alcohol_mgl": -0.22
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:23:34",
       "temperature_c": 24.3,
       "noise_pct": 43.3,
       "humidity_pct": 39.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:23:41",
+      "alcohol_mgl": -0.32
     },
     {
       "box_id": 7,
@@ -2308,12 +3028,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:24:01",
+      "alcohol_mgl": -0.35
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:25:27",
       "temperature_c": 25.3,
       "noise_pct": 57.8,
       "humidity_pct": 39,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:25:31",
+      "alcohol_mgl": -0.41
     },
     {
       "box_id": 3,
@@ -2340,12 +3070,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:26:26",
+      "alcohol_mgl": -0.43
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:27:04",
       "temperature_c": 24.4,
       "noise_pct": 80.5,
       "humidity_pct": 39.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:27:11",
+      "alcohol_mgl": -0.43
     },
     {
       "box_id": 7,
@@ -2364,6 +3104,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:28:11",
+      "alcohol_mgl": -0.38
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:28:12",
       "temperature_c": 25.2,
@@ -2380,6 +3125,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:29:26",
+      "alcohol_mgl": -0.24
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:29:27",
       "temperature_c": 25.2,
@@ -2394,6 +3144,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 49.5,
       "humidity_pct": 39,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:30:16",
+      "alcohol_mgl": -0.32
     },
     {
       "box_id": 3,
@@ -2420,6 +3175,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:31:36",
+      "alcohol_mgl": -0.37
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:31:49",
       "temperature_c": 24.4,
@@ -2434,6 +3194,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 58.1,
       "humidity_pct": 39.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:32:01",
+      "alcohol_mgl": -0.31
     },
     {
       "box_id": 7,
@@ -2452,6 +3217,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:33:51",
+      "alcohol_mgl": 0.07
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:34:12",
       "temperature_c": 25.2,
@@ -2466,6 +3236,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 52.3,
       "humidity_pct": 39.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:34:21",
+      "alcohol_mgl": 0.09
     },
     {
       "box_id": 7,
@@ -2484,6 +3259,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:35:21",
+      "alcohol_mgl": -0.18
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:36:04",
       "temperature_c": 24.4,
@@ -2498,6 +3278,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 57.5,
       "humidity_pct": 39.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:36:16",
+      "alcohol_mgl": -0.13
     },
     {
       "box_id": 7,
@@ -2516,12 +3301,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:37:36",
+      "alcohol_mgl": 0.04
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:37:57",
       "temperature_c": 25.2,
       "noise_pct": 56.7,
       "humidity_pct": 39.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:38:01",
+      "alcohol_mgl": -0.05
     },
     {
       "box_id": 3,
@@ -2540,6 +3335,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:39:41",
+      "alcohol_mgl": -0.21
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:39:42",
       "temperature_c": 25.2,
@@ -2554,6 +3354,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 58,
       "humidity_pct": 39.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:40:46",
+      "alcohol_mgl": -0.16
     },
     {
       "box_id": 3,
@@ -2572,12 +3377,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:41:01",
+      "alcohol_mgl": -0.22
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:42:04",
       "temperature_c": 24.3,
       "noise_pct": 81.9,
       "humidity_pct": 39.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:42:11",
+      "alcohol_mgl": -0.24
     },
     {
       "box_id": 7,
@@ -2596,6 +3411,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:43:16",
+      "alcohol_mgl": -0.25
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:43:19",
       "temperature_c": 24.3,
@@ -2610,6 +3430,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 35.4,
       "humidity_pct": 39.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:44:11",
+      "alcohol_mgl": -0.31
     },
     {
       "box_id": 7,
@@ -2628,12 +3453,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:45:56",
+      "alcohol_mgl": -0.34
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:45:57",
       "temperature_c": 25.1,
       "noise_pct": 46.8,
       "humidity_pct": 39.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:46:01",
+      "alcohol_mgl": -0.37
     },
     {
       "box_id": 3,
@@ -2652,12 +3487,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:47:16",
+      "alcohol_mgl": -0.3
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:48:27",
       "temperature_c": 25.1,
       "noise_pct": 58,
       "humidity_pct": 39.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:48:31",
+      "alcohol_mgl": -0.23
     },
     {
       "box_id": 3,
@@ -2674,6 +3519,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 73.6,
       "humidity_pct": 39.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:49:41",
+      "alcohol_mgl": -0.31
     },
     {
       "box_id": 7,
@@ -2700,6 +3550,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:50:06",
+      "alcohol_mgl": -0.27
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:51:27",
       "temperature_c": 25.1,
@@ -2714,6 +3569,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 75.3,
       "humidity_pct": 40,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:51:36",
+      "alcohol_mgl": -0.26
     },
     {
       "box_id": 7,
@@ -2732,12 +3592,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:52:51",
+      "alcohol_mgl": -0.2
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:53:19",
       "temperature_c": 24.2,
       "noise_pct": 72.8,
       "humidity_pct": 40.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:53:26",
+      "alcohol_mgl": -0.25
     },
     {
       "box_id": 7,
@@ -2756,6 +3626,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:54:01",
+      "alcohol_mgl": -0.19
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:54:04",
       "temperature_c": 24.2,
@@ -2770,6 +3645,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 72.3,
       "humidity_pct": 40.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:55:41",
+      "alcohol_mgl": -0.21
     },
     {
       "box_id": 7,
@@ -2796,6 +3676,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:56:46",
+      "alcohol_mgl": -0.17
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 19:57:12",
       "temperature_c": 25.1,
@@ -2810,6 +3695,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 78,
       "humidity_pct": 40.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:57:21",
+      "alcohol_mgl": -0.17
     },
     {
       "box_id": 3,
@@ -2828,12 +3718,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:58:46",
+      "alcohol_mgl": -0.28
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 19:59:34",
       "temperature_c": 24.3,
       "noise_pct": 57.8,
       "humidity_pct": 40.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 19:59:41",
+      "alcohol_mgl": -0.28
     },
     {
       "box_id": 7,
@@ -2850,6 +3750,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 53,
       "humidity_pct": 40.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:00:41",
+      "alcohol_mgl": -0.24
     },
     {
       "box_id": 7,
@@ -2876,6 +3781,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:01:31",
+      "alcohol_mgl": -0.25
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:02:12",
       "temperature_c": 25.2,
@@ -2890,6 +3800,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 75.4,
       "humidity_pct": 40.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:02:21",
+      "alcohol_mgl": -0.3
     },
     {
       "box_id": 7,
@@ -2908,12 +3823,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:03:21",
+      "alcohol_mgl": -0.24
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:04:49",
       "temperature_c": 24.2,
       "noise_pct": 77,
       "humidity_pct": 41.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:04:56",
+      "alcohol_mgl": -0.26
     },
     {
       "box_id": 7,
@@ -2940,6 +3865,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:05:51",
+      "alcohol_mgl": -0.17
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:06:12",
       "temperature_c": 25.3,
@@ -2956,12 +3886,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:06:21",
+      "alcohol_mgl": -0.24
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:07:12",
       "temperature_c": 25.4,
       "noise_pct": 73.1,
       "humidity_pct": 40.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:07:16",
+      "alcohol_mgl": -0.32
     },
     {
       "box_id": 3,
@@ -2988,6 +3928,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:08:46",
+      "alcohol_mgl": -0.35
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:09:27",
       "temperature_c": 25.3,
@@ -3002,6 +3947,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 80.5,
       "humidity_pct": 41.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:09:36",
+      "alcohol_mgl": -0.32
     },
     {
       "box_id": 3,
@@ -3020,6 +3970,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:10:01",
+      "alcohol_mgl": -0.27
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:10:57",
       "temperature_c": 25.3,
@@ -3034,6 +3989,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 78.8,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:11:06",
+      "alcohol_mgl": -0.34
     },
     {
       "box_id": 7,
@@ -3052,12 +4012,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:12:51",
+      "alcohol_mgl": -0.29
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:12:57",
       "temperature_c": 25.3,
       "noise_pct": 64.8,
       "humidity_pct": 40.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:13:01",
+      "alcohol_mgl": -0.31
     },
     {
       "box_id": 7,
@@ -3076,12 +4046,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:14:36",
+      "alcohol_mgl": -0.47
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:15:04",
       "temperature_c": 24.1,
       "noise_pct": 79,
       "humidity_pct": 42.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:15:11",
+      "alcohol_mgl": -0.39
     },
     {
       "box_id": 7,
@@ -3108,6 +4088,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:16:36",
+      "alcohol_mgl": -0.32
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:17:19",
       "temperature_c": 24.1,
@@ -3122,6 +4107,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 72.9,
       "humidity_pct": 40.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:17:31",
+      "alcohol_mgl": -0.39
     },
     {
       "box_id": 7,
@@ -3140,6 +4130,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:18:51",
+      "alcohol_mgl": -0.41
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:19:42",
       "temperature_c": 25.1,
@@ -3156,12 +4151,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:19:51",
+      "alcohol_mgl": -0.38
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:20:34",
       "temperature_c": 23.9,
       "noise_pct": 80.3,
       "humidity_pct": 43.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:20:41",
+      "alcohol_mgl": -0.44
     },
     {
       "box_id": 7,
@@ -3178,6 +4183,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 77.8,
       "humidity_pct": 43.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:21:26",
+      "alcohol_mgl": -0.35
     },
     {
       "box_id": 7,
@@ -3204,12 +4214,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:22:36",
+      "alcohol_mgl": -0.39
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:23:34",
       "temperature_c": 23.9,
       "noise_pct": 82.7,
       "humidity_pct": 44,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:23:41",
+      "alcohol_mgl": -0.39
     },
     {
       "box_id": 7,
@@ -3236,12 +4256,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:24:31",
+      "alcohol_mgl": -0.34
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:25:04",
       "temperature_c": 24,
       "noise_pct": 82.3,
       "humidity_pct": 44.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:25:11",
+      "alcohol_mgl": -0.38
     },
     {
       "box_id": 7,
@@ -3258,6 +4288,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 82.5,
       "humidity_pct": 44.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:26:26",
+      "alcohol_mgl": -0.37
     },
     {
       "box_id": 7,
@@ -3284,6 +4319,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:27:51",
+      "alcohol_mgl": -0.35
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:28:04",
       "temperature_c": 23.9,
@@ -3300,12 +4340,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:28:16",
+      "alcohol_mgl": -0.39
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:29:49",
       "temperature_c": 23.8,
       "noise_pct": 76.1,
       "humidity_pct": 44.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:29:56",
+      "alcohol_mgl": -0.38
     },
     {
       "box_id": 7,
@@ -3332,6 +4382,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:30:16",
+      "alcohol_mgl": -0.38
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:31:27",
       "temperature_c": 25,
@@ -3346,6 +4401,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 78.7,
       "humidity_pct": 44.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:31:36",
+      "alcohol_mgl": -0.39
     },
     {
       "box_id": 3,
@@ -3364,6 +4424,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:32:31",
+      "alcohol_mgl": -0.41
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:33:42",
       "temperature_c": 25.1,
@@ -3378,6 +4443,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 79.1,
       "humidity_pct": 45.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:33:51",
+      "alcohol_mgl": -0.43
     },
     {
       "box_id": 3,
@@ -3396,12 +4466,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:34:46",
+      "alcohol_mgl": -0.4
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:35:34",
       "temperature_c": 23.7,
       "noise_pct": 83.2,
       "humidity_pct": 45.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:35:41",
+      "alcohol_mgl": -0.43
     },
     {
       "box_id": 7,
@@ -3420,6 +4500,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:36:26",
+      "alcohol_mgl": -0.46
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:36:27",
       "temperature_c": 25,
@@ -3434,6 +4519,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 76.4,
       "humidity_pct": 45.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:37:11",
+      "alcohol_mgl": -0.43
     },
     {
       "box_id": 7,
@@ -3460,12 +4550,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:38:51",
+      "alcohol_mgl": -0.44
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:38:57",
       "temperature_c": 25,
       "noise_pct": 76.2,
       "humidity_pct": 40.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:39:01",
+      "alcohol_mgl": -0.44
     },
     {
       "box_id": 7,
@@ -3484,12 +4584,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:40:21",
+      "alcohol_mgl": -0.44
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:41:19",
       "temperature_c": 24.2,
       "noise_pct": 78.8,
       "humidity_pct": 45.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:41:26",
+      "alcohol_mgl": -0.46
     },
     {
       "box_id": 7,
@@ -3516,6 +4626,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:42:51",
+      "alcohol_mgl": -0.43
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:43:42",
       "temperature_c": 24.9,
@@ -3530,6 +4645,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 79.3,
       "humidity_pct": 45.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:43:51",
+      "alcohol_mgl": -0.41
     },
     {
       "box_id": 3,
@@ -3548,12 +4668,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:44:46",
+      "alcohol_mgl": -0.43
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:45:34",
       "temperature_c": 24.4,
       "noise_pct": 84.5,
       "humidity_pct": 45.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:45:41",
+      "alcohol_mgl": -0.44
     },
     {
       "box_id": 7,
@@ -3580,6 +4710,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:46:01",
+      "alcohol_mgl": -0.43
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:47:04",
       "temperature_c": 24.4,
@@ -3596,12 +4731,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:47:16",
+      "alcohol_mgl": -0.45
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:48:19",
       "temperature_c": 24.4,
       "noise_pct": 74.3,
       "humidity_pct": 45.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:48:26",
+      "alcohol_mgl": -0.46
     },
     {
       "box_id": 7,
@@ -3628,6 +4773,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:49:16",
+      "alcohol_mgl": -0.47
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:50:27",
       "temperature_c": 24.8,
@@ -3644,12 +4794,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:50:36",
+      "alcohol_mgl": -0.46
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:51:42",
       "temperature_c": 24.8,
       "noise_pct": 71,
       "humidity_pct": 40.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:51:46",
+      "alcohol_mgl": -0.46
     },
     {
       "box_id": 3,
@@ -3666,6 +4826,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 76.1,
       "humidity_pct": 46,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:52:11",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -3692,6 +4857,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:53:46",
+      "alcohol_mgl": -0.46
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:54:27",
       "temperature_c": 24.7,
@@ -3706,6 +4876,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 83.4,
       "humidity_pct": 46.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:54:36",
+      "alcohol_mgl": -0.49
     },
     {
       "box_id": 3,
@@ -3724,6 +4899,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:55:46",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 20:55:57",
       "temperature_c": 24.7,
@@ -3738,6 +4918,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 82.3,
       "humidity_pct": 46.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:56:06",
+      "alcohol_mgl": -0.5
     },
     {
       "box_id": 3,
@@ -3756,6 +4941,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:57:46",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:58:04",
       "temperature_c": 24.1,
@@ -3772,12 +4962,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:58:16",
+      "alcohol_mgl": -0.48
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 20:59:04",
       "temperature_c": 24.1,
       "noise_pct": 69.7,
       "humidity_pct": 47.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 20:59:11",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -3794,6 +4994,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 81.9,
       "humidity_pct": 47.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:00:41",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -3820,6 +5025,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:01:01",
+      "alcohol_mgl": -0.47
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:02:04",
       "temperature_c": 24.1,
@@ -3836,12 +5046,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:02:16",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:03:04",
       "temperature_c": 24,
       "noise_pct": 80.6,
       "humidity_pct": 47.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:03:11",
+      "alcohol_mgl": -0.5
     },
     {
       "box_id": 7,
@@ -3868,12 +5088,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:04:31",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:05:19",
       "temperature_c": 24,
       "noise_pct": 65.8,
       "humidity_pct": 48,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:05:26",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -3900,6 +5130,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:06:46",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:07:27",
       "temperature_c": 24.5,
@@ -3914,6 +5149,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 85.8,
       "humidity_pct": 47.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:07:36",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -3932,6 +5172,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:08:51",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:09:19",
       "temperature_c": 24.1,
@@ -3946,6 +5191,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 68.5,
       "humidity_pct": 40,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:09:31",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -3964,6 +5214,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:10:06",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:11:42",
       "temperature_c": 24.4,
@@ -3980,12 +5235,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:11:51",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:12:04",
       "temperature_c": 24.1,
       "noise_pct": 81.4,
       "humidity_pct": 48.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:12:11",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -4004,6 +5269,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:13:11",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:13:12",
       "temperature_c": 24.4,
@@ -4020,6 +5290,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:14:11",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:14:12",
       "temperature_c": 24.4,
@@ -4034,6 +5309,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 78.6,
       "humidity_pct": 48.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:15:11",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -4060,6 +5340,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:16:36",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:16:49",
       "temperature_c": 24.3,
@@ -4074,6 +5359,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 72.9,
       "humidity_pct": 40.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:17:01",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -4092,6 +5382,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:18:51",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:19:19",
       "temperature_c": 24.4,
@@ -4106,6 +5401,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 77.5,
       "humidity_pct": 40.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:19:31",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 3,
@@ -4124,12 +5424,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:20:16",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:21:49",
       "temperature_c": 24.5,
       "noise_pct": 70.1,
       "humidity_pct": 47,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:21:56",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -4156,6 +5466,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:22:46",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:22:57",
       "temperature_c": 24.4,
@@ -4170,6 +5485,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 78.6,
       "humidity_pct": 46.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:23:06",
+      "alcohol_mgl": -0.49
     },
     {
       "box_id": 7,
@@ -4188,12 +5508,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:24:51",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:24:57",
       "temperature_c": 24.4,
       "noise_pct": 61.6,
       "humidity_pct": 40.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:25:01",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -4212,6 +5542,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:26:36",
+      "alcohol_mgl": -0.47
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:27:42",
       "temperature_c": 24.3,
@@ -4226,6 +5561,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 82.2,
       "humidity_pct": 45.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:27:51",
+      "alcohol_mgl": -0.42
     },
     {
       "box_id": 7,
@@ -4244,6 +5584,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:28:51",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:28:57",
       "temperature_c": 24.3,
@@ -4260,12 +5605,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:29:06",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:30:04",
       "temperature_c": 24.6,
       "noise_pct": 80.6,
       "humidity_pct": 45.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:30:11",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -4282,6 +5637,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 79.8,
       "humidity_pct": 45.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:31:56",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -4308,6 +5668,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:32:16",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:33:42",
       "temperature_c": 24.4,
@@ -4324,12 +5689,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:33:51",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:34:04",
       "temperature_c": 24.5,
       "noise_pct": 79.2,
       "humidity_pct": 44.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:34:11",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -4348,6 +5723,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:35:26",
+      "alcohol_mgl": -0.46
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:35:27",
       "temperature_c": 24.4,
@@ -4362,6 +5742,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 84.1,
       "humidity_pct": 44.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:36:26",
+      "alcohol_mgl": -0.47
     },
     {
       "box_id": 7,
@@ -4388,6 +5773,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:37:51",
+      "alcohol_mgl": -0.45
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:38:27",
       "temperature_c": 24.5,
@@ -4404,12 +5794,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:38:36",
+      "alcohol_mgl": -0.44
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:39:12",
       "temperature_c": 24.6,
       "noise_pct": 76.5,
       "humidity_pct": 40.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:39:16",
+      "alcohol_mgl": -0.46
     },
     {
       "box_id": 3,
@@ -4436,6 +5836,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:40:21",
+      "alcohol_mgl": -0.47
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:41:27",
       "temperature_c": 24.6,
@@ -4450,6 +5855,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 80.7,
       "humidity_pct": 44.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:41:36",
+      "alcohol_mgl": -0.47
     },
     {
       "box_id": 3,
@@ -4468,12 +5878,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:42:01",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:43:19",
       "temperature_c": 24.4,
       "noise_pct": 83.5,
       "humidity_pct": 44.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:43:26",
+      "alcohol_mgl": -0.48
     },
     {
       "box_id": 7,
@@ -4500,6 +5920,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:44:06",
+      "alcohol_mgl": -0.48
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:45:04",
       "temperature_c": 24.5,
@@ -4514,6 +5939,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 66,
       "humidity_pct": 40.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:45:16",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 3,
@@ -4532,12 +5962,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:46:46",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:47:12",
       "temperature_c": 24.6,
       "noise_pct": 76.5,
       "humidity_pct": 39.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:47:16",
+      "alcohol_mgl": -0.54
     },
     {
       "box_id": 3,
@@ -4556,6 +5996,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:48:31",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:48:34",
       "temperature_c": 24.4,
@@ -4570,6 +6015,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 82.5,
       "humidity_pct": 43.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:49:41",
+      "alcohol_mgl": -0.52
     },
     {
       "box_id": 7,
@@ -4596,6 +6046,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:50:16",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:51:19",
       "temperature_c": 24.5,
@@ -4612,12 +6067,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:51:31",
+      "alcohol_mgl": -0.53
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:52:04",
       "temperature_c": 24.5,
       "noise_pct": 78.5,
       "humidity_pct": 43.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:52:11",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -4644,6 +6109,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:53:16",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:54:42",
       "temperature_c": 24.6,
@@ -4660,12 +6130,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:54:51",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:55:19",
       "temperature_c": 24.2,
       "noise_pct": 80.2,
       "humidity_pct": 43.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:55:26",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -4692,6 +6172,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:56:21",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 21:57:12",
       "temperature_c": 24.6,
@@ -4706,6 +6191,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 79.6,
       "humidity_pct": 44.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:57:26",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -4724,12 +6214,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:58:06",
+      "alcohol_mgl": -0.54
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 21:59:04",
       "temperature_c": 24.1,
       "noise_pct": 85.2,
       "humidity_pct": 44.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 21:59:11",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -4746,6 +6246,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 75.9,
       "humidity_pct": 39.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:00:01",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 3,
@@ -4772,6 +6277,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:01:06",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:02:27",
       "temperature_c": 24.7,
@@ -4788,12 +6298,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:02:36",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:03:27",
       "temperature_c": 24.7,
       "noise_pct": 71.7,
       "humidity_pct": 39.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:03:31",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 3,
@@ -4820,6 +6340,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:04:36",
+      "alcohol_mgl": -0.54
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:05:27",
       "temperature_c": 24.7,
@@ -4834,6 +6359,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 87.1,
       "humidity_pct": 44.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:05:36",
+      "alcohol_mgl": -0.54
     },
     {
       "box_id": 7,
@@ -4852,6 +6382,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:06:21",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:07:12",
       "temperature_c": 24.7,
@@ -4868,12 +6403,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:07:21",
+      "alcohol_mgl": -0.54
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:08:19",
       "temperature_c": 24.2,
       "noise_pct": 85.3,
       "humidity_pct": 44.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:08:26",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -4890,6 +6435,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 78.3,
       "humidity_pct": 44.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:09:41",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -4916,12 +6466,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:10:16",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:11:42",
       "temperature_c": 24.7,
       "noise_pct": 76.7,
       "humidity_pct": 39.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:11:46",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 3,
@@ -4940,6 +6500,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:12:26",
+      "alcohol_mgl": -0.54
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:12:27",
       "temperature_c": 24.7,
@@ -4956,6 +6521,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:13:11",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:13:12",
       "temperature_c": 24.8,
@@ -4970,6 +6540,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 84.1,
       "humidity_pct": 44.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:14:11",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -4996,6 +6571,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:15:36",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:16:27",
       "temperature_c": 24.7,
@@ -5010,6 +6590,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 89.2,
       "humidity_pct": 44.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:16:36",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 3,
@@ -5028,12 +6613,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:17:16",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:18:04",
       "temperature_c": 24.1,
       "noise_pct": 86,
       "humidity_pct": 44.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:18:11",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 7,
@@ -5060,12 +6655,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:19:21",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:20:27",
       "temperature_c": 24.4,
       "noise_pct": 74.3,
       "humidity_pct": 39.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:20:31",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 3,
@@ -5092,6 +6697,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:21:46",
+      "alcohol_mgl": -0.58
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:22:42",
       "temperature_c": 24.3,
@@ -5108,12 +6718,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:22:51",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:23:34",
       "temperature_c": 24,
       "noise_pct": 87.1,
       "humidity_pct": 44.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:23:41",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5140,6 +6760,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:24:21",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:25:04",
       "temperature_c": 24.1,
@@ -5154,6 +6779,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 76.7,
       "humidity_pct": 39.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:25:16",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5172,6 +6802,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:26:26",
+      "alcohol_mgl": -0.58
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:27:19",
       "temperature_c": 24.2,
@@ -5188,12 +6823,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:27:31",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:28:04",
       "temperature_c": 24.2,
       "noise_pct": 50.5,
       "humidity_pct": 44,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:28:11",
+      "alcohol_mgl": -0.57
     },
     {
       "box_id": 7,
@@ -5212,6 +6857,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:29:56",
+      "alcohol_mgl": -0.58
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:29:57",
       "temperature_c": 24.1,
@@ -5226,6 +6876,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 80.5,
       "humidity_pct": 40.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:30:31",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 3,
@@ -5252,6 +6907,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:31:16",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:32:27",
       "temperature_c": 24.1,
@@ -5266,6 +6926,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 42.1,
       "humidity_pct": 43.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:32:36",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5284,6 +6949,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:33:51",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:33:57",
       "temperature_c": 24.2,
@@ -5298,6 +6968,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 32.3,
       "humidity_pct": 43.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:34:11",
+      "alcohol_mgl": -0.57
     },
     {
       "box_id": 7,
@@ -5316,12 +6991,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:35:21",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:36:34",
       "temperature_c": 24.4,
       "noise_pct": 29.1,
       "humidity_pct": 42.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:36:41",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 7,
@@ -5348,12 +7033,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:37:21",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:38:12",
       "temperature_c": 24,
       "noise_pct": 47.2,
       "humidity_pct": 40.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:38:16",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 3,
@@ -5370,6 +7065,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 34.5,
       "humidity_pct": 42.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:39:41",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 7,
@@ -5396,6 +7096,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:40:06",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:40:49",
       "temperature_c": 24.4,
@@ -5410,6 +7115,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 51.2,
       "humidity_pct": 41,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:41:01",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5428,6 +7138,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:42:06",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:43:19",
       "temperature_c": 24.4,
@@ -5444,12 +7159,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:43:31",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:44:19",
       "temperature_c": 24.4,
       "noise_pct": 30.1,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:44:26",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 7,
@@ -5476,12 +7201,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:45:36",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:46:34",
       "temperature_c": 24.4,
       "noise_pct": 28.2,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:46:41",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5498,6 +7233,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 31.7,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:47:41",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5524,6 +7264,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:48:46",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:49:12",
       "temperature_c": 23.8,
@@ -5538,6 +7283,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 27.4,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:49:21",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 3,
@@ -5556,6 +7306,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:50:31",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:51:04",
       "temperature_c": 24.3,
@@ -5570,6 +7325,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 51.2,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:51:16",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5588,6 +7348,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:52:06",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 22:52:57",
       "temperature_c": 23.7,
@@ -5602,6 +7367,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 43,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:53:06",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -5620,6 +7390,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:54:01",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:55:04",
       "temperature_c": 24.3,
@@ -5634,6 +7409,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 43.1,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:55:16",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -5652,6 +7432,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:56:16",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:57:19",
       "temperature_c": 24.3,
@@ -5666,6 +7451,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 45.7,
       "humidity_pct": 41.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:57:31",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -5684,12 +7474,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:58:46",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 22:59:34",
       "temperature_c": 24.3,
       "noise_pct": 37.1,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 22:59:41",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -5716,6 +7516,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:00:16",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:01:04",
       "temperature_c": 24.2,
@@ -5730,6 +7535,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 49.7,
       "humidity_pct": 41.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:01:16",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 3,
@@ -5748,12 +7558,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:02:31",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:03:34",
       "temperature_c": 24.2,
       "noise_pct": 45.7,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:03:41",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -5780,12 +7600,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:04:21",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:05:19",
       "temperature_c": 24.1,
       "noise_pct": 46.4,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:05:26",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -5812,6 +7642,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:06:06",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:07:12",
       "temperature_c": 23.4,
@@ -5826,6 +7661,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 36.1,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:07:21",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -5844,12 +7684,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:08:06",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:09:42",
       "temperature_c": 23.3,
       "noise_pct": 53.2,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:09:46",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -5866,6 +7716,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 30.3,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:10:56",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -5892,6 +7747,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:11:51",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:12:42",
       "temperature_c": 23.3,
@@ -5906,6 +7766,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 31.1,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:12:51",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -5924,12 +7789,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:13:51",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:13:57",
       "temperature_c": 23.3,
       "noise_pct": 48.2,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:14:01",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 3,
@@ -5956,6 +7831,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:15:16",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:16:34",
       "temperature_c": 24.1,
@@ -5972,12 +7852,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:16:46",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:17:34",
       "temperature_c": 24.1,
       "noise_pct": 39.1,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:17:41",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 7,
@@ -6004,6 +7894,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:18:36",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:18:49",
       "temperature_c": 24.1,
@@ -6020,12 +7915,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:19:01",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:20:19",
       "temperature_c": 24.1,
       "noise_pct": 31,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:20:26",
+      "alcohol_mgl": -0.64
     },
     {
       "box_id": 7,
@@ -6042,6 +7947,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 24.2,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:21:56",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -6068,12 +7978,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:22:36",
+      "alcohol_mgl": -0.64
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:23:19",
       "temperature_c": 24,
       "noise_pct": 25.7,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:23:26",
+      "alcohol_mgl": -0.64
     },
     {
       "box_id": 7,
@@ -6092,6 +8012,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:24:56",
+      "alcohol_mgl": -0.64
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:24:57",
       "temperature_c": 23.4,
@@ -6108,6 +8033,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:25:56",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:25:57",
       "temperature_c": 23.4,
@@ -6122,6 +8052,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 24.1,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:26:41",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -6148,6 +8083,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:27:06",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:28:34",
       "temperature_c": 23.7,
@@ -6164,12 +8104,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:28:46",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:29:49",
       "temperature_c": 23.7,
       "noise_pct": 23.3,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:29:56",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 7,
@@ -6196,6 +8146,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:30:36",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:31:42",
       "temperature_c": 23.6,
@@ -6210,6 +8165,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 25.5,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:31:51",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 3,
@@ -6228,6 +8188,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:32:31",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:33:27",
       "temperature_c": 23.7,
@@ -6244,12 +8209,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:33:41",
+      "alcohol_mgl": -0.52
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:33:49",
       "temperature_c": 23.5,
       "noise_pct": 23.9,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:33:56",
+      "alcohol_mgl": -0.53
     },
     {
       "box_id": 7,
@@ -6266,6 +8241,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 65.4,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:35:16",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 3,
@@ -6292,6 +8272,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:36:06",
+      "alcohol_mgl": -0.54
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:37:27",
       "temperature_c": 24,
@@ -6308,12 +8293,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:37:36",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:37:49",
       "temperature_c": 23.5,
       "noise_pct": 24.3,
       "humidity_pct": 42.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:37:56",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -6340,6 +8335,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:39:31",
+      "alcohol_mgl": -0.55
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:39:49",
       "temperature_c": 23.5,
@@ -6356,12 +8356,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:40:01",
+      "alcohol_mgl": -0.58
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:41:34",
       "temperature_c": 23.5,
       "noise_pct": 26.4,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:41:41",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -6380,6 +8390,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:42:11",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:42:12",
       "temperature_c": 24.3,
@@ -6394,6 +8409,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 51.4,
       "humidity_pct": 41.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:43:16",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 3,
@@ -6420,6 +8440,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:44:06",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:45:34",
       "temperature_c": 23.7,
@@ -6434,6 +8459,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 60.9,
       "humidity_pct": 40.7,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:45:46",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 3,
@@ -6452,6 +8482,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:46:46",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:47:04",
       "temperature_c": 23.6,
@@ -6468,12 +8503,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:47:16",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:47:49",
       "temperature_c": 23.6,
       "noise_pct": 24.4,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:47:56",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 7,
@@ -6492,6 +8537,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:49:46",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:49:49",
       "temperature_c": 23.6,
@@ -6506,6 +8556,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23.7,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:50:26",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 7,
@@ -6532,6 +8587,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:51:46",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:51:57",
       "temperature_c": 24.8,
@@ -6548,12 +8608,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:52:06",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:53:34",
       "temperature_c": 23.6,
       "noise_pct": 23.5,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:53:41",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -6580,12 +8650,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:54:56",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:55:04",
       "temperature_c": 23.6,
       "noise_pct": 24,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:55:11",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -6612,6 +8692,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:56:46",
+      "alcohol_mgl": -0.56
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-09-30 23:57:04",
       "temperature_c": 23.6,
@@ -6626,6 +8711,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 55.1,
       "humidity_pct": 40,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:57:16",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -6644,12 +8734,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:58:51",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-09-30 23:58:57",
       "temperature_c": 24.9,
       "noise_pct": 46.2,
       "humidity_pct": 40,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-09-30 23:59:01",
+      "alcohol_mgl": -0.57
     },
     {
       "box_id": 3,
@@ -6668,6 +8768,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:00:41",
+      "alcohol_mgl": -0.57
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:00:42",
       "temperature_c": 25,
@@ -6682,6 +8787,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23.9,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:00:56",
+      "alcohol_mgl": -0.58
     },
     {
       "box_id": 7,
@@ -6700,12 +8810,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:02:56",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:02:57",
       "temperature_c": 24.9,
       "noise_pct": 44.8,
       "humidity_pct": 39.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:03:01",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 3,
@@ -6722,6 +8842,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 54,
       "humidity_pct": 39.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:04:16",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -6748,12 +8873,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:05:31",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:06:27",
       "temperature_c": 25,
       "noise_pct": 57.6,
       "humidity_pct": 39,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:06:31",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -6780,6 +8915,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:07:21",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:07:49",
       "temperature_c": 23.6,
@@ -6796,12 +8936,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:08:01",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:08:57",
       "temperature_c": 25.1,
       "noise_pct": 47,
       "humidity_pct": 38.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:09:01",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 3,
@@ -6828,6 +8978,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:10:16",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:11:12",
       "temperature_c": 25.2,
@@ -6842,6 +8997,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23.1,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:11:21",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 7,
@@ -6860,6 +9020,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:12:06",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:13:12",
       "temperature_c": 25.3,
@@ -6876,12 +9041,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:13:21",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:14:27",
       "temperature_c": 25.3,
       "noise_pct": 56.1,
       "humidity_pct": 38.4,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:14:31",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 3,
@@ -6908,6 +9083,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:15:36",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:15:57",
       "temperature_c": 25.3,
@@ -6922,6 +9102,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23.3,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:16:06",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -6940,6 +9125,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:17:11",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:17:49",
       "temperature_c": 23.6,
@@ -6954,6 +9144,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 45.2,
       "humidity_pct": 38.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:18:01",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 3,
@@ -6972,6 +9167,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:19:01",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:19:49",
       "temperature_c": 23.6,
@@ -6986,6 +9186,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 40,
       "humidity_pct": 38.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:20:01",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 3,
@@ -7004,6 +9209,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:21:01",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:22:12",
       "temperature_c": 25.4,
@@ -7018,6 +9228,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:22:26",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 7,
@@ -7036,6 +9251,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:23:06",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:24:04",
       "temperature_c": 23.6,
@@ -7050,6 +9270,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 48.7,
       "humidity_pct": 38.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:24:16",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 7,
@@ -7068,12 +9293,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:25:36",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:25:49",
       "temperature_c": 23.5,
       "noise_pct": 23.7,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:25:56",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -7100,12 +9335,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:27:26",
+      "alcohol_mgl": -0.59
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:27:57",
       "temperature_c": 25.5,
       "noise_pct": 45.3,
       "humidity_pct": 38.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:28:01",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 3,
@@ -7132,12 +9377,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:29:31",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:30:19",
       "temperature_c": 23.6,
       "noise_pct": 28.4,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:30:26",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -7164,6 +9419,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:31:06",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:32:42",
       "temperature_c": 25.5,
@@ -7180,12 +9440,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:32:51",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:32:57",
       "temperature_c": 25.5,
       "noise_pct": 49.3,
       "humidity_pct": 38.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:33:01",
+      "alcohol_mgl": -0.61
     },
     {
       "box_id": 7,
@@ -7204,6 +9474,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:34:36",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:34:57",
       "temperature_c": 25.6,
@@ -7218,6 +9493,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:35:06",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -7236,12 +9516,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:36:51",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:36:57",
       "temperature_c": 25.6,
       "noise_pct": 54.3,
       "humidity_pct": 37.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:37:01",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 3,
@@ -7268,6 +9558,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:38:51",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:38:57",
       "temperature_c": 25.6,
@@ -7284,12 +9579,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:39:11",
+      "alcohol_mgl": -0.61
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:40:19",
       "temperature_c": 23.5,
       "noise_pct": 23.9,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:40:26",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -7306,6 +9611,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 23.1,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:41:41",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -7332,12 +9642,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:42:06",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:43:04",
       "temperature_c": 23.5,
       "noise_pct": 23.4,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:43:11",
+      "alcohol_mgl": -0.62
     },
     {
       "box_id": 7,
@@ -7356,6 +9676,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:44:11",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:44:12",
       "temperature_c": 25.7,
@@ -7370,6 +9695,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 22.4,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:45:11",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -7388,6 +9718,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:46:16",
+      "alcohol_mgl": -0.64
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:46:19",
       "temperature_c": 23.5,
@@ -7402,6 +9737,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 24.7,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:46:56",
+      "alcohol_mgl": -0.64
     },
     {
       "box_id": 7,
@@ -7428,6 +9768,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:48:21",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:49:12",
       "temperature_c": 25.7,
@@ -7442,6 +9787,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 22.7,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:49:21",
+      "alcohol_mgl": -0.63
     },
     {
       "box_id": 7,
@@ -7460,12 +9810,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:50:51",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:51:19",
       "temperature_c": 23.5,
       "noise_pct": 22.7,
       "humidity_pct": 41.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:51:26",
+      "alcohol_mgl": -0.64
     },
     {
       "box_id": 7,
@@ -7492,6 +9852,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:52:16",
+      "alcohol_mgl": -0.64
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:53:42",
       "temperature_c": 25.8,
@@ -7508,6 +9873,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:53:56",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:53:57",
       "temperature_c": 25.8,
@@ -7516,12 +9886,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:54:01",
+      "alcohol_mgl": -0.63
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 00:54:49",
       "temperature_c": 23.5,
       "noise_pct": 50.8,
       "humidity_pct": 42,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:54:56",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 7,
@@ -7548,12 +9928,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:56:21",
+      "alcohol_mgl": -0.62
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:56:57",
       "temperature_c": 25.7,
       "noise_pct": 47.4,
       "humidity_pct": 37.6,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:57:01",
+      "alcohol_mgl": -0.6
     },
     {
       "box_id": 3,
@@ -7580,6 +9970,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:58:21",
+      "alcohol_mgl": -0.6
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 00:58:57",
       "temperature_c": 25.6,
@@ -7594,6 +9989,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 77.1,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 00:59:06",
+      "alcohol_mgl": -0.59
     },
     {
       "box_id": 7,
@@ -7612,12 +10012,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:00:21",
+      "alcohol_mgl": -0.58
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 01:01:19",
       "temperature_c": 23.5,
       "noise_pct": 65,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:01:26",
+      "alcohol_mgl": -0.56
     },
     {
       "box_id": 7,
@@ -7634,6 +10044,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 80.4,
       "humidity_pct": 42.1,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:02:56",
+      "alcohol_mgl": -0.55
     },
     {
       "box_id": 7,
@@ -7660,12 +10075,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:03:51",
+      "alcohol_mgl": -0.48
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 01:04:19",
       "temperature_c": 23.4,
       "noise_pct": 61.8,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:04:26",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 7,
@@ -7682,6 +10107,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 67.4,
       "humidity_pct": 42.2,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:04:56",
+      "alcohol_mgl": -0.52
     },
     {
       "box_id": 7,
@@ -7708,6 +10138,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:06:51",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 01:06:57",
       "temperature_c": 25.4,
@@ -7716,12 +10151,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:07:01",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 01:08:34",
       "temperature_c": 23.4,
       "noise_pct": 35.4,
       "humidity_pct": 42.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:08:41",
+      "alcohol_mgl": -0.5
     },
     {
       "box_id": 7,
@@ -7748,6 +10193,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:09:36",
+      "alcohol_mgl": -0.51
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 01:10:27",
       "temperature_c": 25.3,
@@ -7762,6 +10212,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 55.3,
       "humidity_pct": 42.3,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:10:36",
+      "alcohol_mgl": -0.51
     },
     {
       "box_id": 3,
@@ -7780,6 +10235,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:11:46",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 01:12:42",
       "temperature_c": 25.3,
@@ -7796,12 +10256,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:12:56",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 01:13:34",
       "temperature_c": 23.2,
       "noise_pct": 66.2,
       "humidity_pct": 42.5,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:13:41",
+      "alcohol_mgl": -0.5
     },
     {
       "box_id": 7,
@@ -7820,6 +10290,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:14:11",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 01:14:12",
       "temperature_c": 25.3,
@@ -7834,6 +10309,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 48.5,
       "humidity_pct": 39.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:15:16",
+      "alcohol_mgl": -0.49
     },
     {
       "box_id": 3,
@@ -7860,12 +10340,22 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:16:16",
+      "alcohol_mgl": -0.5
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 01:17:12",
       "temperature_c": 25.3,
       "noise_pct": 49.3,
       "humidity_pct": 39.9,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:17:16",
+      "alcohol_mgl": -0.49
     },
     {
       "box_id": 3,
@@ -7884,6 +10374,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:18:41",
+      "alcohol_mgl": -0.46
+    },
+    {
       "box_id": 7,
       "measured_at": "2026-10-01 01:18:42",
       "temperature_c": 25.2,
@@ -7900,6 +10395,11 @@ const PARTY_UNLOAD_DATA = {
       "alcohol_mgl": null
     },
     {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:19:01",
+      "alcohol_mgl": -0.44
+    },
+    {
       "box_id": 3,
       "measured_at": "2026-10-01 01:19:04",
       "temperature_c": 23.2,
@@ -7914,6 +10414,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 59,
       "humidity_pct": 42.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:20:56",
+      "alcohol_mgl": -0.42
     },
     {
       "box_id": 7,
@@ -7938,6 +10443,11 @@ const PARTY_UNLOAD_DATA = {
       "noise_pct": 56.4,
       "humidity_pct": 42.8,
       "alcohol_mgl": null
+    },
+    {
+      "box_id": 5,
+      "measured_at": "2026-10-01 01:21:21",
+      "alcohol_mgl": -0.28
     },
     {
       "box_id": 7,

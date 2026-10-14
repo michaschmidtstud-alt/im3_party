@@ -136,7 +136,7 @@
 
     function formatTime(time) {
         const date = new Date(time);
-        return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")} Uhr`;
+        return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
     }
 
     function clockFromTime(time) {
@@ -155,8 +155,8 @@
     }
 
     document.getElementById("noise-metrics").innerHTML = [
-        { label: "Start", value: first ? formatVolume(first.value) : "--", note: `${first ? formatTime(timestamp(first)).replace(" Uhr", "") : "--:--"} Uhr` },
-        { label: "Peak", value: peak ? formatVolume(peak.value) : "--", note: `${peak ? formatTime(timestamp(peak)).replace(" Uhr", "") : "--:--"} Uhr, ${room(peak)}` },
+        { label: "Start", value: first ? formatVolume(first.value) : "--", note: first ? formatTime(timestamp(first)) : "--:--" },
+        { label: "Peak", value: peak ? formatVolume(peak.value) : "--", note: `${peak ? formatTime(timestamp(peak)) : "--:--"}, ${room(peak)}` },
         { label: "Veränderung", value: delta(first, last), note: "vom ersten bis letzten Messpunkt" }
     ].map((metric) => `
         <article class="metric-card orange">
@@ -234,6 +234,73 @@
             const distance = Math.abs(timestamp(point) - targetTime);
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
+        const trendAround = (items, point) => {
+            if (!point) return 0;
+            const pointTime = timestamp(point);
+            const window = 18 * 60 * 1000;
+            const before = items
+                .filter((item) => timestamp(item) <= pointTime && pointTime - timestamp(item) <= window)
+                .sort((a, b) => timestamp(a) - timestamp(b))[0] || point;
+            const after = items
+                .filter((item) => timestamp(item) >= pointTime && timestamp(item) - pointTime <= window)
+                .sort((a, b) => timestamp(b) - timestamp(a))[0] || point;
+            return after.value - before.value;
+        };
+        const localPeak = (items, point) => {
+            if (!point) return false;
+            const pointTime = timestamp(point);
+            const window = 12 * 60 * 1000;
+            const neighbors = items.filter((item) => {
+                const itemTime = timestamp(item);
+                return item !== point && Math.abs(itemTime - pointTime) <= window;
+            });
+            if (!neighbors.length) return false;
+            const neighborAverage = neighbors.reduce((sum, item) => sum + item.value, 0) / neighbors.length;
+            return point.value - neighborAverage >= 10;
+        };
+        const noiseComment = (studio, mensa) => {
+            if (!studio || !mensa) return "Bei Studio oder Mensa fehlt gerade ein Wert. Der Vergleich bleibt deshalb nur teilweise lesbar.";
+
+            const studioTrend = trendAround(series[3], studio);
+            const mensaTrend = trendAround(series[7], mensa);
+            const difference = studio.value - mensa.value;
+            const studioPeak = localPeak(series[3], studio);
+            const mensaPeak = localPeak(series[7], mensa);
+            const isStudioMoving = Math.abs(studioTrend) >= 9;
+            const isMensaMoving = Math.abs(mensaTrend) >= 9;
+
+            if (studioPeak && !mensaPeak) {
+                return "Im Studio gibt es gerade einen kurzen Lautstärke-Peak. Die Mensa bleibt daneben hörbar ruhiger.";
+            }
+            if (mensaPeak && !studioPeak) {
+                return "In der Mensa gibt es gerade einen kurzen Lautstärke-Peak. Das Studio bleibt im Vergleich ruhiger.";
+            }
+            if (studioTrend >= 14 && studioTrend > mensaTrend + 5) {
+                return "Im Studio wird es deutlich lauter. Die Mensa bleibt im Vergleich ruhiger.";
+            }
+            if (studioTrend <= -14 && studioTrend < mensaTrend - 5) {
+                return "Im Studio fällt die Lautstärke klar ab. Die Mensa hält ihren Pegel stabiler.";
+            }
+            if (mensaTrend >= 14 && mensaTrend > studioTrend + 5) {
+                return "In der Mensa steigt der Pegel spürbar. Das Studio zieht gerade weniger stark mit.";
+            }
+            if (mensaTrend <= -14 && mensaTrend < studioTrend - 5) {
+                return "Die Mensa wird deutlich leiser. Im Studio bleibt mehr Geräusch im Raum.";
+            }
+            if (difference >= 18) {
+                return "Das Studio ist klar lauter als die Mensa. In der Mensa bleibt es vergleichsweise entspannt.";
+            }
+            if (difference <= -18) {
+                return "Die Mensa ist lauter als das Studio. Im Studio wirkt der Pegel gerade zurückhaltender.";
+            }
+            if (isStudioMoving && isMensaMoving && studioTrend > 0 && mensaTrend > 0) {
+                return "Studio und Mensa werden gleichzeitig lauter. Die ganze Party zieht akustisch an.";
+            }
+            if (isStudioMoving && isMensaMoving && studioTrend < 0 && mensaTrend < 0) {
+                return "Studio und Mensa werden gleichzeitig leiser. In beiden Räumen klingt der Abend kurz ab.";
+            }
+            return "Studio und Mensa bleiben hier relativ stabil. Die Lautstärke pendelt sich in beiden Räumen ein.";
+        };
         const guideValues = Array.from({ length: 6 }, (_, index) => minValue + index * 20);
         const soundcheckStudioX = soundcheckStudio ? xForTime(timestamp(soundcheckStudio)) : pad.left;
         const soundcheckStudioY = soundcheckStudio ? yFor(soundcheckStudio.value) : pad.top;
@@ -318,7 +385,6 @@
             const targetTime = minTime + ratio * (maxTime - minTime);
             const studio = nearest(series[3], targetTime);
             const mensa = nearest(series[7], targetTime);
-            const xPercent = (x / width) * 100;
 
             guide.setAttribute("x1", x);
             guide.setAttribute("x2", x);
@@ -335,10 +401,43 @@
             tooltip.innerHTML = `
                 <strong>${clockFromTime(targetTime)}</strong>
                 <span>Studio: ${studio ? formatVolume(studio.value) : "--"} · Mensa: ${mensa ? formatVolume(mensa.value) : "--"}</span>
-                <p>Lautstärke im direkten Vergleich der beiden Räume.</p>
+                <p>${noiseComment(studio, mensa)}</p>
             `;
-            tooltip.style.left = `${Math.max(8, Math.min(xPercent, 92))}%`;
-            tooltip.style.top = "34%";
+            const cardRect = tooltip.parentElement.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const scaleX = rect.width / width;
+            const scaleY = rect.height / height;
+            const cardX = rect.left - cardRect.left + x * scaleX;
+            const yValues = [studio, mensa].filter(Boolean).map((point) => yFor(point.value));
+            const upperY = yValues.length ? Math.min(...yValues) : pad.top + chartHeight * 0.5;
+            const lowerY = yValues.length ? Math.max(...yValues) : pad.top + chartHeight * 0.5;
+            const shouldPlaceBelow = lowerY < pad.top + chartHeight * 0.5;
+            const gap = 18;
+            const minLeft = tooltipRect.width / 2 + 8;
+            const maxLeft = cardRect.width - tooltipRect.width / 2 - 8;
+            const left = Math.max(minLeft, Math.min(cardX, maxLeft));
+            let top;
+            let transform;
+
+            if (shouldPlaceBelow) {
+                top = rect.top - cardRect.top + lowerY * scaleY + gap;
+                transform = "translate(-50%, 0)";
+                if (top + tooltipRect.height > cardRect.height - 8) {
+                    top = rect.top - cardRect.top + upperY * scaleY - gap;
+                    transform = "translate(-50%, -100%)";
+                }
+            } else {
+                top = rect.top - cardRect.top + upperY * scaleY - gap;
+                transform = "translate(-50%, -100%)";
+                if (top - tooltipRect.height < 8) {
+                    top = rect.top - cardRect.top + lowerY * scaleY + gap;
+                    transform = "translate(-50%, 0)";
+                }
+            }
+
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+            tooltip.style.transform = transform;
         };
 
         svg.addEventListener("pointermove", showPoint);
@@ -411,7 +510,7 @@
         timelineAxis.innerHTML = Array.from({ length: tickCount }, (_, index) => {
             const ratio = index / (tickCount - 1);
             const time = timelineStart + ratio * timelineDuration;
-            return `<span style="left: ${ratio * 100}%">${formatTime(time).replace(" Uhr", "")}</span>`;
+            return `<span style="left: ${ratio * 100}%">${formatTime(time)}</span>`;
         }).join("");
 
         timelineLanes.innerHTML = Object.entries(boxes).map(([boxId, name]) => {
@@ -437,11 +536,10 @@
         const showTooltip = (period, target, event) => {
             const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
             const average = period.sum / period.count;
-            const endTime = period.end > period.start ? `–${formatTime(period.end).replace(" Uhr", "")} Uhr` : "";
+            const endTime = period.end > period.start ? `–${formatTime(period.end)}` : "";
             periodTooltip.innerHTML = `
-                <strong>${formatTime(period.start).replace(" Uhr", "")}${endTime}</strong>
+                <strong>${formatTime(period.start)}${endTime}</strong>
                 <span>${boxes[period.box]} · ca. ${duration} Min. · Ø ${formatVolume(average)}</span>
-                <p>${periodComment(period)}</p>
             `;
             periodTooltip.hidden = false;
             const timelineRect = timeline.getBoundingClientRect();

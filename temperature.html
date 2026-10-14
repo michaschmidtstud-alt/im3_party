@@ -62,8 +62,6 @@
                 <div class="temperature-timeline-lanes" id="temperature-timeline-lanes"></div>
                 <div class="temperature-period-tooltip" id="temperature-period-tooltip" hidden></div>
             </div>
-            <p class="temperature-accuracy" id="temperature-accuracy"></p>
-            <p class="temperature-explainer">Viele Gäste, eine volle Tanzfläche und wenig Luftaustausch: Mit jeder Runde wurde die Mensa wärmer. Als die Tür zum Innenhof geschlossen wurde, blieb auch die letzte kühle Brise draussen – danach arbeitete sich der Raum zuverlässig Richtung Sauna.</p>
         </div>
     </section>
 
@@ -115,7 +113,6 @@
     const timelineAxis = document.getElementById("temperature-timeline-axis");
     const timelineLanes = document.getElementById("temperature-timeline-lanes");
     const periodTooltip = document.getElementById("temperature-period-tooltip");
-    const accuracy = document.getElementById("temperature-accuracy");
 
     const minTemperature = Math.floor(Math.min(...points.map((point) => point.value)) * 10) / 10;
     const maxTemperature = Math.ceil(Math.max(...points.map((point) => point.value)) * 10) / 10;
@@ -133,7 +130,7 @@
 
     function formatTime(time) {
         const date = new Date(time);
-        return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")} Uhr`;
+        return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
     }
 
     function clockFromTime(time) {
@@ -152,8 +149,8 @@
     }
 
     document.getElementById("temperature-metrics").innerHTML = [
-        { label: "Start", value: first ? formatTemperature(first.value) : "--", note: `${first ? formatTime(timestamp(first)).replace(" Uhr", "") : "--:--"} Uhr` },
-        { label: "Peak", value: peak ? formatTemperature(peak.value) : "--", note: `${peak ? formatTime(timestamp(peak)).replace(" Uhr", "") : "--:--"} Uhr, ${room(peak)}` },
+        { label: "Start", value: first ? formatTemperature(first.value) : "--", note: first ? formatTime(timestamp(first)) : "--:--" },
+        { label: "Peak", value: peak ? formatTemperature(peak.value) : "--", note: `${peak ? formatTime(timestamp(peak)) : "--:--"}, ${room(peak)}` },
         { label: "Veränderung", value: delta(first, last), note: "vom ersten bis letzten Messpunkt" }
     ].map((metric) => `
         <article class="metric-card red">
@@ -223,6 +220,53 @@
             const distance = Math.abs(timestamp(point) - targetTime);
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
+        const trendAround = (items, point) => {
+            if (!point) return 0;
+            const pointTime = timestamp(point);
+            const window = 18 * 60 * 1000;
+            const before = items
+                .filter((item) => timestamp(item) <= pointTime && pointTime - timestamp(item) <= window)
+                .sort((a, b) => timestamp(a) - timestamp(b))[0] || point;
+            const after = items
+                .filter((item) => timestamp(item) >= pointTime && timestamp(item) - pointTime <= window)
+                .sort((a, b) => timestamp(b) - timestamp(a))[0] || point;
+            return after.value - before.value;
+        };
+        const temperatureComment = (studio, mensa) => {
+            if (!studio || !mensa) return "Hier fehlt einer der beiden Räume, der Vergleich bleibt deshalb nur halb lesbar.";
+
+            const studioTrend = trendAround(series[3], studio);
+            const mensaTrend = trendAround(series[7], mensa);
+            const difference = mensa.value - studio.value;
+            const isStudioMoving = Math.abs(studioTrend) >= 0.28;
+            const isMensaMoving = Math.abs(mensaTrend) >= 0.28;
+
+            if (mensaTrend >= 0.42 && mensaTrend > studioTrend + 0.18) {
+                return "Die Mensa zieht deutlich an und sammelt spürbar Wärme. Das Studio bleibt im Vergleich ruhiger.";
+            }
+            if (mensaTrend <= -0.42 && mensaTrend < studioTrend - 0.18) {
+                return "In der Mensa fällt die Temperatur merklich. Das Studio hält sich daneben stabiler.";
+            }
+            if (studioTrend >= 0.42 && studioTrend > mensaTrend + 0.18) {
+                return "Im Studio geht die Kurve klar nach oben. Die Mensa reagiert deutlich weniger stark.";
+            }
+            if (studioTrend <= -0.42 && studioTrend < mensaTrend - 0.18) {
+                return "Das Studio kühlt auffällig ab. Die Mensa bleibt im Vergleich wärmer oder stabiler.";
+            }
+            if (difference >= 0.75) {
+                return "Die Mensa ist klar wärmer als das Studio. Im Studio bleibt es spürbar kühler.";
+            }
+            if (difference <= -0.75) {
+                return "Das Studio liegt jetzt wärmer als die Mensa. In der Mensa ist die Hitze weniger präsent.";
+            }
+            if (isStudioMoving && isMensaMoving && studioTrend > 0 && mensaTrend > 0) {
+                return "Studio und Mensa werden gleichzeitig wärmer. Die Party dreht in beiden Räumen sichtbar auf.";
+            }
+            if (isStudioMoving && isMensaMoving && studioTrend < 0 && mensaTrend < 0) {
+                return "Studio und Mensa kühlen gleichzeitig ab. Für einen Moment kommt in beiden Räumen etwas Ruhe rein.";
+            }
+            return "Studio und Mensa bleiben hier relativ stabil. Die Temperaturen pendeln sich in beiden Räumen ein.";
+        };
         const guideValues = Array.from({ length: 5 }, (_, index) => minValue + index);
         const lowMensaX = lowMensa ? xForTime(timestamp(lowMensa)) : pad.left;
         const lowMensaY = lowMensa ? yFor(lowMensa.value) : height - pad.bottom;
@@ -318,7 +362,6 @@
             const targetTime = minTime + ratio * (maxTime - minTime);
             const studio = nearest(series[3], targetTime);
             const mensa = nearest(series[7], targetTime);
-            const xPercent = (x / width) * 100;
 
             guide.setAttribute("x1", x);
             guide.setAttribute("x2", x);
@@ -335,10 +378,43 @@
             tooltip.innerHTML = `
                 <strong>${clockFromTime(targetTime)}</strong>
                 <span>Studio: ${studio ? formatTemperature(studio.value) : "--"} · Mensa: ${mensa ? formatTemperature(mensa.value) : "--"}</span>
-                <p>Temperatur im direkten Vergleich der beiden Räume.</p>
+                <p>${temperatureComment(studio, mensa)}</p>
             `;
-            tooltip.style.left = `${Math.max(8, Math.min(xPercent, 92))}%`;
-            tooltip.style.top = "34%";
+            const cardRect = tooltip.parentElement.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const scaleX = rect.width / width;
+            const scaleY = rect.height / height;
+            const cardX = rect.left - cardRect.left + x * scaleX;
+            const yValues = [studio, mensa].filter(Boolean).map((point) => yFor(point.value));
+            const upperY = yValues.length ? Math.min(...yValues) : pad.top + chartHeight * 0.5;
+            const lowerY = yValues.length ? Math.max(...yValues) : pad.top + chartHeight * 0.5;
+            const shouldPlaceBelow = lowerY < pad.top + chartHeight * 0.5;
+            const gap = 18;
+            const minLeft = tooltipRect.width / 2 + 8;
+            const maxLeft = cardRect.width - tooltipRect.width / 2 - 8;
+            const left = Math.max(minLeft, Math.min(cardX, maxLeft));
+            let top;
+            let transform;
+
+            if (shouldPlaceBelow) {
+                top = rect.top - cardRect.top + lowerY * scaleY + gap;
+                transform = "translate(-50%, 0)";
+                if (top + tooltipRect.height > cardRect.height - 8) {
+                    top = rect.top - cardRect.top + upperY * scaleY - gap;
+                    transform = "translate(-50%, -100%)";
+                }
+            } else {
+                top = rect.top - cardRect.top + upperY * scaleY - gap;
+                transform = "translate(-50%, -100%)";
+                if (top - tooltipRect.height < 8) {
+                    top = rect.top - cardRect.top + lowerY * scaleY + gap;
+                    transform = "translate(-50%, 0)";
+                }
+            }
+
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+            tooltip.style.transform = transform;
         };
 
         svg.addEventListener("pointermove", showPoint);
@@ -395,22 +471,12 @@
         return { matchedTemperature, periods };
     }
 
-    function periodComment(period) {
-        const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
-        const hour = new Date(period.start).getHours();
-        if (duration >= 10) return "Die Temperatur hat es sich hier richtig gemütlich gemacht – offenbar wollte sie noch nicht nach Hause.";
-        if (hour < 20) return "Frühe Wärmephase: Die Party läuft sich gerade erst warm, nimmt das aber erstaunlich wörtlich.";
-        if (hour >= 0 && hour < 2) return "Mitternachts-Hitze: Vermutlich gleichzeitig Lieblingssong, volle Tanzfläche und null Bereitschaft zum Lüften.";
-        if (period.box === 3) return "Im Studio wurde offenbar engagiert getanzt – oder die Fenster hatten einfach Feierabend.";
-        return "Die Mensa liefert kurz tropische Gefühle, ganz ohne Flugticket und Sonnencreme.";
-    }
-
     function renderTimeline(selectedTemperature) {
         const { matchedTemperature, periods } = temperaturePeriods(selectedTemperature);
         const periodData = periods.map((period, index) => ({ ...period, index }));
         timelineAxis.innerHTML = timelineHours.map((time) => {
             const ratio = (time - timelineStart) / timelineDuration;
-            return `<span style="left: ${ratio * 100}%">${formatTime(time).replace(" Uhr", "")}</span>`;
+            return `<span style="left: ${ratio * 100}%">${formatTime(time)}</span>`;
         }).join("");
 
         timelineLanes.innerHTML = Object.entries(boxes).map(([boxId, name]) => {
@@ -435,11 +501,10 @@
 
         const showTooltip = (period, target, event) => {
             const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
-            const endTime = period.end > period.start ? `–${formatTime(period.end).replace(" Uhr", "")} Uhr` : "";
+            const endTime = period.end > period.start ? `–${formatTime(period.end)}` : "";
             periodTooltip.innerHTML = `
-                <strong>${formatTime(period.start).replace(" Uhr", "")}${endTime}</strong>
+                <strong>${formatTime(period.start)}${endTime}</strong>
                 <span>${boxes[period.box]} · ca. ${duration} Min.</span>
-                <p>${periodComment(period)}</p>
             `;
             periodTooltip.hidden = false;
             const timelineRect = timeline.getBoundingClientRect();
@@ -462,25 +527,16 @@
                 periodTooltip.hidden = true;
             });
         });
-
-        return {
-            exact: Math.abs(matchedTemperature - selectedTemperature) < 0.051,
-            matchedTemperature,
-            count: periods.length
-        };
     }
 
     function renderTemperature() {
         const selectedTemperature = Number(slider.value);
         const range = Math.max(maxTemperature - minTemperature, 0.1);
         const fillPercentage = ((selectedTemperature - minTemperature) / range) * 100;
-        const result = renderTimeline(selectedTemperature);
+        renderTimeline(selectedTemperature);
 
         selection.value = formatTemperature(selectedTemperature);
         fill.style.height = `${Math.max(5, Math.min(fillPercentage, 97))}%`;
-        accuracy.textContent = result.exact
-            ? `${result.count} Zeiträume mit exakt ${formatTemperature(selectedTemperature)} gefunden.`
-            : `Kein exakter Treffer – die Timeline zeigt ${formatTemperature(result.matchedTemperature)}.`;
     }
 
     if (points.length) {
@@ -495,7 +551,6 @@
     } else {
         slider.disabled = true;
         timelineLanes.innerHTML = "<p>Keine Temperaturdaten verfügbar.</p>";
-        accuracy.textContent = "Sobald Messwerte vorhanden sind, wird das Thermometer aktiv.";
     }
 </script>
 </body>

@@ -362,7 +362,7 @@ a {
 .metric-card {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    align-content: center;
+    align-content: start;
     align-items: center;
     gap: 6px;
     min-width: 0;
@@ -416,7 +416,8 @@ a {
 
 .humidity-chart-card,
 .temperature-chart-card,
-.noise-chart-card {
+.noise-chart-card,
+.alcohol-chart-card {
     position: relative;
     min-height: clamp(330px, 42vw, 500px);
     margin-top: clamp(18px, 2vw, 28px);
@@ -428,14 +429,16 @@ a {
 
 .humidity-chart-card,
 .temperature-chart-card,
-.noise-chart-card {
+.noise-chart-card,
+.alcohol-chart-card {
     padding: 42px 18px 14px;
     background: var(--paper);
 }
 
 .humidity-chart-card h3,
 .temperature-chart-card h3,
-.noise-chart-card h3 {
+.noise-chart-card h3,
+.alcohol-chart-card h3 {
     margin: 0 0 14px;
     font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
     font-size: clamp(1.4rem, 2.6vw, 3rem);
@@ -548,7 +551,8 @@ a {
 
 .humidity-chart-card svg,
 .temperature-chart-card svg,
-.noise-chart-card svg {
+.noise-chart-card svg,
+.alcohol-chart-card svg {
     display: block;
     width: 100%;
     height: auto;
@@ -559,7 +563,8 @@ a {
 
 .humidity-chart-key,
 .temperature-chart-key,
-.noise-chart-key {
+.noise-chart-key,
+.alcohol-chart-key {
     display: flex;
     justify-content: center;
     gap: 22px;
@@ -571,7 +576,8 @@ a {
 
 .humidity-chart-key span::before,
 .temperature-chart-key span::before,
-.noise-chart-key span::before {
+.noise-chart-key span::before,
+.alcohol-chart-key span::before {
     display: inline-block;
     width: 24px;
     margin-right: 8px;
@@ -604,9 +610,25 @@ a {
     color: #a35d05;
 }
 
+.alcohol-chart-card {
+    min-height: 0;
+    grid-column: 1;
+    margin: clamp(16px, 2vw, 26px) 0 0;
+    border: 2px solid var(--rule);
+}
+
+.alcohol-chart-card h3 {
+    color: var(--red);
+}
+
+.alcohol-chart-key {
+    color: var(--red);
+}
+
 .humidity-chart-grid,
 .temperature-chart-grid,
-.noise-chart-grid {
+.noise-chart-grid,
+.alcohol-chart-grid {
     stroke: rgba(22, 21, 19, 0.18);
     stroke-width: 2;
     vector-effect: non-scaling-stroke;
@@ -614,19 +636,22 @@ a {
 
 .humidity-chart-plot,
 .temperature-chart-plot,
-.noise-chart-plot {
+.noise-chart-plot,
+.alcohol-chart-plot {
     fill: rgba(22, 21, 19, 0.05);
 }
 
 .humidity-chart-grid.edge,
 .temperature-chart-grid.edge,
-.noise-chart-grid.edge {
+.noise-chart-grid.edge,
+.alcohol-chart-grid.edge {
     stroke: var(--rule);
 }
 
 .humidity-chart-line,
 .temperature-chart-line,
-.noise-chart-line {
+.noise-chart-line,
+.alcohol-chart-line {
     fill: none;
     stroke-width: 5;
     stroke-linecap: round;
@@ -742,6 +767,24 @@ a {
 
 .noise-chart-line-mensa {
     stroke: #a35d05;
+}
+
+.alcohol-chart-line {
+    stroke: var(--red);
+    stroke-width: 3.5;
+}
+
+.alcohol-chart-grid.zero {
+    stroke: var(--red);
+    stroke-dasharray: 6 7;
+    opacity: 0.72;
+}
+
+.alcohol-chart-dot {
+    fill: var(--paper);
+    stroke: var(--red);
+    stroke-width: 4;
+    vector-effect: non-scaling-stroke;
 }
 
 .humidity-chart-guide,
@@ -879,7 +922,9 @@ a {
 .temperature-chart-label,
 .temperature-chart-legend,
 .noise-chart-axis,
-.noise-chart-label {
+.noise-chart-label,
+.alcohol-chart-axis,
+.alcohol-chart-label {
     fill: var(--ink);
     font-family: "Arial Narrow", Impact, Haettenschweiler, "Arial Black", sans-serif;
     font-size: 12px;
@@ -891,14 +936,16 @@ a {
 
 .humidity-chart-axis,
 .temperature-chart-axis,
-.noise-chart-axis {
+.noise-chart-axis,
+.alcohol-chart-axis {
     fill: var(--ink);
     font-size: 14px;
 }
 
 .humidity-chart-label,
 .temperature-chart-label,
-.noise-chart-label {
+.noise-chart-label,
+.alcohol-chart-label {
     fill: var(--muted);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
@@ -2162,16 +2209,19 @@ a {
 }
 
 .temperature-page .temperature-period-tooltip {
+    width: min(190px, calc(100% - 24px));
     background: #f3bfd0;
     box-shadow: 3px 3px 0 rgba(22, 21, 19, 0.16);
 }
 
 .noise-page .temperature-period-tooltip {
+    width: min(190px, calc(100% - 24px));
     background: var(--gold);
     box-shadow: 3px 3px 0 rgba(22, 21, 19, 0.16);
 }
 
 .humidity-page .temperature-period-tooltip {
+    width: min(190px, calc(100% - 24px));
     background: #bfecef;
     box-shadow: 3px 3px 0 rgba(22, 21, 19, 0.16);
 }
@@ -2473,6 +2523,8 @@ a {
 
 .alcohol-photo {
     align-self: start;
+    grid-column: 1;
+    grid-row: 1;
     margin: 0;
     border: 2px solid var(--rule);
     background: var(--paper);
@@ -2493,7 +2545,9 @@ a {
 }
 
 .alcohol-copy {
-    align-self: center;
+    align-self: start;
+    grid-column: 2;
+    grid-row: 1 / span 2;
     min-width: 0;
 }
 
@@ -2523,33 +2577,41 @@ a {
 
 .alcohol-diagnostics {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    border: 2px solid var(--rule);
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 0.82fr) minmax(0, 1.36fr);
+    gap: 8px;
 }
 
 .alcohol-diagnostics div {
     display: grid;
-    gap: 5px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    align-content: start;
+    align-items: start;
+    gap: 8px;
     min-width: 0;
-    padding: 12px 10px;
-    background: linear-gradient(to bottom, var(--red) 0 10px, var(--paper) 10px);
-}
-
-.alcohol-diagnostics div + div {
-    border-left: 2px solid var(--rule);
+    min-height: 88px;
+    padding: 18px 12px 10px;
+    border: 2px solid var(--rule);
+    background: linear-gradient(to bottom, var(--red) 0 12px, var(--paper) 12px);
 }
 
 .alcohol-diagnostics span {
-    color: var(--muted);
-    font-size: 0.58rem;
+    grid-row: 1;
+    color: var(--ink);
+    font-size: clamp(0.54rem, 1.45vw, 0.68rem);
     font-weight: 900;
+    line-height: 1.05;
     text-transform: uppercase;
 }
 
 .alcohol-diagnostics strong {
+    grid-row: 2;
+    min-width: 0;
     color: var(--red);
-    font-size: clamp(0.95rem, 1.7vw, 1.45rem);
-    line-height: 1;
+    font-size: clamp(0.92rem, 1.7vw, 1.3rem);
+    line-height: 0.95;
+    text-align: left;
+    overflow-wrap: anywhere;
 }
 
 .alcohol-copy blockquote {
@@ -2664,17 +2726,19 @@ a {
         grid-template-columns: 1fr;
     }
 
+    .alcohol-photo,
+    .alcohol-chart-card,
+    .alcohol-copy {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
     .alcohol-error-banner {
         text-align: center;
     }
 
     .alcohol-diagnostics {
         grid-template-columns: 1fr;
-    }
-
-    .alcohol-diagnostics div + div {
-        border-top: 2px solid var(--rule);
-        border-left: 0;
     }
 
     .thermometer-panel,

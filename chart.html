@@ -224,7 +224,7 @@
             if (px < m.left || px > W - m.right) return hide();
             const t = T_START + (px - m.left) / iw * (T_END - T_START);
             cross.setAttribute("x1", px); cross.setAttribute("x2", px); cross.style.display = "";
-            let html = `<b>${fmt(t)} Uhr</b>`, d = "";
+            let html = `<b>${fmt(t)}</b>`, d = "";
             panelSeries.forEach(s => {
                 const p = nearest(s, t);
                 if (!p) return;

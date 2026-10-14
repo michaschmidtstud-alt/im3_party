@@ -37,13 +37,20 @@
         <figure class="alcohol-photo">
             <img src="assets/micha-alcohol-error.jpg" alt="Micha testet den Alkoholtester; auf dem Laptop erscheint ein unrealistisch hoher Messwert von 5,42 Promille." width="1800" height="1350">
             <figcaption>
-                17:00 Uhr – Micha, der Sensor und eine sehr kreative Interpretation der Realität.
+                17:00 – Micha, der Sensor und eine sehr kreative Interpretation der Realität.
             </figcaption>
         </figure>
 
+        <div class="alcohol-chart-card">
+            <svg id="alcohol-chart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet" aria-label="Alkoholwerte der Box 5 über den Abend"></svg>
+            <div class="alcohol-chart-key" aria-label="Legende">
+                <span>Alkoholwert</span>
+            </div>
+        </div>
+
         <article class="alcohol-copy">
             <p class="alcohol-kicker">Eilmeldung aus dem Messlabor</p>
-            <h2>Micha hatte um 17 Uhr bereits 5 Promille.</h2>
+            <h2>Micha hatte um 17 bereits 5 Promille.</h2>
             <p class="alcohol-punchline">Zumindest behauptet das Gerät 5,42 ‰. Micha konnte noch stehen, sprechen und den Fehler suchen – der Sensor offensichtlich nicht.</p>
 
             <div class="alcohol-diagnostics" aria-label="Fehlerdiagnose">
@@ -55,11 +62,76 @@
             <blockquote>Fazit: Diese Messreihe sagt deutlich mehr über unseren Alkoholtester als über unsere Gäste.</blockquote>
         </article>
     </section>
-
     <footer class="paper-footer" aria-label="Seitenabschluss">
         <p>MMP NEWS · Welcome Party H8 · 30. Sept 2026</p>
         <small>Live gemessen, zu spät ausgewertet.</small>
     </footer>
 </main>
+<script src="javascript/js.js"></script>
+<script>
+    const rows = window.PARTY_UNLOAD_DATA?.data || [];
+    const alcoholPoints = rows
+        .filter((row) => row.box_id === 5 && Number.isFinite(row.alcohol_mgl))
+        .map((row) => ({
+            value: row.alcohol_mgl * 2,
+            time: row.measured_at
+        }))
+        .sort((a, b) => timestamp(a) - timestamp(b));
+
+    function timestamp(point) {
+        return Date.parse(point.time.replace(" ", "T"));
+    }
+
+    function clockFromTime(time) {
+        const date = new Date(time);
+        return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+    }
+
+    function renderAlcoholChart() {
+        const svg = document.getElementById("alcohol-chart");
+        if (!svg || !alcoholPoints.length) return;
+
+        const width = 900;
+        const height = 340;
+        const pad = { top: 34, right: 30, bottom: 28, left: 62 };
+        const chartWidth = width - pad.left - pad.right;
+        const chartHeight = height - pad.top - pad.bottom;
+        const chartDate = alcoholPoints[0]?.time?.slice(0, 10) || "2026-09-30";
+        const minTime = Date.parse(`${chartDate}T17:00:00`);
+        const lastMeasuredTime = timestamp(alcoholPoints[alcoholPoints.length - 1]);
+        const maxTime = Math.max(lastMeasuredTime, minTime + 1);
+        const hourTicks = Array.from(
+            { length: Math.floor((maxTime - minTime) / (60 * 60 * 1000)) + 1 },
+            (_, index) => minTime + index * 60 * 60 * 1000
+        );
+        if (hourTicks[hourTicks.length - 1] !== maxTime) hourTicks.push(maxTime);
+        const visiblePoints = alcoholPoints.filter((point) => timestamp(point) >= minTime && timestamp(point) <= maxTime);
+        const minValue = -2;
+        const maxValue = 16;
+        const guideValues = [-2, 0, 4, 8, 12, 16];
+        const valueRange = Math.max(maxValue - minValue, 1);
+        const xForTime = (time) => pad.left + ((time - minTime) / Math.max(maxTime - minTime, 1)) * chartWidth;
+        const yFor = (value) => pad.top + (1 - (value - minValue) / valueRange) * chartHeight;
+        const lineFor = (items) => items.map((point) => `${xForTime(timestamp(point)).toFixed(1)},${yFor(point.value).toFixed(1)}`).join(" ");
+        const peak = visiblePoints.reduce((best, point) => !best || point.value > best.value ? point : best, null);
+
+        svg.innerHTML = `
+            <rect class="alcohol-chart-plot" x="${pad.left}" y="${pad.top}" width="${chartWidth}" height="${chartHeight}"></rect>
+            ${guideValues.map((value) => `
+                <line class="alcohol-chart-grid ${value === minValue || value === maxValue ? "edge" : ""} ${value === 0 ? "zero" : ""}" x1="${pad.left}" x2="${width - pad.right}" y1="${yFor(value)}" y2="${yFor(value)}"></line>
+                <text class="alcohol-chart-axis" x="10" y="${yFor(value) + 4}">${value}‰</text>
+            `).join("")}
+            <line class="alcohol-chart-grid edge" x1="${pad.left}" x2="${pad.left}" y1="${pad.top}" y2="${height - pad.bottom}"></line>
+            <line class="alcohol-chart-grid edge" x1="${pad.left}" x2="${width - pad.right}" y1="${height - pad.bottom}" y2="${height - pad.bottom}"></line>
+            <polyline class="alcohol-chart-line" points="${lineFor(visiblePoints)}"></polyline>
+            ${peak ? `<circle class="alcohol-chart-dot" cx="${xForTime(timestamp(peak))}" cy="${yFor(peak.value)}" r="6"></circle>` : ""}
+            ${hourTicks.map((time, index) => `
+                <text class="alcohol-chart-label" x="${xForTime(time)}" y="18" text-anchor="${index === 0 ? "start" : index === hourTicks.length - 1 ? "end" : "middle"}">${clockFromTime(time)}</text>
+            `).join("")}
+        `;
+    }
+
+    renderAlcoholChart();
+</script>
 </body>
 </html>

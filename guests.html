@@ -27,7 +27,7 @@
     <h1 class="main-title" id="main-title">Gezählt?</h1>
 
     <section class="hero guests-hero" aria-labelledby="main-title">
-        <p class="lead">Ab 20 Uhr hatte jede Person<br>plötzlich eine Begleitung</p>
+        <p class="lead">Ab 20:00 hatte jede Person<br>plötzlich eine Begleitung</p>
     </section>
 
     <section class="guest-finder" aria-labelledby="guest-finder-title">
@@ -91,15 +91,15 @@
     function guestComment(entry) {
         if (!Number.isFinite(entry.value)) return "Ab hier wurde nicht mehr gezählt. Möglicherweise fehlte Personal, möglicherweise nur noch der Fokus.";
         if (entry.reliable) return "Noch eine seriöse Zahl: einzelne Menschen, einzelne Köpfe, erstaunlich klare Sicht.";
-        if (entry.time === "22:30²") return "Zum zweiten Mal 22:30 Uhr. Ab hier sah offenbar sogar die Uhr doppelt.";
+        if (entry.time === "22:30²") return "Zum zweiten Mal 22:30. Ab hier sah offenbar sogar die Uhr doppelt.";
         return `Diese Zahl wirkt so groß, weil doppelt gesehen wurde. Nüchtern geschätzt wären es etwa ${Math.round(entry.value / 2)} Gäste.`;
     }
 
     function showTooltip(entry, chartX, chartY) {
         const rect = chart.getBoundingClientRect();
         tooltip.innerHTML = Number.isFinite(entry.value)
-            ? `<strong>${entry.time} Uhr</strong><span>${entry.value} gezählte Gäste</span><p>${guestComment(entry)}</p>`
-            : `<strong>${entry.time} Uhr</strong><span>Messwert: ?</span><p>${guestComment(entry)}</p>`;
+            ? `<strong>${entry.time}</strong><span>${entry.value} gezählte Gäste</span><p>${guestComment(entry)}</p>`
+            : `<strong>${entry.time}</strong><span>Messwert: ?</span><p>${guestComment(entry)}</p>`;
         tooltip.style.left = `${Math.max(120, Math.min((chartX / 760) * rect.width, rect.width - 120))}px`;
         tooltip.style.top = `${Math.max(20, (chartY / 300) * rect.height - 8)}px`;
         tooltip.hidden = false;
@@ -175,8 +175,8 @@
     }
 
     document.getElementById("guest-story").innerHTML = `
-        <p><strong>Bis 19:30 Uhr lief alles verdächtig professionell:</strong> 39 Gäste zum Start, ein sauberer Anstieg und schließlich 63 Menschen im Raum. Um 20:00 Uhr geschah dann das statistische Wunder: Plötzlich waren es 126. Kein Reisebus war vorgefahren, keine zweite Party durch die Hintertür gekommen – das Zählteam hatte einfach begonnen, jede Person mit ihrer verschwommenen Begleitung zu notieren.</p>
-        <p>Die Zahlen blieben danach erstaunlich stabil doppelt: 122, 121, wieder 122. Um 22:30 Uhr wurde sogar zweimal um 22:30 Uhr gezählt. Danach stehen nur noch Fragezeichen. Vermutlich waren weiterhin Gäste da; bloß niemand mehr, der gleichzeitig Menschen, Uhrzeit und Strichliste scharf sehen konnte.</p>
+        <p><strong>Bis 19:30 lief alles verdächtig professionell:</strong> 39 Gäste zum Start, ein sauberer Anstieg und schließlich 63 Menschen im Raum. Um 20:00 geschah dann das statistische Wunder: Plötzlich waren es 126. Kein Reisebus war vorgefahren, keine zweite Party durch die Hintertür gekommen – das Zählteam hatte einfach begonnen, jede Person mit ihrer verschwommenen Begleitung zu notieren.</p>
+        <p>Die Zahlen blieben danach erstaunlich stabil doppelt: 122, 121, wieder 122. Um 22:30 wurde sogar zweimal um 22:30 gezählt. Danach stehen nur noch Fragezeichen. Vermutlich waren weiterhin Gäste da; bloß niemand mehr, der gleichzeitig Menschen, Uhrzeit und Strichliste scharf sehen konnte.</p>
         <blockquote>Redaktionelle Schätzung: Die Party wurde nicht voller – nur die Wahrnehmung großzügiger.</blockquote>
     `;
 

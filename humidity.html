@@ -149,8 +149,8 @@
     }
 
     document.getElementById("humidity-metrics").innerHTML = [
-        { label: "Start", value: format(first?.value, 0), note: `${timeOnly(first?.time)} Uhr` },
-        { label: "Peak", value: format(peak?.value, 0), note: `${timeOnly(peak?.time)} Uhr, ${room(peak)}` },
+        { label: "Start", value: format(first?.value, 0), note: timeOnly(first?.time) },
+        { label: "Peak", value: format(peak?.value, 0), note: `${timeOnly(peak?.time)}, ${room(peak)}` },
         { label: "Veränderung", value: delta(first, last), note: "vom ersten bis letzten Messpunkt" }
     ].map((metric) => `
         <article class="metric-card blue">
@@ -223,6 +223,53 @@
             const distance = Math.abs(Date.parse(point.time.replace(" ", "T")) - targetTime);
             return !best || distance < best.distance ? { point, distance } : best;
         }, null)?.point || null;
+        const trendAround = (items, point) => {
+            if (!point) return 0;
+            const pointTime = timestamp(point);
+            const window = 18 * 60 * 1000;
+            const before = items
+                .filter((item) => timestamp(item) <= pointTime && pointTime - timestamp(item) <= window)
+                .sort((a, b) => timestamp(a) - timestamp(b))[0] || point;
+            const after = items
+                .filter((item) => timestamp(item) >= pointTime && timestamp(item) - pointTime <= window)
+                .sort((a, b) => timestamp(b) - timestamp(a))[0] || point;
+            return after.value - before.value;
+        };
+        const humidityComment = (studio, mensa) => {
+            if (!studio || !mensa) return "Bei Studio oder Mensa fehlt gerade ein Wert. Der Vergleich bleibt deshalb nur teilweise lesbar.";
+
+            const studioTrend = trendAround(series[3], studio);
+            const mensaTrend = trendAround(series[7], mensa);
+            const difference = mensa.value - studio.value;
+            const isStudioMoving = Math.abs(studioTrend) >= 2.2;
+            const isMensaMoving = Math.abs(mensaTrend) >= 2.2;
+
+            if (mensaTrend >= 3.2 && mensaTrend > studioTrend + 1.2) {
+                return "In der Mensa steigt die Luftfeuchtigkeit deutlich. Das Studio bleibt daneben trockener oder ruhiger.";
+            }
+            if (mensaTrend <= -3.2 && mensaTrend < studioTrend - 1.2) {
+                return "Die Mensa wird spürbar trockener. Im Studio verändert sich die Luft weniger stark.";
+            }
+            if (studioTrend >= 3.2 && studioTrend > mensaTrend + 1.2) {
+                return "Im Studio nimmt die Luftfeuchtigkeit klar zu. Die Mensa zieht nicht im gleichen Tempo mit.";
+            }
+            if (studioTrend <= -3.2 && studioTrend < mensaTrend - 1.2) {
+                return "Das Studio wird merklich trockener. Die Mensa hält ihre feuchtere Luft eher.";
+            }
+            if (difference >= 6) {
+                return "Die Mensa ist deutlich feuchter als das Studio. Im Studio bleibt die Luft vergleichsweise trockener.";
+            }
+            if (difference <= -6) {
+                return "Das Studio ist feuchter als die Mensa. In der Mensa wirkt die Luft gerade trockener.";
+            }
+            if (isStudioMoving && isMensaMoving && studioTrend > 0 && mensaTrend > 0) {
+                return "Studio und Mensa werden gleichzeitig feuchter. In beiden Räumen sammelt sich Partyluft.";
+            }
+            if (isStudioMoving && isMensaMoving && studioTrend < 0 && mensaTrend < 0) {
+                return "Studio und Mensa trocknen gleichzeitig etwas ab. In beiden Räumen beruhigt sich das Mikroklima.";
+            }
+            return "Studio und Mensa bleiben hier relativ stabil. Die Luftfeuchtigkeit pendelt sich in beiden Räumen ein.";
+        };
         const guideValues = Array.from({ length: 6 }, (_, index) => minValue + index * 5);
         const freshMensaX = freshMensa ? xForTime(timestamp(freshMensa)) : pad.left;
         const freshMensaY = freshMensa ? yFor(freshMensa.value) : height - pad.bottom;
@@ -312,7 +359,6 @@
             const targetTime = minTime + ratio * (maxTime - minTime);
             const studio = nearest(series[3], targetTime);
             const mensa = nearest(series[7], targetTime);
-            const xPercent = (x / width) * 100;
 
             guide.setAttribute("x1", x);
             guide.setAttribute("x2", x);
@@ -329,10 +375,43 @@
             tooltip.innerHTML = `
                 <strong>${clockFromTime(targetTime)}</strong>
                 <span>Studio: ${format(studio?.value, 0)} · Mensa: ${format(mensa?.value, 0)}</span>
-                <p>Luftfeuchtigkeit im direkten Vergleich der beiden Räume.</p>
+                <p>${humidityComment(studio, mensa)}</p>
             `;
-            tooltip.style.left = `${Math.max(8, Math.min(xPercent, 92))}%`;
-            tooltip.style.top = "34%";
+            const cardRect = tooltip.parentElement.getBoundingClientRect();
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const scaleX = rect.width / width;
+            const scaleY = rect.height / height;
+            const cardX = rect.left - cardRect.left + x * scaleX;
+            const yValues = [studio, mensa].filter(Boolean).map((point) => yFor(point.value));
+            const upperY = yValues.length ? Math.min(...yValues) : pad.top + chartHeight * 0.5;
+            const lowerY = yValues.length ? Math.max(...yValues) : pad.top + chartHeight * 0.5;
+            const shouldPlaceBelow = lowerY < pad.top + chartHeight * 0.5;
+            const gap = 18;
+            const minLeft = tooltipRect.width / 2 + 8;
+            const maxLeft = cardRect.width - tooltipRect.width / 2 - 8;
+            const left = Math.max(minLeft, Math.min(cardX, maxLeft));
+            let top;
+            let transform;
+
+            if (shouldPlaceBelow) {
+                top = rect.top - cardRect.top + lowerY * scaleY + gap;
+                transform = "translate(-50%, 0)";
+                if (top + tooltipRect.height > cardRect.height - 8) {
+                    top = rect.top - cardRect.top + upperY * scaleY - gap;
+                    transform = "translate(-50%, -100%)";
+                }
+            } else {
+                top = rect.top - cardRect.top + upperY * scaleY - gap;
+                transform = "translate(-50%, -100%)";
+                if (top - tooltipRect.height < 8) {
+                    top = rect.top - cardRect.top + lowerY * scaleY + gap;
+                    transform = "translate(-50%, 0)";
+                }
+            }
+
+            tooltip.style.left = `${left}px`;
+            tooltip.style.top = `${top}px`;
+            tooltip.style.transform = transform;
         };
 
         svg.addEventListener("pointermove", showPoint);
@@ -409,7 +488,7 @@
                             const visibleEnd = Math.min(period.end + 60000, finderEnd);
                             const width = Math.min(Math.max(((visibleEnd - period.start) / finderDuration) * 100, 0.65), 100 - left);
                             const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
-                            return `<button class="temperature-period humidity-period" style="left: ${left}%; width: ${width}%; --pulse-delay: ${(period.index % 8) * 90}ms" data-period="${period.index}" aria-label="${box.name}, ${clockFromTime(period.start)} Uhr, ${duration} Minuten"></button>`;
+                            return `<button class="temperature-period humidity-period" style="left: ${left}%; width: ${width}%; --pulse-delay: ${(period.index % 8) * 90}ms" data-period="${period.index}" aria-label="${box.name}, ${clockFromTime(period.start)}, ${duration} Minuten"></button>`;
                         }).join("")}
                     </div>
                 </div>
@@ -418,11 +497,10 @@
 
         const showTooltip = (period, target, event) => {
             const duration = Math.max(1, Math.round((period.end - period.start) / 60000) + 1);
-            const endTime = period.end > period.start ? `–${clockFromTime(period.end)} Uhr` : " Uhr";
+            const endTime = period.end > period.start ? `–${clockFromTime(period.end)}` : "";
             humidityPeriodTooltip.innerHTML = `
                 <strong>${clockFromTime(period.start)}${endTime}</strong>
                 <span>${boxes[period.box].name} · ca. ${duration} Min.</span>
-                <p>${humidityPeriodComment(period)}</p>
             `;
             humidityPeriodTooltip.hidden = false;
             const timelineRect = humidityFinderTimeline.getBoundingClientRect();
